@@ -18,11 +18,25 @@ jobs:
       with:
         node-version: 18
 
-    - name: Konversi Web HTML ke Proyek iOS (Capacitor)
+    - name: Inisialisasi Proyek & Capacitor
       run: |
-        npm init -y
+        # Buat package.json jika belum ada
+        if [ ! -f package.json ]; then
+          npm init -y
+        fi
+        
+        # Install Capacitor
         npm install @capacitor/core @capacitor/cli @capacitor/ios
-        npx cap init "MIDI Controller" "com.midi.controller" --web-dir .
+        
+        # Siapkan folder asset web www
+        mkdir -p www
+        cp -R index.html *.js *.css *.json assets/ www/ 2>/dev/null || true
+        
+        # Hapus konfigurasi capacitor lama jika ada
+        rm -rf capacitor.config.json capacitor.config.ts ios
+        
+        # Init ulang dengan web-dir www
+        npx cap init "MIDI Controller" "com.midi.controller" --web-dir www
         npx cap add ios
         npx cap sync ios
 
