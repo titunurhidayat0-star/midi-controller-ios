@@ -24,27 +24,27 @@ jobs:
           npm init -y
         fi
         
-        # Install Capacitor
-        npm install @capacitor/core @capacitor/cli @capacitor/ios
+        # Install Capacitor CLI & Core versi 5 yang stabil untuk CI/CD
+        npm install @capacitor/core@5 @capacitor/cli@5 @capacitor/ios@5
         
         # Siapkan folder asset web www
         mkdir -p www
         cp -R index.html *.js *.css *.json assets/ www/ 2>/dev/null || true
         
-        # Bersihkan folder/config lama
+        # Bersihkan konfigurasi lama
         rm -rf capacitor.config.json capacitor.config.ts ios
         
-        # Init ulang proyek Capacitor
+        # Inisialisasi ulang
         npx cap init "MIDI Controller" "com.midi.controller" --web-dir www
         npx cap add ios
         
-        # Perbaiki iOS Deployment Target di Podfile agar tidak bentrok CocoaPods
+        # Naikkan target iOS di Podfile ke 14.0
         if [ -f ios/App/Podfile ]; then
-          sed -i '' "s/platform :ios, '.*'/platform :ios, '13.0'/g" ios/App/Podfile
+          sed -i '' "s/platform :ios, '.*/platform :ios, '14.0'/g" ios/App/Podfile
         fi
         
-        # Lakukan sync iOS
-        npx cap sync ios
+        # Jalankan pod install manual di folder ios/App
+        cd ios/App && pod install && cd ../..
 
     - name: Tambahkan Izin Hardware MIDI & Bluetooth di Info.plist
       run: |
