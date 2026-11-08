@@ -24,21 +24,16 @@ jobs:
           npm init -y
         fi
         
-        # Install Capacitor 5 stabil untuk iOS CI/CD
         npm install @capacitor/core@5 @capacitor/cli@5 @capacitor/ios@5
         
-        # Siapkan folder asset web www
         mkdir -p www
         cp -R index.html *.js *.css *.json assets/ www/ 2>/dev/null || true
         
-        # Bersihkan konfigurasi lama
         rm -rf capacitor.config.json capacitor.config.ts ios
         
-        # Inisialisasi proyek Capacitor
         npx cap init "MIDI Royale Pro" "com.midi.royale.pro" --web-dir www
         npx cap add ios
         
-        # Lock target iOS ke 14.0 agar CocoaPods tidak error
         if [ -f ios/App/Podfile ]; then
           sed -i '' "s/platform :ios, '.*/platform :ios, '14.0'/g" ios/App/Podfile
         fi
@@ -63,15 +58,21 @@ jobs:
                    CODE_SIGN_IDENTITY="" \
                    BUILD_DIR=$PWD/build
 
-    - name: Bungkus ke Format .ipa
+    - name: Bungkus Bebas Korupsi ke Format .ipa
       run: |
+        # Buat struktur Payload
+        rm -rf Payload MIDI-Royale-Pro.ipa
         mkdir -p Payload
+        
+        # Salin folder .app hasil compile
         APP_PATH=$(find build -name "*.app" -type d | head -n 1)
         cp -r "$APP_PATH" Payload/
-        zip -r MIDI-Royale-Pro.ipa Payload
+        
+        # Kompresi tingkat rendah (-0) agar dibaca utuh oleh sistem iOS
+        zip -r -0 MIDI-Royale-Pro.ipa Payload
 
     - name: Simpan dan keluarkan File .ipa
       uses: actions/upload-artifact@v4
       with:
-        name: Hasil-Build-IPA
+        name: MIDI-Royale-Pro-IPA
         path: MIDI-Royale-Pro.ipa
