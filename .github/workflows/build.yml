@@ -18,20 +18,20 @@ jobs:
       with:
         node-version: 18
 
-    - name: Inisialisasi Proyek & Capacitor + Web MIDI Polyfill
+    - name: Inisialisasi Proyek & Inject Web MIDI Polyfill
       run: |
         if [ ! -f package.json ]; then
           npm init -y
         fi
         
-        # Install Capacitor 5 dan Plugin MIDI Native yang Valid
-        npm install @capacitor/core@5 @capacitor/cli@5 @capacitor/ios@5 @capacitor-community/midi web-midi-api
+        # Hanya install core Capacitor resmi yang pasti ada di npm
+        npm install @capacitor/core@5 @capacitor/cli@5 @capacitor/ios@5
         
         # Siapkan folder asset web www
         mkdir -p www
         cp -R index.html *.js *.css *.json assets/ www/ 2>/dev/null || true
         
-        # Injeksi Polyfill Web MIDI ke dalam index.html agar WKWebView iOS mengenali Web MIDI
+        # Injeksi CDN Polyfill Web MIDI langsung ke dalam head index.html
         if [ -f www/index.html ]; then
           sed -i '' 's|<head>|<head><script src="https://cdn.jsdelivr.net/npm/web-midi-api@0.8.2/lib/WebMIDIAPI.min.js"></script>|g' www/index.html
         fi
@@ -43,7 +43,7 @@ jobs:
         npx cap init "MIDI Royale Pro" "com.midi.royale.pro" --web-dir www
         npx cap add ios
         
-        # Lock target iOS ke 14.0 agar CocoaPods tidak error
+        # Lock target iOS ke 14.0 agar CocoaPods lancar
         if [ -f ios/App/Podfile ]; then
           sed -i '' "s/platform :ios, '.*/platform :ios, '14.0'/g" ios/App/Podfile
         fi
