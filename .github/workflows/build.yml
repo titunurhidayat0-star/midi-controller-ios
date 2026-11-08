@@ -24,7 +24,7 @@ jobs:
           npm init -y
         fi
         
-        # Install Capacitor CLI & Core versi 5 yang stabil untuk CI/CD
+        # Install Capacitor 5 stabil untuk iOS CI/CD
         npm install @capacitor/core@5 @capacitor/cli@5 @capacitor/ios@5
         
         # Siapkan folder asset web www
@@ -34,23 +34,23 @@ jobs:
         # Bersihkan konfigurasi lama
         rm -rf capacitor.config.json capacitor.config.ts ios
         
-        # Inisialisasi ulang
-        npx cap init "MIDI Controller" "com.midi.controller" --web-dir www
+        # Inisialisasi proyek Capacitor
+        npx cap init "MIDI Royale Pro" "com.midi.royale.pro" --web-dir www
         npx cap add ios
         
-        # Naikkan target iOS di Podfile ke 14.0
+        # Lock target iOS ke 14.0 agar CocoaPods tidak error
         if [ -f ios/App/Podfile ]; then
           sed -i '' "s/platform :ios, '.*/platform :ios, '14.0'/g" ios/App/Podfile
         fi
         
-        # Jalankan pod install manual di folder ios/App
         cd ios/App && pod install && cd ../..
 
-    - name: Tambahkan Izin Hardware MIDI & Bluetooth di Info.plist
+    - name: Tambahkan Izin Hardware MIDI, Bluetooth & SysEx di Info.plist
       run: |
         PLIST="ios/App/App/Info.plist"
-        /usr/libexec/PlistBuddy -c "Add :NSBluetoothAlwaysUsageDescription string 'Aplikasi membutuhkan akses MIDI/Bluetooth untuk terhubung ke keyboard Korg.'" $PLIST || true
-        /usr/libexec/PlistBuddy -c "Add :NSBluetoothPeripheralUsageDescription string 'Aplikasi membutuhkan akses MIDI untuk instrumen.'" $PLIST || true
+        /usr/libexec/PlistBuddy -c "Add :NSBluetoothAlwaysUsageDescription string 'Aplikasi MIDI Royale Pro membutuhkan akses MIDI/Bluetooth/SysEx untuk terhubung ke keyboard Korg.'" $PLIST || true
+        /usr/libexec/PlistBuddy -c "Add :NSBluetoothPeripheralUsageDescription string 'Aplikasi membutuhkan akses MIDI SysEx untuk instrumen.'" $PLIST || true
+        /usr/libexec/PlistBuddy -c "Add :NSLocalNetworkUsageDescription string 'Aplikasi membutuhkan komunikasi hardware MIDI SysEx.'" $PLIST || true
 
     - name: Compile Proyek Xcode ke .app
       run: |
