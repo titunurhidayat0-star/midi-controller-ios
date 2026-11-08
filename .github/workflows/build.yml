@@ -18,18 +18,23 @@ jobs:
       with:
         node-version: 18
 
-    - name: Inisialisasi Proyek & Capacitor
+    - name: Inisialisasi Proyek & Capacitor + Web MIDI Polyfill
       run: |
         if [ ! -f package.json ]; then
           npm init -y
         fi
         
-        # Install Capacitor 5 beserta plugin Native Web MIDI / CoreMIDI
-        npm install @capacitor/core@5 @capacitor/cli@5 @capacitor/ios@5 @capacitor-community/web-midi
+        # Install Capacitor 5 dan Plugin MIDI Native yang Valid
+        npm install @capacitor/core@5 @capacitor/cli@5 @capacitor/ios@5 @capacitor-community/midi web-midi-api
         
         # Siapkan folder asset web www
         mkdir -p www
         cp -R index.html *.js *.css *.json assets/ www/ 2>/dev/null || true
+        
+        # Injeksi Polyfill Web MIDI ke dalam index.html agar WKWebView iOS mengenali Web MIDI
+        if [ -f www/index.html ]; then
+          sed -i '' 's|<head>|<head><script src="https://cdn.jsdelivr.net/npm/web-midi-api@0.8.2/lib/WebMIDIAPI.min.js"></script>|g' www/index.html
+        fi
         
         # Bersihkan konfigurasi lama
         rm -rf capacitor.config.json capacitor.config.ts ios
@@ -45,7 +50,7 @@ jobs:
         
         cd ios/App && pod install && cd ../..
 
-    - name: Tambahkan Izin CoreMIDI & Hardware di Info.plist
+    - name: Tambahkan Izin CoreMIDI, Bluetooth & SysEx di Info.plist
       run: |
         PLIST="ios/App/App/Info.plist"
         /usr/libexec/PlistBuddy -c "Add :NSBluetoothAlwaysUsageDescription string 'Aplikasi MIDI Royale Pro membutuhkan akses MIDI/Bluetooth/SysEx untuk terhubung ke keyboard Korg.'" $PLIST || true
