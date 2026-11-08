@@ -1,0 +1,57 @@
+name: Build Web MIDI iOS IPA
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Ambil Kode Proyek
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+
+    - name: Konversi Web HTML ke Proyek iOS (Capacitor)
+      run: |
+        npm init -y
+        npm install @capacitor/core @capacitor/cli @capacitor/ios
+        npx cap init "MIDI Controller" "com.midi.controller" --web-dir .
+        npx cap add ios
+        npx cap sync ios
+
+    - name: Tambahkan Izin Hardware MIDI & Bluetooth di Info.plist
+      run: |
+        PLIST="ios/App/App/Info.plist"
+        /usr/libexec/PlistBuddy -c "Add :NSBluetoothAlwaysUsageDescription string 'Aplikasi membutuhkan akses MIDI/Bluetooth untuk terhubung ke keyboard Korg.'" $PLIST || true
+        /usr/libexec/PlistBuddy -c "Add :NSBluetoothPeripheralUsageDescription string 'Aplikasi membutuhkan akses MIDI untuk instrumen.'" $PLIST || true
+
+    - name: Compile Proyek Xcode ke .app
+      run: |
+        xcodebuild -workspace ios/App/App.xcworkspace \
+                   -scheme App \
+                   -configuration Release \
+                   -sdk iphoneos \
+                   CODE_SIGNING_ALLOWED=NO \
+                   CODE_SIGNING_REQUIRED=NO \
+                   CODE_SIGN_IDENTITY="" \
+                   BUILD_DIR=$PWD/build
+
+    - name: Bungkus ke Format .ipa
+      run: |
+        mkdir -p Payload
+        APP_PATH=$(find build -name "*.app" -type d | head -n 1)
+        cp -r "$APP_PATH" Payload/
+        zip -r MIDI-Royale-Pro.ipa Payload
+
+    - name: Simpan dan keluarkan File .ipa
+      uses: actions/upload-artifact@v4
+      with:
+        name: Hasil-Build-IPA
+        path: MIDI-Royale-Pro.ipa
