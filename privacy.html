@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07070a">
+<title>Kebijakan Privasi - MIDI ROYALE PRO</title>
+<meta name="description" content="Kebijakan Privasi aplikasi MIDI ROYALE PRO oleh KING TITU. Privacy Policy for the MIDI ROYALE PRO app.">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #07070a; --card: #0e0f15; --line: #232634; --tx: #e8eaf0; --mut: #a9b0c0; --ac: #d4af37; --ac2: #e5cf87; }
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--tx); }
+body { font: 400 16px/1.65 'Plus Jakarta Sans', system-ui, sans-serif; padding: max(16px, env(safe-area-inset-top)) 16px 48px; }
+.wrap { max-width: 760px; margin: 0 auto; }
+header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0 18px; border-bottom: 1px solid var(--line); }
+.brand { font: 800 15px/1.2 Orbitron, sans-serif; letter-spacing: .14em; color: var(--ac2); }
+.brand small { display: block; font: 600 11px/1.4 'Plus Jakarta Sans', sans-serif; letter-spacing: .04em; color: var(--mut); margin-top: 4px; }
+.lang { display: inline-flex; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.lang button { min-width: 64px; min-height: 44px; border: 0; background: transparent; color: var(--mut); font: 700 13px 'Plus Jakarta Sans', sans-serif; cursor: pointer; }
+.lang button.on { background: var(--ac); color: #120f04; }
+h1 { font: 800 clamp(22px, 5vw, 30px)/1.25 Orbitron, sans-serif; letter-spacing: .04em; margin: 26px 0 6px; }
+.meta { color: var(--mut); font-size: 14px; margin: 0 0 20px; }
+.sum { background: linear-gradient(180deg, rgba(212,175,55,.12), rgba(212,175,55,.04)); border: 1px solid rgba(212,175,55,.35); border-radius: 14px; padding: 14px 16px; margin-bottom: 8px; }
+.sum ul { margin: 6px 0 0; padding-left: 20px; }
+h2 { font: 700 18px/1.35 'Plus Jakarta Sans', sans-serif; color: var(--ac2); margin: 30px 0 8px; }
+h3 { font: 700 15px/1.4 'Plus Jakarta Sans', sans-serif; margin: 18px 0 4px; }
+p, li { color: var(--tx); }
+.mut { color: var(--mut); }
+ul { padding-left: 22px; }
+li { margin: 4px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; margin: 8px 0; }
+th, td { text-align: left; vertical-align: top; padding: 9px 10px; border-bottom: 1px solid var(--line); }
+th { color: var(--mut); font-weight: 600; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+a { color: var(--ac2); }
+.btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border-radius: 12px; background: var(--ac); color: #120f04; font-weight: 700; text-decoration: none; }
+footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--mut); font-size: 13px; }
+[data-l] { display: none; }
+html[lang="id"] [data-l="id"], html[lang="en"] [data-l="en"] { display: block; }
+@media (max-width: 520px) { th, td { padding: 8px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand">MIDI ROYALE PRO<small>by KING TITU</small></div>
+  <div class="lang" role="group" aria-label="Bahasa / Language">
+    <button type="button" data-set="id">ID</button><button type="button" data-set="en">EN</button>
+  </div>
+</header>
+
+<!-- ============================ BAHASA INDONESIA ============================ -->
+<main data-l="id">
+<h1>Kebijakan Privasi</h1>
+<p class="meta">Berlaku sejak 3 November 2026 · Pengembang: KING TITU</p>
+
+<div class="sum">
+  <b>Ringkasnya</b>
+  <ul>
+    <li>Nada dan pesan MIDI yang kamu mainkan tidak pernah dikirim ke server. Semuanya langsung ke keyboard.</li>
+    <li>Kami hanya menyimpan email akun, ID perangkat untuk lisensi, backup preset, dan laporan error teknis.</li>
+    <li>Tidak ada iklan, tidak ada pelacak/analytics, dan data tidak dijual atau dibagikan untuk pemasaran.</li>
+  </ul>
+</div>
+
+<h2>1. Tentang aplikasi</h2>
+<p>MIDI ROYALE PRO adalah aplikasi pengontrol MIDI untuk keyboard arranger dan synthesizer (KORG, YAMAHA, ROLAND, dan keyboard MIDI umum). Kebijakan ini menjelaskan data apa yang dikumpulkan aplikasi, untuk apa, dan bagaimana kamu bisa menghapusnya.</p>
+
+<h2>2. Data yang kami kumpulkan</h2>
+<div class="tbl"><table>
+<tr><th>Data</th><th>Untuk apa</th><th>Kapan</th></tr>
+<tr><td><b>Alamat email &amp; password</b></td><td>Login akun. Password dikelola Firebase Authentication (Google); pengembang tidak bisa melihat password kamu.</td><td>Saat login</td></tr>
+<tr><td><b>ID perangkat</b> (kode acak, contoh <code>DEV2-…</code>), waktu pendaftaran, waktu &amp; jumlah pindah perangkat</td><td>Lisensi: satu akun untuk satu perangkat, dan fitur pindah perangkat mandiri sebulan sekali. ID ini dibuat acak oleh aplikasi dan tidak berisi nomor IMEI, nomor telepon, atau data pribadi.</td><td>Saat login pertama di perangkat, dan saat kamu memindahkan lisensi</td></tr>
+<tr><td><b>Backup preset</b>: tile voice (nama, kategori, Bank MSB/LSB, Program), gambar tile buatanmu, REG, setlist, tuning, Performance, setelan aplikasi, versi aplikasi</td><td>Supaya preset aman bila HP rusak atau diganti.</td><td>Saat kamu menekan SIMPAN KE CLOUD, dan otomatis sekali sehari bila ada perubahan (bisa dimatikan di Pengaturan › Data &amp; Info)</td></tr>
+<tr><td><b>Laporan error</b>: pesan error teknis, versi aplikasi, jenis browser/perangkat (user agent), model keyboard yang dipilih, mode tampilan, nama port MIDI, bahasa, waktu, dan ID akun acak (uid). <b>Tanpa email.</b></td><td>Menemukan dan memperbaiki kerusakan aplikasi.</td><td>Hanya saat terjadi error, maksimal 5 laporan per sesi. Bisa dimatikan di Pengaturan › Data &amp; Info</td></tr>
+</table></div>
+
+<h2>3. Data yang tetap di perangkatmu</h2>
+<ul>
+  <li>Semua pesan MIDI (nada, akor, pitch bend, CC, Program Change, SysEx quartertone) dikirim langsung ke keyboard lewat USB, kabel MIDI, atau Bluetooth. Tidak ada yang dikirim ke server.</li>
+  <li>Nada yang masuk dari keyboard (untuk tampilan tuts &amp; akor dan kontrol dari pedal) hanya diproses di perangkat.</li>
+  <li>Preset dan setelan juga disimpan di penyimpanan lokal aplikasi. Rekaman .MID dan file Export hanya ada di perangkat sampai kamu sendiri membagikannya.</li>
+</ul>
+
+<h2>4. Izin yang dipakai</h2>
+<ul>
+  <li><b>MIDI (termasuk SysEx)</b>: untuk berkomunikasi dengan keyboard. Bluetooth MIDI memakai pasangan Bluetooth dari sistem HP.</li>
+  <li><b>Getar</b>: umpan balik saat tombol ditekan dan saat MIDI tersambung/terputus (bisa dimatikan).</li>
+  <li><b>Internet</b>: login, lisensi, backup cloud, dan laporan error.</li>
+</ul>
+<p class="mut">Aplikasi tidak memakai kamera, mikrofon, lokasi, kontak, atau galeri (kecuali gambar yang kamu pilih sendiri untuk tile).</p>
+
+<h2>5. Layanan pihak ketiga</h2>
+<ul>
+  <li><b>Google Firebase</b> (Authentication dan Cloud Firestore) menyimpan data pada bagian 2. Lihat <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Privasi Firebase</a> dan <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Kebijakan Privasi Google</a>.</li>
+  <li><b>Google Fonts, cdn.tailwindcss.com, unpkg.com, gstatic.com</b> dipakai untuk memuat huruf dan kode aplikasi. Seperti saat membuka situs web biasa, server tersebut menerima alamat IP dan jenis browser.</li>
+</ul>
+
+<h2>6. Berapa lama data disimpan &amp; cara menghapus</h2>
+<ul>
+  <li>Data akun, ID perangkat, dan backup disimpan selama akun masih aktif. Backup cloud selalu ditimpa oleh backup terbaru (hanya satu salinan).</li>
+  <li>Laporan error disimpan selama diperlukan untuk memperbaiki masalah.</li>
+  <li>Kamu bisa meminta <b>salinan atau penghapusan</b> akun, ID perangkat, backup cloud, dan laporan error kapan saja lewat WhatsApp di bawah. Sebutkan email akunmu. Permintaan diproses paling lambat 30 hari.</li>
+  <li>Data lokal di HP terhapus bila aplikasi di-uninstall atau data aplikasinya dihapus.</li>
+</ul>
+
+<h2>7. Keamanan</h2>
+<p>Semua koneksi ke server memakai HTTPS. Aturan keamanan database membuat data lisensi dan backup hanya bisa dibaca oleh pemilik akun itu sendiri, dan laporan error tidak bisa dibaca oleh pengguna mana pun. Tidak ada sistem yang 100% aman, jadi jaga password akunmu.</p>
+
+<h2>8. Anak-anak</h2>
+<p>Aplikasi ini tidak ditujukan untuk anak di bawah 13 tahun, dan kami tidak dengan sengaja mengumpulkan data anak. Bila kamu orang tua dan mengetahui anakmu membuat akun, hubungi kami untuk menghapusnya.</p>
+
+<h2>9. Perubahan kebijakan</h2>
+<p>Bila kebijakan ini berubah, tanggal "Berlaku sejak" di atas akan diperbarui dan versi terbaru selalu ada di halaman ini.</p>
+
+<h2>10. Kontak</h2>
+<p>KING TITU — pengembang MIDI ROYALE PRO</p>
+<p><a class="btn" href="https://wa.me/6282245736914" target="_blank" rel="noopener">WhatsApp +62 822-4573-6914</a></p>
+</main>
+
+<!-- ================================ ENGLISH ================================ -->
+<main data-l="en">
+<h1>Privacy Policy</h1>
+<p class="meta">Effective 3 November 2026 · Developer: KING TITU</p>
+
+<div class="sum">
+  <b>In short</b>
+  <ul>
+    <li>The notes and MIDI messages you play are never sent to a server. Everything goes straight to your keyboard.</li>
+    <li>We only store your account email, a device ID for the license, preset backups, and technical error reports.</li>
+    <li>No ads, no trackers/analytics, and data is never sold or shared for marketing.</li>
+  </ul>
+</div>
+
+<h2>1. About the app</h2>
+<p>MIDI ROYALE PRO is a MIDI controller app for arranger keyboards and synthesizers (KORG, YAMAHA, ROLAND and general MIDI keyboards). This policy explains what data the app collects, why, and how you can delete it.</p>
+
+<h2>2. Data we collect</h2>
+<div class="tbl"><table>
+<tr><th>Data</th><th>Purpose</th><th>When</th></tr>
+<tr><td><b>Email address &amp; password</b></td><td>Account login. Passwords are handled by Firebase Authentication (Google); the developer cannot see your password.</td><td>When you log in</td></tr>
+<tr><td><b>Device ID</b> (a random code such as <code>DEV2-…</code>), registration time, time &amp; number of device moves</td><td>License: one account per device, and the self-service device move once a month. The ID is generated randomly by the app and contains no IMEI, phone number or personal data.</td><td>On first login on a device, and when you move your license</td></tr>
+<tr><td><b>Preset backup</b>: voice tiles (name, category, Bank MSB/LSB, Program), your custom tile images, REG, setlist, tuning, Performances, app settings, app version</td><td>So your presets are safe if your phone breaks or is replaced.</td><td>When you tap SAVE TO CLOUD, and automatically once a day when something changed (can be turned off in Settings › Data &amp; Info)</td></tr>
+<tr><td><b>Error reports</b>: technical error message, app version, browser/device type (user agent), chosen keyboard model, view mode, MIDI port name, language, time and a random account ID (uid). <b>No email.</b></td><td>Finding and fixing app bugs.</td><td>Only when an error happens, at most 5 reports per session. Can be turned off in Settings › Data &amp; Info</td></tr>
+</table></div>
+
+<h2>3. Data that stays on your device</h2>
+<ul>
+  <li>All MIDI messages (notes, chords, pitch bend, CC, Program Change, quartertone SysEx) go straight to the keyboard over USB, MIDI cable or Bluetooth. Nothing is sent to a server.</li>
+  <li>Notes coming from the keyboard (for the keys &amp; chord display and pedal control) are processed on the device only.</li>
+  <li>Presets and settings are also kept in the app's local storage. .MID recordings and Export files stay on the device until you share them yourself.</li>
+</ul>
+
+<h2>4. Permissions</h2>
+<ul>
+  <li><b>MIDI (including SysEx)</b>: to talk to your keyboard. Bluetooth MIDI uses your phone's own Bluetooth pairing.</li>
+  <li><b>Vibration</b>: feedback on button presses and when MIDI connects/disconnects (can be turned off).</li>
+  <li><b>Internet</b>: login, license, cloud backup and error reports.</li>
+</ul>
+<p class="mut">The app does not use the camera, microphone, location, contacts or gallery (except an image you choose yourself for a tile).</p>
+
+<h2>5. Third-party services</h2>
+<ul>
+  <li><b>Google Firebase</b> (Authentication and Cloud Firestore) stores the data in section 2. See <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Firebase Privacy</a> and the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.</li>
+  <li><b>Google Fonts, cdn.tailwindcss.com, unpkg.com, gstatic.com</b> load the app's fonts and code. As with any website, those servers receive your IP address and browser type.</li>
+</ul>
+
+<h2>6. Retention &amp; deletion</h2>
+<ul>
+  <li>Account data, device ID and backups are kept while the account is active. The cloud backup is always replaced by the newest one (a single copy).</li>
+  <li>Error reports are kept as long as needed to fix problems.</li>
+  <li>You can ask for a <b>copy or deletion</b> of your account, device ID, cloud backup and error reports at any time via WhatsApp below. Include your account email. Requests are handled within 30 days.</li>
+  <li>Local data on the phone is removed when you uninstall the app or clear its data.</li>
+</ul>
+
+<h2>7. Security</h2>
+<p>All server connections use HTTPS. Database security rules let only the account owner read their own license and backup data, and error reports cannot be read by any user. No system is 100% secure, so keep your account password safe.</p>
+
+<h2>8. Children</h2>
+<p>The app is not directed at children under 13, and we do not knowingly collect children's data. If you are a parent and find that your child created an account, contact us to delete it.</p>
+
+<h2>9. Changes</h2>
+<p>If this policy changes, the "Effective" date above is updated and the latest version is always on this page.</p>
+
+<h2>10. Contact</h2>
+<p>KING TITU — developer of MIDI ROYALE PRO</p>
+<p><a class="btn" href="https://wa.me/6282245736914" target="_blank" rel="noopener">WhatsApp +62 822-4573-6914</a></p>
+</main>
+
+<footer>© 2026 KING TITU · MIDI ROYALE PRO</footer>
+</div>
+<script>
+(function () {
+  function set(l) {
+    l = l === 'en' ? 'en' : 'id';
+    document.documentElement.lang = l;
+    document.title = l === 'en' ? 'Privacy Policy - MIDI ROYALE PRO' : 'Kebijakan Privasi - MIDI ROYALE PRO';
+    document.querySelectorAll('[data-set]').forEach(function (b) { b.classList.toggle('on', b.dataset.set === l); });
+    try { history.replaceState(null, '', l === 'en' ? '#en' : '#id'); } catch (e) {}
+  }
+  document.querySelectorAll('[data-set]').forEach(function (b) { b.addEventListener('click', function () { set(b.dataset.set); }); });
+  var h = (location.hash || '').slice(1), nav = (navigator.language || '').slice(0, 2);
+  set(h === 'en' || h === 'id' ? h : (nav === 'id' || nav === 'ms' ? 'id' : 'en'));
+})();
+</script>
+</body>
+</html>

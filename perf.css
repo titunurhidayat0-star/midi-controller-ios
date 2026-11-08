@@ -1,0 +1,157 @@
+/* MIDI ROYALE PRO 9.7: tampilan utama PERFORMANCE, bank sound, efek Klasik lebih tipis */
+
+/* ===================== BANK SOUND ===================== */
+.mr-bks { display: inline-flex; flex: 0 0 auto; gap: 2px; padding: 2px; margin-right: .35rem; border-radius: .7rem; background: #05070d; border: 1px solid #1e293b; }
+.mr-bk { display: inline-flex; align-items: center; gap: .3rem; min-height: 32px; padding: 0 .55rem; border-radius: .55rem; border: 0; background: none; color: #94a3b8; font: 800 10px 'Orbitron', sans-serif; letter-spacing: .04em; white-space: nowrap; touch-action: manipulation; }
+.mr-bk small { font: 700 9px 'JetBrains Mono', monospace; color: #475569; }
+.mr-bk.on { background: rgb(var(--accent-rgb) / .16); color: rgb(var(--ac-300)); box-shadow: inset 0 0 0 1px rgb(var(--accent-rgb) / .6); }
+.mr-bk.on small { color: rgb(var(--ac-300)); }
+.mr-bk.empty { opacity: .45; }
+@media (orientation: landscape) and (max-height: 520px) { .mr-bk { min-height: 28px; padding: 0 .4rem; font-size: 9px; } .mr-bk small { display: none; } }
+
+/* Pa5X Keys: tab bank di bawah daftar (seperti Korg) */
+#paRoot .pa-banks { display: flex; gap: 4px; padding: 4px 0 0; flex: 0 0 auto; }
+#paRoot .pa-banks:empty { display: none; }
+#paRoot .pa-banks .mr-bk { flex: 1 1 0; justify-content: center; min-height: 34px; border-radius: 5px; border: 1px solid #00ff6626; background: linear-gradient(180deg, #08160e, #030805); color: #6ee7a0; font-family: 'Chakra Petch', 'Orbitron', sans-serif; font-size: 12px; box-shadow: none; }
+#paRoot .pa-banks .mr-bk small { color: #3f7a55; }
+#paRoot .pa-banks .mr-bk.on { border-color: #00ff66; background: linear-gradient(180deg, #0f3a20, #06180d); color: #fff; }
+#paRoot .pa-banks .mr-bk.on small { color: #00ff66; }
+@media (max-height: 520px) { #paRoot .pa-banks .mr-bk { min-height: 28px; font-size: 11px; } }
+#paRoot .pa-empty { padding: 1rem; color: #3f7a55; font: 700 12px 'JetBrains Mono', monospace; }
+html.lcd-x #paRoot .pa-banks { filter: hue-rotate(var(--lcd-rot, 0deg)) saturate(var(--lcd-sat, 1)); }
+
+/* ===================== UPPER 1/2/3 (MAIN Pa5X) ===================== */
+#paRoot .pa-uplist > button.mr-up { display: flex; align-items: center; gap: .5rem; min-width: 0; width: 100%; min-height: 30px; padding: 2px 6px 2px 0; background: none; border: 0; border-radius: 4px; text-align: left; opacity: .45; touch-action: manipulation; position: relative; z-index: 2; }
+#paRoot .pa-uplist > button.mr-up.on { opacity: 1; }
+#paRoot .pa-uplist > button.mr-up:active, #paRoot .pa-uplist > button.mr-up.pk { background: #00ff6618; }
+#paRoot .pa-uplist > button.mr-up.on em { background: #00ff6622; }
+#paRoot .pa-uplist > button.mr-up b { text-decoration: underline; text-decoration-color: #00ff6644; text-underline-offset: 3px; }
+#paRoot .pa-uplist > button.mr-up.dirty small { color: #fbbf24; }
+#paRoot #paScr-main.perf .pa-uplist { max-width: 66%; gap: 2px; }
+#paRoot #paScr-main.perf .pa-uplist b { font-size: clamp(14px, 1.9vw, 22px); }
+#paRoot .pa-uplist .mr-psave { align-self: flex-start; margin-top: 3px; min-height: 30px; padding: 0 .7rem; border-radius: 5px; border: 1px solid #fbbf24aa; background: #2a1d05; color: #fde68a; font: 800 10px 'Chakra Petch', 'Orbitron', sans-serif; letter-spacing: .06em; position: relative; z-index: 2; }
+@media (max-height: 520px) { #paRoot .pa-uplist > button.mr-up { min-height: 24px; } #paRoot #paScr-main.perf .pa-uplist b { font-size: 13px; } }
+
+/* ===================== UPPER 1/2/3 (Klasik) ===================== */
+#mrHero .mr-hups { grid-column: 1 / -1; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+#mrHero .mr-hups[hidden] { display: none; }
+#mrHero .mr-up { display: flex; align-items: center; gap: .5rem; min-height: 38px; padding: 0 .6rem; border-radius: .7rem; border: 1px solid rgba(255, 255, 255, .07); background: rgba(0, 0, 0, .35); color: #e2e8f0; text-align: left; min-width: 0; opacity: .55; touch-action: manipulation; }
+#mrHero .mr-up.on { opacity: 1; }
+#mrHero .mr-up:active, #mrHero .mr-up.pk { border-color: rgb(var(--accent-rgb) / .7); background: rgb(var(--accent-rgb) / .12); }
+#mrHero .mr-up em { flex: 0 0 auto; font: 800 9px 'JetBrains Mono', monospace; font-style: normal; color: rgb(var(--ac-300)); border: 1px solid rgb(var(--accent-rgb) / .45); border-radius: 4px; padding: 1px 4px; }
+#mrHero .mr-up .ui { flex: 0 0 auto; display: inline-flex; width: 20px; height: 20px; color: rgb(var(--ac-300)); }
+#mrHero .mr-up .ui:empty { display: none; }
+#mrHero .mr-up .ui svg, #mrHero .mr-up .ui img { width: 20px !important; height: 20px !important; filter: none !important; }
+#mrHero .mr-up b { flex: 1 1 auto; min-width: 0; font: 800 clamp(.72rem, 1.6vw, 1rem) 'Orbitron', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#mrHero .mr-up small { flex: 0 0 auto; font: 700 9px 'JetBrains Mono', monospace; color: #64748b; }
+#mrHero .mr-up.dirty small { color: #fbbf24; }
+#mrHero .mr-psave { min-height: 34px; border-radius: .7rem; border: 1px solid rgba(251, 191, 36, .6); background: rgba(251, 191, 36, .1); color: #fde68a; font: 800 10px 'Orbitron', sans-serif; letter-spacing: .05em; }
+#mrHero.mr-perf .mr-name span { font-size: clamp(1rem, 3vw, 1.9rem); }
+@media (orientation: landscape) and (max-height: 520px) { #mrHero .mr-up { min-height: 30px; } #mrHero .mr-up b { font-size: .7rem; } #mrHero .mr-psave { min-height: 28px; } }
+
+/* sound target Upper 2/3 di daftar Klasik */
+.voice-tile.mr-tgt { border-color: #22d3ee !important; box-shadow: 0 0 0 1px #22d3ee !important; }
+.voice-tile.mr-tgt::before { content: attr(data-tgt); position: absolute; top: 4px; right: 6px; font: 800 8px 'JetBrains Mono', monospace; color: #04131a; background: #22d3ee; border-radius: 999px; padding: 0 5px; z-index: 3; pointer-events: none; }
+
+/* bilah "PILIH SOUND · UPPER n" */
+.mr-pickbar { position: fixed; left: 50%; bottom: calc(var(--sab, 0px) + 10px); transform: translateX(-50%); z-index: 70; display: flex; align-items: center; gap: .55rem; max-width: calc(100vw - 1.2rem); padding: .35rem .4rem .35rem .45rem; border-radius: 999px; background: #04131a; border: 1px solid #22d3ee; color: #cffafe; box-shadow: 0 8px 24px rgba(0, 0, 0, .6); font: 700 11px 'JetBrains Mono', monospace; }
+.mr-pickbar.off { display: none; }
+.mr-pickbar .pk-k { padding: .2rem .55rem; border-radius: 999px; background: #22d3ee; color: #04131a; font: 900 10px 'Orbitron', sans-serif; white-space: nowrap; }
+.mr-pickbar .pk-t { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.mr-pickbar button { flex: 0 0 auto; min-height: 32px; padding: 0 .8rem; border-radius: 999px; border: 1px solid #22d3ee88; background: #082f3a; color: #cffafe; font: 800 10px 'Orbitron', sans-serif; }
+body.pa-mode .mr-pickbar { bottom: auto; left: auto; right: max(10px, var(--sar, 0px)); transform: none; top: calc(var(--sat, 0px) + 47px); max-width: min(46vw, 420px); background: #021108; border-color: #00ff66; color: #b6ffd2; }
+body.pa-mode .mr-pickbar .pk-k { background: #00ff66; color: #021108; }
+body.pa-mode .mr-pickbar button { border-color: #00ff6688; background: #06200f; color: #b6ffd2; }
+
+/* ===================== EFEK KLASIK LEBIH TIPIS ===================== */
+/* tile aktif: garis tipis, tanpa lingkaran bayangan tebal */
+body:not(.pa-mode) .voice-tile.active-tile { box-shadow: 0 0 0 1px rgb(var(--ac-300) / .9) !important; border-color: rgb(var(--ac-300)) !important; background: linear-gradient(180deg, rgb(var(--accent-rgb) / .12), rgba(8, 10, 18, .92)) !important; }
+body:not(.pa-mode) .voice-tile.active-tile h4 { text-shadow: none !important; }
+body:not(.pa-mode) .voice-tile svg, body:not(.pa-mode) .voice-tile img { filter: none !important; }
+body:not(.pa-mode) .voice-tile.layer-tile { box-shadow: 0 0 0 1px #a855f7 !important; }
+body:not(.pa-mode) .voice-tile.u3-tile { box-shadow: 0 0 0 1px #0ea5e9 !important; }
+body:not(.pa-mode) .voice-tile.active-tile .mr-badge { box-shadow: none !important; }
+body:not(.pa-mode) .voice-tile.glow-cyan.active-tile, body:not(.pa-mode) .voice-tile.glow-amber.active-tile, body:not(.pa-mode) .voice-tile.glow-purple.active-tile, body:not(.pa-mode) .voice-tile.glow-orange.active-tile, body:not(.pa-mode) .voice-tile.glow-rose.active-tile { box-shadow: 0 0 0 1px rgb(var(--ac-300) / .9) !important; }
+/* tab & tombol aktif: tanpa pendar */
+body:not(.pa-mode) .category-tab.active, body:not(.pa-mode) .category-tab.mr-cc.active { box-shadow: inset 0 -2px 0 currentColor !important; }
+body:not(.pa-mode) .main-tab-btn.active { box-shadow: inset 0 0 0 1px rgb(var(--accent-rgb) / .7) !important; }
+body:not(.pa-mode) .style-btn.active-style { box-shadow: 0 0 0 1.5px currentColor, inset 0 0 10px rgb(var(--accent-rgb) / .1) !important; }
+body:not(.pa-mode) #panelStyle button:active, body:not(.pa-mode) #panelCtrl button:active { box-shadow: 0 0 0 1px rgb(var(--accent-rgb) / .7) !important; }
+body:not(.pa-mode) .ptoggle.on, body:not(.pa-mode) .reg-btn.active-reg, body:not(.pa-mode) .reg-store.armed, body:not(.pa-mode) .layer-bar.armed { box-shadow: inset 0 0 0 1px currentColor !important; }
+body:not(.pa-mode) .ks-tile.on { box-shadow: 0 0 0 1px rgb(var(--c) / .6) !important; }
+body:not(.pa-mode) .key-white.qt-active, body:not(.pa-mode) .key-black.qt-active { box-shadow: 0 0 0 1px rgb(var(--ac-300)) !important; }
+/* kotak voice / performance: tanpa pendar luar, nama tanpa bayangan tebal */
+body:not(.pa-mode) #mrHero.mr-split > .mr-vbox, body:not(.pa-mode) .mr-hero { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06) !important; }
+body:not(.pa-mode) .mr-name span { text-shadow: none !important; }
+body:not(.pa-mode) div:has(> #whiteKeysContainer) { box-shadow: inset 0 2px 14px #000 !important; }
+body:not(.pa-mode) .vk-white.down { box-shadow: inset 0 0 0 1px rgb(var(--accent-rgb) / .8) !important; }
+body:not(.pa-mode) .vk-black.down { box-shadow: 0 0 0 1px rgb(var(--accent-rgb) / .8) !important; }
+
+/* Klasik: urutan kotak Performance = nama, Upper 1-3, PREV · layar penuh · NEXT */
+#mrHero.mr-perf.mr-split > .mr-vbox { grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) !important; grid-template-rows: minmax(0, 1fr) auto auto !important; }
+#mrHero.mr-perf .mr-name { grid-column: 1 / -1; grid-row: 1; min-height: 0; overflow: hidden; }
+#mrHero.mr-perf .mr-name span { white-space: nowrap !important; max-width: 100%; }
+#mrHero.mr-perf .mr-name small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+#mrHero.mr-perf .mr-hups { grid-column: 1 / -1; grid-row: 2; }
+#mrHero.mr-perf .mr-prev { grid-column: 1; grid-row: 3; }
+#mrHero.mr-perf .mr-next { grid-column: 3; grid-row: 3; }
+#mrHero.mr-perf .mr-tb { grid-column: 2 !important; grid-row: 3 !important; align-self: center; }
+@media (orientation: landscape) and (max-height: 520px) {
+  #mrHero.mr-perf .mr-name span { font-size: clamp(.9rem, 2.6vw, 1.25rem) !important; }
+  #mrHero.mr-perf .mr-name small { font-size: .58rem; }
+  #mrHero.mr-perf .mr-hups { gap: 2px; }
+  #mrHero .mr-up { min-height: 26px; padding: 0 .45rem; gap: .35rem; }
+  #mrHero .mr-up small { display: none; }
+  #mrHero .mr-up .ui { width: 16px; height: 16px; }
+  #mrHero .mr-up .ui svg, #mrHero .mr-up .ui img { width: 16px !important; height: 16px !important; }
+  #mrHero.mr-perf .mr-nav { min-height: 40px !important; }
+}
+
+/* Pa5X Keys: tombol UPPER 1 sama seperti UPPER 2/3 */
+#paRoot .pa-kb #paPick1 { padding: 0 10px; font-weight: 800; font-size: 11px; white-space: nowrap; flex: 0 0 auto; }
+
+/* Pa5X MAIN (PERFORMANCE): tombol ◀ ▶ selalu terlihat & bisa disentuh (juga saat keyboard virtual terbuka) */
+#paRoot #paScr-main.perf .pa-keys .info { padding-right: 132px; }
+#paRoot #paScr-main.perf .pa-vnav { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); margin: 0 !important; gap: 8px; z-index: 5; }
+#paRoot #paScr-main.perf .pa-vnav .vnav { width: 54px !important; height: 54px !important; border-radius: 10px !important; border: 1px solid #00ff6666 !important; background: #020d06 !important; touch-action: manipulation; }
+#paRoot #paScr-main.perf .pa-vnav .vnav:active { background: #06301a !important; }
+#paRoot #paScr-main.perf .pa-uplist { max-width: none; }
+#paRoot #paScr-main.perf .pa-uplist .mr-psave { position: absolute; right: 8px; top: calc(50% + 34px); width: 116px; margin: 0; padding: 0 .3rem; white-space: normal; line-height: 1.15; z-index: 5; }
+#paRoot #paScr-main.perf .pa-keys .big { font-size: clamp(22px, min(5.6vw, 9vh), 52px); }
+@media (max-height: 520px) {
+  #paRoot #paScr-main.perf .pa-keys .info { padding-right: 112px; }
+  #paRoot #paScr-main.perf .pa-vnav .vnav { width: 46px !important; height: 46px !important; }
+  #paRoot #paScr-main.perf .pa-uplist .mr-psave { width: 100px; top: calc(50% + 28px); min-height: 26px; font-size: 9px; }
+}
+/* keyboard virtual terbuka: kartu lebih pendek */
+body:has(#vkDock:not(.is-hidden)) #paRoot #paScr-main.perf .pa-keys .big { font-size: clamp(18px, 6.5vh, 34px); }
+body:has(#vkDock:not(.is-hidden)) #paRoot #paScr-main.perf .pa-keys .hint { display: none; }
+body:has(#vkDock:not(.is-hidden)) #paRoot #paScr-main.perf .pa-uplist { margin-top: .15rem; gap: 0; }
+body:has(#vkDock:not(.is-hidden)) #paRoot #paScr-main.perf .pa-uplist > button.mr-up { min-height: 22px; }
+body:has(#vkDock:not(.is-hidden)) #paRoot #paScr-main.perf .pa-uplist b { font-size: 13px; }
+body:has(#vkDock:not(.is-hidden)) #paRoot #paScr-main.perf .pa-vnav { top: 42%; }
+body:has(#vkDock:not(.is-hidden)) #paRoot #paScr-main.perf .pa-uplist .mr-psave { top: calc(42% + 30px); }
+/* SOUND + keyboard virtual terbuka: ◀ ▶ pindah ke kanan supaya tidak terpotong */
+body:has(#vkDock:not(.is-hidden)) #paRoot #paScr-main:not(.perf) .pa-keys .info { padding-right: 120px; }
+body:has(#vkDock:not(.is-hidden)) #paRoot #paScr-main:not(.perf) .pa-vnav { position: absolute; right: 8px; top: 42%; transform: translateY(-50%); margin: 0 !important; gap: 8px; z-index: 5; }
+body:has(#vkDock:not(.is-hidden)) #paRoot #paScr-main:not(.perf) .pa-vnav .vnav { width: 46px !important; height: 46px !important; border-radius: 10px !important; border: 1px solid #00ff6666 !important; background: #020d06 !important; }
+/* Klasik + keyboard virtual terbuka: ◀ NAMA ▶ satu baris, Upper di bawahnya */
+body:has(#vkDock:not(.is-hidden)) #mrHero.mr-perf.mr-split > .mr-vbox { grid-template-columns: auto minmax(0, 1fr) auto !important; grid-template-rows: auto minmax(0, auto) !important; align-content: start; overflow: hidden; }
+body:has(#vkDock:not(.is-hidden)) #mrHero.mr-perf .mr-prev { grid-column: 1; grid-row: 1; }
+body:has(#vkDock:not(.is-hidden)) #mrHero.mr-perf .mr-name { grid-column: 2; grid-row: 1; }
+body:has(#vkDock:not(.is-hidden)) #mrHero.mr-perf .mr-next { grid-column: 3; grid-row: 1; }
+body:has(#vkDock:not(.is-hidden)) #mrHero.mr-perf .mr-hups { grid-column: 1 / -1; grid-row: 2; }
+body:has(#vkDock:not(.is-hidden)) #mrHero.mr-perf .mr-tb { display: none !important; }
+body:has(#vkDock:not(.is-hidden)) #mrHero.mr-perf .mr-nav { min-height: 42px !important; width: 46px; padding: 0 !important; }
+body:has(#vkDock:not(.is-hidden)) #mrHero.mr-perf .mr-nav span { display: none; }
+body:has(#vkDock:not(.is-hidden)) #mrHero.mr-perf .mr-name span { font-size: clamp(.85rem, 2.2vw, 1.3rem) !important; }
+body:has(#vkDock:not(.is-hidden)) #mrHero.mr-perf .mr-name small { display: none !important; }
+body:has(#vkDock:not(.is-hidden)) #mrHero .mr-up { min-height: 24px; }
+body:has(#vkDock:not(.is-hidden)) #mrHero .mr-psave { min-height: 26px; }
+@media (max-height: 520px) {
+  body:has(#vkDock:not(.is-hidden)) #mrHero.mr-perf .mr-hups { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3px; }
+  body:has(#vkDock:not(.is-hidden)) #mrHero.mr-perf .mr-hups .mr-psave { grid-column: 1 / -1; }
+  body:has(#vkDock:not(.is-hidden)) #mrHero.mr-perf .mr-up { padding: 0 .3rem; gap: .25rem; }
+  body:has(#vkDock:not(.is-hidden)) #mrHero.mr-perf .mr-up .ui { display: none; }
+  body:has(#vkDock:not(.is-hidden)) #mrHero.mr-perf .mr-up b { font-size: .62rem; }
+}

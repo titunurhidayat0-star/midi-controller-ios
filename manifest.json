@@ -1,0 +1,95 @@
+{
+  "id": "./index.html",
+  "name": "MIDI ROYALE PRO",
+  "short_name": "MIDI ROYALE",
+  "description": "Controller MIDI untuk keyboard arranger (KORG, YAMAHA, ROLAND): ganti voice, Keyboard Set, quartertone/maqam, pitch bend, Style Play, setlist, dan kontrol pedal. By KING TITU.",
+  "lang": "id",
+  "dir": "ltr",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "fullscreen",
+    "standalone"
+  ],
+  "orientation": "landscape",
+  "background_color": "#07070a",
+  "theme_color": "#07070a",
+  "categories": [
+    "music",
+    "entertainment",
+    "utilities"
+  ],
+  "prefer_related_applications": false,
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/klasik-voice.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Tampilan Klasik: voice, akor dari keyboard, keyboard virtual"
+    },
+    {
+      "src": "screenshots/pa5x-main.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Tampilan Pa5X"
+    },
+    {
+      "src": "screenshots/klasik-quartertone.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Quartertone / maqam"
+    },
+    {
+      "src": "screenshots/pilih-keyboard.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Pilih merek & model keyboard"
+    }
+  ]
+}

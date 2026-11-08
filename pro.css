@@ -1,0 +1,73 @@
+/* MIDI ROYALE PRO - Feature Pack v6 (mengikuti warna tema lewat --accent-rgb) */
+.pro-hide { display: none !important; }
+
+/* ---- strip cepat ---- */
+.pro-strip { margin-top: 0.15rem; }
+.ptoggle.red { color: #fecaca; border-color: #b91c1c; background: rgba(185, 28, 28, 0.2); }
+.ptoggle.red:active { background: #dc2626; color: #fff; box-shadow: 0 0 16px rgba(220, 38, 38, 0.8); }
+.ptoggle.rec { color: #fff; border-color: #ef4444; background: rgba(239, 68, 68, 0.35); animation: proBlink 1s ease-in-out infinite; }
+@keyframes proBlink { 50% { box-shadow: 0 0 16px rgba(239, 68, 68, 0.9); } }
+.pro-song { display: flex; align-items: center; gap: 0.2rem; flex: 1 1 140px; min-width: 130px; }
+.pro-songname { flex: 1 1 auto; min-width: 0; height: 34px; padding: 0 0.5rem; border-radius: 0.6rem; background: #080c16; border: 1.5px solid rgb(var(--accent-rgb) / 0.35); color: rgb(var(--ac-300, var(--accent-rgb))); font: 800 11px 'Orbitron', sans-serif; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; touch-action: manipulation; min-height: 44px; }
+
+/* ---- penanda split di keyboard virtual ---- */
+.vk-split { box-shadow: inset 4px 0 0 #ef4444; }
+.vk-white.vk-split::after { content: 'SPLIT'; position: absolute; top: 4px; left: 4px; font: 800 7px 'Orbitron', sans-serif; color: #ef4444; }
+
+/* ---- modal ---- */
+.pro-modal { position: fixed; inset: 0; z-index: 60; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 0.75rem; }
+.pro-card { width: 100%; max-width: 640px; max-height: 92vh; overflow-y: auto; border-radius: 1rem; padding: 0.9rem; display: flex; flex-direction: column; gap: 0.6rem; border: 1px solid rgb(var(--accent-rgb) / 0.4); font-size: 12px; color: #e2e8f0; }
+.pro-head { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1e293b; padding-bottom: 0.5rem; }
+.pro-title { font: 800 13px 'Orbitron', sans-serif; color: rgb(var(--accent-rgb)); letter-spacing: 0.06em; }
+.pro-x { width: 36px; height: 36px; border-radius: 0.6rem; background: #0b1120; border: 1px solid #1e293b; color: #cbd5e1; font-size: 16px; }
+.pro-tabs { display: flex; gap: 0.3rem; overflow-x: auto; padding-bottom: 0.2rem; }
+.pro-tab { flex: 0 0 auto; min-height: 40px; padding: 0 0.8rem; border-radius: 0.6rem; background: #0b1120; border: 1px solid #1e293b; color: #94a3b8; font: 800 10px 'Orbitron', sans-serif; letter-spacing: 0.05em; touch-action: manipulation; }
+.pro-tab.on { color: rgb(var(--accent-rgb)); border-color: rgb(var(--accent-rgb)); background: rgb(var(--accent-rgb) / 0.12); }
+.pro-sec { display: flex; flex-direction: column; gap: 0.5rem; }
+.pro-help { color: #94a3b8; font-size: 11px; line-height: 1.45; margin: 0; }
+.pro-help.full { flex: 1 1 100%; }
+.pro-row { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
+.pro-lbl { color: #94a3b8; font: 700 10px 'JetBrains Mono', monospace; }
+.pro-val { min-width: 84px; text-align: center; font: 800 13px 'JetBrains Mono', monospace; color: rgb(var(--accent-rgb)); }
+.pro-val.sm { min-width: 30px; font-size: 11px; }
+.pro-input { flex: 1 1 140px; min-width: 0; min-height: 40px; background: #0f172a; border: 1px solid #334155; border-radius: 0.6rem; color: #f1f5f9; padding: 0 0.6rem; font-size: 12px; }
+.pro-input:focus { outline: none; border-color: rgb(var(--accent-rgb)); }
+.pro-btn { min-height: 40px; padding: 0 0.8rem; border-radius: 0.6rem; background: #0b1120; border: 1px solid #334155; color: #e2e8f0; font: 800 10px 'Orbitron', sans-serif; letter-spacing: 0.04em; touch-action: manipulation; }
+.pro-btn.sm { min-height: 34px; min-width: 34px; padding: 0 0.5rem; }
+.pro-btn.pri { color: rgb(var(--accent-rgb)); border-color: rgb(var(--accent-rgb)); background: rgb(var(--accent-rgb) / 0.14); }
+.pro-btn.bad { color: #f87171; border-color: #7f1d1d; }
+.pro-btn:active { transform: scale(0.96); }
+.pro-check { display: flex; align-items: center; gap: 0.4rem; color: #cbd5e1; min-height: 34px; }
+.pro-status { margin: 0; min-height: 1.2em; color: rgb(var(--accent-rgb)); font: 700 11px 'JetBrains Mono', monospace; }
+.pro-status.bad { color: #f87171; }
+.pro-list { display: flex; flex-direction: column; gap: 0.3rem; max-height: 46vh; overflow-y: auto; }
+.pro-song-row { display: flex; align-items: center; gap: 0.3rem; padding: 0.25rem; border-radius: 0.6rem; border: 1px solid #1e293b; background: #080c16; }
+.pro-song-row.cur { border-color: rgb(var(--accent-rgb)); background: rgb(var(--accent-rgb) / 0.1); }
+.pro-idx { width: 22px; text-align: center; color: #64748b; font: 800 11px 'JetBrains Mono', monospace; }
+.pro-song-name { flex: 1 1 auto; min-width: 0; min-height: 40px; text-align: left; padding: 0 0.4rem; background: transparent; border: 0; color: #f1f5f9; font-weight: 700; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pro-mix { border: 1px solid #1e293b; border-radius: 0.7rem; padding: 0.5rem; display: flex; flex-direction: column; gap: 0.3rem; background: #080c16; }
+.pro-mixh { font: 800 10px 'Orbitron', sans-serif; color: rgb(var(--accent-rgb)); }
+.pro-range { flex: 1 1 120px; min-width: 0; accent-color: rgb(var(--accent-rgb)); height: 30px; }
+.pro-mix .pro-lbl { width: 108px; }
+
+/* ---- kotak maqam di panel quartertone ---- */
+.pro-maqam { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; padding: 0.5rem; border-radius: 0.75rem; border: 1px solid #1e293b; background: rgba(2, 6, 23, 0.6); }
+
+/* ---- layout tablet: 2 panel ----
+   (dinonaktifkan di v7) Tata letak grid landscape di index.html sudah dua kolom
+   (hero + voice). Aturan lama di sini memaksa #panelVoice/#panelQt menjadi
+   flex/grid-column di dalam body grid sehingga tampilan >=980px hancur. */
+
+/* ---- tombol besar ---- */
+body.mr-big .pstep, body.mr-big .ptoggle, body.mr-big .reg-btn, body.mr-big .reg-store, body.mr-big .pval, body.mr-big .pro-songname { min-height: 54px !important; }
+body.mr-big .pstep { width: 40px; }
+body.mr-big .main-tab-btn { min-height: 54px; }
+body.mr-big .voice-tile { min-height: 84px; }
+
+/* ---- mode panggung ---- */
+body.mr-stage header, body.mr-stage footer { display: none !important; }
+body.mr-stage .mr-hero { min-height: 120px; }
+.pro-stage-exit { position: fixed; top: 6px; right: 6px; z-index: 55; min-height: 30px; padding: 0 0.6rem; border-radius: 0.6rem; background: rgba(8, 12, 22, 0.85); border: 1px solid rgb(var(--accent-rgb) / 0.5); color: #cbd5e1; font: 800 9px 'Orbitron', sans-serif; opacity: 0.55; }
+.pro-stage-exit:active { opacity: 1; }
+
+/* v7: aturan perbaikan tampilan dipindah ke <style id="mr-fix-v7"> di index.html (agar tidak tertahan cache) */

@@ -1,0 +1,512 @@
+MIDI ROYALE PRO - VERSI 9.9.5 (ketahanan: penyimpanan penuh, pembaruan, sustain)
+=================================================================================
+- BARU: bila penyimpanan perangkat penuh (kuota localStorage), aplikasi sekarang memberi peringatan dan
+  menawarkan EKSPOR backup. Dulu gagal simpan terjadi diam-diam. Peringatan maksimal sekali per 2 menit.
+- BARU: saat versi baru aplikasi terpasang di tengah pemakaian, muncul banner "Versi baru tersedia" + MUAT ULANG
+  (memakai banner yang sudah ada). Aplikasi tidak memuat ulang sendiri.
+- Sustain yang sedang ditekan/terkunci otomatis dilepas saat aplikasi masuk latar belakang (mencegah sustain tersangkut).
+- Offline cache: ikon 384 dan icon.svg ikut disimpan; respons halaman yang gagal (404/500) tidak lagi disimpan.
+- Kode lama pengaturan FPS (elemen sudah tidak ada) dibersihkan; nama kategori kini di-escape.
+- Nomor ?v= di index.html dan sw.js diseragamkan ke 9.9.5; cache sw menjadi v81.
+- File berubah: index.html, sw.js, v9.js, PERUBAHAN_V9.txt.
+
+MIDI ROYALE PRO - VERSI 9.9.4 (perbaikan RESET Triple Controller)
+==================================================================
+- BUG: reset Triple Controller tidak jalan saat ganti Performance / Keyboard Set (tombol Performance,
+  ◀ ▶, pedal). Sekarang ganti voice ATAU Performance sama-sama mengembalikan Mod 0 · Exp 127 · Velocity 100.
+- Tombol di kotak Triple Controller dipisah jadi dua:
+  * ↺ RESET  = tekan, angka langsung kembali (Mod 0 · Exp 127 · Velocity 100).
+  * AUTO ON/OFF = reset otomatis saat ganti voice / Performance (dulu tombol "↺ RESET ON/OFF").
+  Setelan AUTO yang lama tetap terbawa.
+- Buku Panduan bagian Triple Controller diperbarui.
+- File berubah: v95.js, v95.css, index.html, sw.js (cache v80).
+
+MIDI ROYALE PRO - VERSI 9.9.3 (pilihan tampilan Performance)
+=============================================================
+- Pengaturan › Tampilan, dua baris baru:
+  * Warna Performance: KATEGORI (tiap kategori berwarna, seperti 9.9.2) atau HIJAU (polos ala Korg asli).
+  * Ukuran tombol Performance: BESAR (HP, mudah ditekan) / SEDANG / KECIL (tablet, nama Upper ikut tampil).
+- MAIN Pa5X: saat Performance dipanggil, tulisan "PERFORMANCE · n", garis atas layar, ikon, dan baris posisi
+  ikut warna kategorinya (mis. Strings merah, Synth ungu). Pilihan HIJAU = tetap hijau.
+- Tab Performance di tampilan Klasik ikut warna kategori: lampu kategori, garis & nomor tombol, dan tombol
+  aktif menyala dengan warna kategori. Tema Klasik lainnya tidak berubah.
+- Usap kiri/kanan di tombol Keyboard Set = pindah halaman P1-P6, dengan geser ringan
+  (di P1/P6 tombol hanya bergoyang sedikit). Tombol P1-P6 tetap ada.
+- Tombol REDUP CEPAT (ikon bulan) di header Klasik dan Pa5X (di HP Pa5X: tombol REDUP di bilah MAIN):
+  memakai "Redup Layar (Dimmer)" yang sudah ada (40%) + Grafis LOW. Tekan lagi = dimmer & grafis kembali
+  seperti sebelumnya. "Panggung: ON/OFF" yang lama tidak diubah.
+- Buku Panduan bab PERFORMANCE ditambah (usap halaman, warna, ukuran, redup cepat).
+- File berubah: look.js & look.css (baru), v9.js (baris pengaturan masuk bagian TAMPILAN), index.html,
+  sw.js (cache v79).
+
+MIDI ROYALE PRO - VERSI 9.9.2 (efek & warna panel Performance Pa5X)
+===================================================================
+- HANYA panel Pa5X › Performance (Keyboard Set Library) yang berubah. Tab lain tetap seperti 9.9.1.
+  * Tiap kategori punya warna sendiri (Piano emas, Organ oranye, Guitar pink, Strings merah, Brass kuning,
+    Trumpet biru, Sax teal, Synth ungu, Ethnic hijau muda). Kategori yang dipilih mewarnai garis,
+    nomor tombol, latar, dan judul layar.
+  * Tab bank berwarna: Factory hijau, User biru, Direct emas, LAINNYA ungu.
+  * Tombol Keyboard Set bergradasi dengan garis warna kategori; nama Upper 1/2/3 hijau/biru/ungu.
+  * Yang aktif menyala hijau penuh + kilau sekali lewat saat dipanggil.
+  * Animasi ringan: layar muncul halus, tombol turun sedikit saat ditekan. Mati di Grafis RENDAH.
+- File berubah: pa5x-skin.css (baru), index.html, sw.js (cache v78).
+
+MIDI ROYALE PRO - VERSI 9.9.1 (tampilan Performance Pa5X lebih bagus)
+===================================================================
+- Pa5X › Performance didesain ulang seperti layar Korg:
+  * Baris judul "KEYBOARD SET LIBRARY  AKTIF: <nama>" bergaya header layar, tombol alat lebih ringkas.
+  * Tab Factory / User / Direct menempel ke layar (tab aktif hijau terang), ◀ ▶ dan STS rapi di kanan.
+  * Tombol kategori bergaya hardware dengan lampu LED (kiri rata kiri, kanan rata kanan).
+  * Tombol Keyboard Set bernomor 1-8, nama besar & jelas, nama Upper "String · String Low · String High",
+    yang aktif menyala hijau penuh seperti Korg; tombol kosong bergaris tipis dengan nomor tebakan.
+  * Tab halaman P1-P6 menempel di bawah layar.
+- Klasik: tombol Keyboard Set juga diberi nomor 1-8; judul menjadi KEYBOARD SET LIBRARY.
+- File berubah: index.html, kset.js, kset.css, sw.js (cache v77).
+
+MIDI ROYALE PRO - VERSI 9.9 (Keyboard Set Library seperti Pa600)
+===============================================================
+- Tab PERFORMANCE (Klasik & Pa5X) sekarang tersusun persis seperti layar "Keyboard Set Library" Pa600:
+  * Bank Factory / User / Direct di atas (+ LAINNYA untuk yang belum punya posisi).
+  * Kategori di kiri & kanan: Piano & EP, Organ, Guitar, Strings, Brass | Trumpet, Sax & Wood., Synth, Ethnic.
+  * 8 tombol per halaman (2 kolom), halaman P1-P6 di bawah. Titik kecil = halaman berisi; angka = jumlah per kategori.
+  * Ketuk tombol berisi = panggil; ketuk tombol kosong (＋) = CARI NOMOR untuk posisi itu.
+  * ◀ ▶ (dan pedal) melangkah di kategori yang sama; daftar ikut pindah ke posisi Performance yang dipanggil.
+- CARI NOMOR + POSISI DI KEYBOARD (bank, kategori, halaman, nomor tombol):
+  * Korg tidak menerbitkan tabel nomor Keyboard Set Library, jadi aplikasi MEMPELAJARI polanya:
+    setelah satu contoh disimpan di sebuah bank, nomor posisi lain dihitung otomatis
+    (pola seperti Style Pa600: CC00 tetap, CC32 per kategori, PC = urutan tombol).
+  * Status: hijau = dihitung dari kategori yang sama, kuning = TEBAKAN, biru = belum ada contoh.
+    Bila salah, betulkan dengan ◀ ▶ lalu SIMPAN: tebakan berikutnya ikut membaik.
+  * SIMPAN & LANJUT pindah ke tombol berikutnya dengan nomor yang sudah dihitung.
+  * Posisi yang sudah terpakai: aplikasi bertanya dulu sebelum mengganti.
+- MAIN menampilkan posisi Performance, mis. "Factory · Strings · P2-3".
+- Buku Panduan bab PERFORMANCE diperbarui.
+- File berubah: index.html, kset.js, kset.css, perf.js, sw.js (cache v76).
+
+MIDI ROYALE PRO - VERSI 9.8.1 (perbaikan logout + MAIN Klasik lebih bagus)
+=========================================================================
+- BUG: LOGOUT di Pengaturan tidak berfungsi di aplikasi APK. Penyebab: kotak konfirmasi bawaan browser
+  (OK/Batal) diblokir di APK sehingga langsung dianggap "Batal". Sekarang memakai kotak dialog milik
+  aplikasi sendiri, berlaku untuk SEMUA konfirmasi & isian nama: logout, hapus Performance, folder baru /
+  ganti nama folder, nama MEM, preset QT (simpan/ganti nama/timpa/hapus), setlist (hapus/ganti nama/
+  perbarui), hapus rekaman, pulihkan cloud, hapus kontrol pedal, hapus daftar voice model, pindah perangkat,
+  dan tawaran membuka pemilih model saat keyboard terdeteksi.
+- MAIN Klasik didesain ulang seperti layar keyboard (tema Klasik tetap):
+  * Label kecil "PERFORMANCE · #1 · folder · nomor" (atau "SOUND · UPPER 1"), kotak ikon besar, nama besar.
+  * Tombol ‹ › bulat di kanan, akor di kanan atas.
+  * UPPER 1/2/3 berupa kartu dengan garis aksen, label kecil, ikon, dan nama.
+  * Bilah kontrol bergaya panel hardware: jendela angka TRANS/OCT, tombol DUAL & KEYS dengan lampu LED.
+- File berubah: index.html, cmain.css, kset.js, pa5x.js, pro.js, v9.js, v95.js, voicelib.js, sw.js (cache v75).
+  File BARU: dlg.js.
+
+MIDI ROYALE PRO - VERSI 9.8 (tampilan Klasik rapi seperti Pa5X)
+==============================================================
+- Tampilan Klasik dibagi menjadi tab: MAIN · VOICE · PERFORMANCE · QUARTER · CONTROL · STYLE · TOOLS.
+  * MAIN (layar utama, terbuka saat aplikasi dibuka): kotak besar dengan akor, ikon + nama Performance
+    (atau voice di mode SOUND), UP1 / UP2 / UP3 dalam 3 kolom, tombol besar PREV / NEXT, lalu satu bilah
+    rapi: TRANS −/+ · OCT −/+ · DUAL · KEYS. Tema warna Klasik tetap.
+  * VOICE: hanya daftar voice (cari, bank, kategori, grid) selebar layar, tidak bercampur dengan layar utama.
+    Ketuk nama Upper di MAIN → tab VOICE terbuka di bank & kategorinya → pilih sound → otomatis kembali ke MAIN.
+    Ketuk nama voice di MAIN (mode SOUND) → tab VOICE.
+  * TOOLS (baru, seperti Pa5X › Tools): MEM + REG 1-8 (sekarang 8 tombol terlihat), PANIC, 🔒, SUS, SPLIT,
+    REC, SETLIST, PRO, ⚙, port MIDI OUT, chip model keyboard, LAYAR PENUH, Export / Import / Logout.
+  * Bar atas lebih bersih: logo, tab, Pa5X, PANIC (selalu terlihat), Pengaturan. Tombol ☰ MENU dan ⋯ dihapus
+    (isinya pindah ke TOOLS).
+  * Keyboard virtual terbuka: kotak MAIN otomatis ringkas, semua tombol tetap bisa disentuh.
+- Buku Panduan: bab TAMPILAN KLASIK (pengganti bab PERFORMA), bab VOICE, FITUR PRO, SETLIST, Tur Cepat diperbarui.
+- File berubah: index.html, perf.js, sw.js (cache v74). File BARU: cmain.js, cmain.css.
+
+MIDI ROYALE PRO - VERSI 9.7.2 (tombol ◀ ▶ Performance selalu bisa disentuh)
+=========================================================================
+- Pa5X MAIN (PERFORMANCE): tombol ◀ ▶ dipindah ke kanan kartu, ukuran besar (54 px), selalu terlihat.
+  Sebelumnya terpotong di bawah UP3 saat keyboard virtual terbuka / layar HP pendek, jadi tidak bisa disentuh.
+  Tombol SIMPAN KE PERFORMANCE ikut di bawah ◀ ▶. Nama Performance mengecil otomatis saat keyboard terbuka.
+- Pa5X MAIN (SOUND) + keyboard virtual terbuka: ◀ ▶ juga pindah ke kanan.
+- Klasik + keyboard virtual terbuka: kotak Performance jadi ringkas: ◀ NAMA ▶ satu baris, UP1-3 di bawahnya.
+- Diuji: 740x360, 852x393, 1000x462, 1180x820, dengan/ tanpa keyboard virtual.
+- File berubah: perf.css, index.html, sw.js (cache v73).
+
+MIDI ROYALE PRO - VERSI 9.7.1 (teks & panduan menyesuaikan PERFORMANCE)
+======================================================================
+- Semua teks lama "Keyboard Set / KBD SET / rekam Keyboard Set" diganti istilah baru PERFORMANCE:
+  * Buku Panduan: bab Mode Pa5X (MAIN mode PERFORMANCE/SOUND, tab bank & tombol UPPER 1/2/3 di Keys,
+    nama tab Performance), bab Pengaturan (Tampilan utama), bab KORG, tabel PENGATURAN MIDI LENGKAP,
+    bab Cloud/backup.
+  * Panduan Setup (wizard), pengingat backup, keterangan Data preset, keterangan SYNC, diagnosa
+    channel Control, Kebijakan Privasi (jenis data: Performance).
+  * Pa5X: label "Keyboard Set Library" & "KBD SET · STS" dihapus/diganti.
+  * "Mode Keyboard Set" di Pengaturan TETAP bernama sama (fitur lain: transpose/pitch bend ikut Upper 1-3).
+- File berubah: index.html, v9.js, pa5x.js, privacy.html, sw.js (cache v72).
+
+MIDI ROYALE PRO - VERSI 9.7 (PERFORMANCE seperti Korg)
+=====================================================
+- Tab KBD SET menjadi PERFORMANCE (Klasik & Pa5X, mekanisme sama):
+  * Yang dikirim sekarang NOMOR Performance (CC00 + CC32 + PC di channel Control, Pa600 = CH 16),
+    jadi keyboard berpindah Performance (foldernya), bukan hanya mengganti isi sound.
+  * ＋ CARI NOMOR: tombol ◀ ▶ (dan −10/+10) untuk CC00, CC32, PC. Setiap tekan langsung dikirim,
+    lihat layar keyboard, lalu SIMPAN. SIMPAN & LANJUT = langsung cari nomor berikutnya (PC +1).
+    Alasan: Pa600 tidak mengirim nomor Performance lewat MIDI OUT, jadi tidak bisa ditangkap otomatis.
+  * LEARN UPPER: saat CARI NOMOR terbuka, tekan tombol Performance yang sama di panel keyboard →
+    nama Upper 1/2/3 terisi sendiri (dari MIDI IN). Bisa juga dipilih dari daftar sound / AMBIL DARI KEYBOARD.
+  * Daftar Performance seperti Keys: folder di kiri (＋ FOLDER, EDIT ON = ganti nama/hapus folder),
+    cari, ▦ jumlah kolom (1-5), EDIT, PREV/NEXT (ikut folder yang tampil), STS 1-4.
+    Setiap Performance menampilkan nama Upper 1/2/3. Maksimal 500 Performance (sebelumnya 200).
+  * Rekaman lama (isi sound) ditandai SNAPSHOT SOUND. EDIT › JADIKAN PERFORMANCE untuk mengubahnya
+    (nama Upper dari rekaman dipakai, tinggal cari nomornya).
+- Pengaturan › Tampilan › Tampilan utama: PERFORMANCE (bawaan) atau SOUND.
+  * PERFORMANCE: MAIN (Pa5X) dan kotak kiri (Klasik) menampilkan nama Performance (mis. KAMANJAT HR)
+    + UP1 / UP2 / UP3 (mis. String / String Low / String High). ◀ ▶ = Performance sebelum/berikutnya.
+    Ketuk layar/nama = daftar Performance.
+  * Ketuk nama Upper → daftar sound terbuka di BANK & KATEGORI sound itu, sound-nya tersorot.
+    Pilih sound = Upper itu berganti (Upper 2/3 langsung di channel-nya, tanpa DUAL).
+    Pa5X Keys: tombol UPPER 1 / UPPER 2 / UPPER 3 memilih Upper tujuan.
+  * Setelah Upper diganti: tombol SIMPAN KE PERFORMANCE (nama Upper di aplikasi; di keyboard tekan WRITE).
+  * Performance diganti dari panel keyboard → dikenali dari nama Upper-nya. Bila belum tersimpan:
+    tampil "DARI KEYBOARD" + tombol SIMPAN JADI PERFORMANCE.
+- Bank sound seperti Korg: SEMUA / FACTORY / LEGACY / GM / USER.
+  * Klasik: di depan tab kategori. Pa5X: di bawah daftar Keys.
+  * EDIT tile › Bank Sound. USER untuk sound sampling / buatan sendiri. Voice dari Library GM → bank GM.
+  * Tile lama otomatis FACTORY.
+- Klasik: efek "membungkus" lebih tipis: tile aktif (mis. GRAND PIANO) hanya garis tipis tanpa lingkaran
+  bayangan tebal; ikon tanpa pendar; tab kategori, tombol menu atas, Style, REG/MEM, tombol aktif, tuts QT,
+  kotak voice: tanpa pendar luar.
+- Pedal: aksi "Keyboard Set ◀ ▶" sekarang bernama "Performance ◀ ▶" (fungsi sama).
+- Buku Panduan: bab PERFORMANCE ditulis ulang, baris bank sound di bab Voice, tabel MIDI diperbarui.
+- File berubah: index.html, kset.js, kset.css, pa5x.js, v9.js, voicelib.js, sw.js (cache v71).
+  File BARU: perf.js, perf.css.
+
+MIDI ROYALE PRO - VERSI 9.6.3 (penting untuk live)
+==================================================
+- Style Play (Klasik & Pa5X) LEBIH RESPONSIF:
+  * Perintah style (INTRO, VAR, FILL, BREAK, ENDING, START/STOP) dikirim SAAT JARI MENYENTUH tombol,
+    bukan saat jari diangkat. Sebelumnya tekanan bisa batal bila jari sedikit bergeser.
+  * Geser jari sedikit tidak membatalkan; pantulan sentuhan ganda (<0,035 dtk) pada tombol yang sama diabaikan.
+  * Tanpa animasi/transisi di tombol style: umpan balik instan (tombol menyala saat disentuh) + getar singkat
+    (ikut setelan Haptic).
+- File berubah: index.html, v95.js, v95.css, sw.js (cache v70).
+
+MIDI ROYALE PRO - VERSI 9.6.2
+=============================
+- Animasi lebih lancar:
+  * Pa5X Style: tombol aktif tidak lagi "berdenyut" terus (cahaya blur besar yang digambar ulang tiap frame
+    = penyebab lag). Sekarang cahaya statis + kilat sekali saat ditekan.
+  * Klasik Style Play: denyut tombol aktif (kPulse) dihapus, cahaya statis → tidak patah-patah.
+  * Garis LCD bergerak hanya di Grafis Ultra.
+- Pa5X bar atas: kotak & label "CHORD" dihapus, nama akor tampil besar langsung (mis. Am).
+- Warna layar Pa5X: utama hijau + 7 preset (hijau, amber, biru es, cyan, ungu, mawar, merah),
+  KLASIK (ikut warna tema Klasik, ikut berubah saat tema diganti), dan ✎ custom (pilih warna sendiri).
+  Berlaku di MAIN, bar atas, Control, Scale Tuning, Kbd Set, keyboard virtual, toast. Ikut Export / Import.
+- Buku Panduan: bab baru PENGATURAN MIDI LENGKAP (34 bab): tabel tiap fitur — setelan di aplikasi vs di
+  keyboard (voice, Upper 2/3, Style, PC, quartertone, pitch bend, triple, tuts menyala & akor, pedal,
+  MIDI clock/tempo, rekam Keyboard Set, cek koneksi), kabel & arah data, letak menu Korg/Yamaha/Roland,
+  dan cara mengatasi tuts tidak menyala.
+- File berubah: index.html, theme-pick.js, v95.css, sw.js (cache v69).
+
+MIDI ROYALE PRO - VERSI 9.6.1
+=============================
+- Pa5X: animasi nama voice (huruf melebar-mengecil) dan animasi ikon voice DIHAPUS; nama & ikon langsung berganti.
+- Pa5X: kotak ikon voice tanpa warna aksen kategori, selalu hijau LCD (ikut warna LCD amber / es).
+- Pa5X Control: angka Pitch Bend (St) dan Triple Controller TANPA animasi (tidak blur / hilang saat slider digeser).
+- Pa5X Scale Tuning: piano 1 oktaf bergaya layar Pa5X (bezel LCD, tuts perak matte, nada quartertone menyala hijau,
+  angka cent hijau LCD).
+- Pa5X Tools › KEYS · KEYBOARD: keyboard virtual bergaya Pa5X (panel logam, layar LCD rentang oktaf,
+  tuts perak matte, tuts ditekan / dari MIDI IN menyala hijau).
+- Cache v68.
+
+MIDI ROYALE PRO - VERSI 9.6
+===========================
+KLASIK
+- Tile baris paling atas tidak terpotong lagi (cahaya & animasi pilih utuh): area grid diberi ruang.
+- Grid 2×2..5×5 sekarang KARTU TEGAK (tinggi ±1,3x lebar, maks. setinggi panel; baris lain digeser).
+- Tombol ATUR: grid custom KOLOM × BARIS (1–8 × 1–8) dengan pratinjau; kartu mengisi panel persis.
+  Tersimpan di preset / Export / Cloud.
+
+Pa5X MAIN
+- Baris status (MIDI TERHUBUNG, REG, DUAL OFF, SPLIT OFF, STYLE) dihapus → panel voice lebih tinggi.
+- Bar TRANSPOSE / OCTAVE / DUAL / MEM baru yang simpel: [ − TRANSPOSE 0 + ]  [ ⌄ OCTAVE 0 ⌃ ]  ◇ DUAL  ▣ MEM
+  (angka di LCD hijau, ketuk angka = kembali 0, lampu kecil di DUAL / MEM). Latar kaca transparan.
+- PREV / NEXT: cukup panah ‹ › menyala (tanpa kotak), di bawah nama voice; warna ikut warna LCD.
+- Kotak ikon kiri sekarang ikon voice yang dipilih (atau gambar custom tile), bingkai warna kategori,
+  animasi saat berganti. Ikon kecil juga di baris UP2 / UP3.
+- Tab bawah transparan (kaca), tab aktif oranye bercahaya; ukuran tetap 46 px.
+
+Pa5X TAB LAIN (tampilan saja, fungsi sama)
+- Kbd Set, Control, Scale Tuning, Style: layar LCD hijau bergaris dengan bingkai, tombol hardware
+  bertekstur dengan lampu LED (menyala saat aktif), slider seperti meter LCD, preset scale sebagai
+  tombol LCD, tombol style aktif "bernapas" (ikut tempo bila keyboard mengirim MIDI clock).
+
+Pa5X ANIMASI (mati / ringan di Grafis Low)
+- Ganti tab bergeser halus; penanda tab meluncur; garis cahaya "layar menyala" saat masuk Pa5X;
+  nama voice berganti dengan efek LCD; angka TR/OCT/slider bergulir; nama akor "muncul";
+  tuts menyala lalu meredup pelan; toast jadi kotak pesan LCD hijau; garis LCD bergerak pelan.
+
+PEMILIH KEYBOARD (langkah model) didesain ulang
+- Latar bercahaya warna merek, nama merek besar + jumlah model, tab merek bercahaya.
+- Kartu model lebih besar dengan ikon, tanda ✓ saat dipilih, hiasan tuts di bawah kartu,
+  muncul berurutan (animasi) saat ganti merek/seri.
+- Panel kanan: ilustrasi keyboard dengan layar LCD berisi nama model (tuts menyala saat dipilih),
+  profil channel/PC/quartertone/Style Play, tombol PAKAI MODEL INI berkilau.
+
+File berubah: index.html (versi 9.6), v9.js, pa5x.js, v95.js, v95.css, sw.js (cache v67).
+
+MIDI ROYALE PRO - VERSI 9.5
+===========================
+QUARTERTONE
+- Preset buatan sendiri: ketuk nada (mis. E dan A) › ＋ SIMPAN › beri nama (mis. "C Bayati").
+  Ketuk = pakai. Tahan 0,6 dtk = ganti nama / timpa dengan tuning sekarang / geser / hapus.
+  Maks 60 preset, menyimpan nilai cent tiap nada. Ikut Export, Cloud, backup otomatis.
+  Tampil di Klasik dan Pa5X (Scale Tuning). Bisa dari pedal: Kontrol dari keyboard › Preset Quartertone ◀ ▶.
+
+TRIPLE CONTROLLER
+- Tombol ↺ RESET ON/OFF (bawaan ON): setiap ganti voice → Modulation 0, Expression 127, Velocity 100.
+  Slider kembali ke posisi istirahat dan baru mengirim lagi saat disentuh.
+
+KLASIK
+- Pilihan grid ▦ AUTO / 2×2 / 3×3 / 4×4 / 5×5 di samping EDIT. Kolom dan baris mengisi panel
+  (2×2 besar, 5×5 rapat), ikon & huruf ikut membesar di tile besar.
+- Panel kiri dipisah: kotak CHORD + TR + OCT (lebih besar) di atas, kotak voice (nama, MSB/LSB/PC,
+  PREV/NEXT, fullscreen) di bawah.
+- Tile aktif bertanda AKTIF + cahaya lebih terang; Upper 2 = UP2 (ungu), Upper 3 = UP3 (biru).
+- Nama tile tidak terpotong: huruf mengecil sendiri, bila perlu dua baris.
+- Tab kategori berwarna sesuai kategori + angka jumlah voice.
+- Tab STYLE berkedip saat style jalan (perkiraan dari tombol START/STOP; tepat bila keyboard mengirim MIDI clock).
+
+Pa5X
+- Bar atas baru: panel logam dengan garis aksen oranye, tombol bertekstur, + "MIDI ROYALE PRO"
+  dan username di samping titik status.
+- MAIN: Upper 2 dan Upper 3 tampil di bawah nama voice; gambar tuts pindah ke kanan bawah;
+  layar LCD diberi bingkai, kilap kaca, dan vignette.
+- Status STYLE (▶/■ + VAR aktif) di baris status; kotak tempo ♩ + lampu ketukan muncul bila
+  keyboard mengirim MIDI clock.
+- Tab bawah: ukuran TETAP seperti sebelumnya; hanya tab aktif bergaris menyala + transisi halus.
+
+UMUM
+- Notifikasi (toast) pindah ke atas layar, tidak menutupi tombol.
+- Garis merah berkedip di tepi atas saat MIDI terputus (setelah sempat tersambung).
+- Efek tekan pada tombol (mengecil + menyala sesaat).
+
+File baru: v95.js, v95.css. Berubah: index.html, v9.js, pa5x.js, sw.js (cache v66).
+
+MIDI ROYALE PRO - VERSI 9.4
+===========================
+- Tampilan Klasik: tombol oranye "Pa5X" di header kanan (di samping ⚙) untuk langsung pindah ke
+  tampilan Pa5X, pasangan tombol KLASIK di Pa5X. Di HP tampil ringkas (ikon + tulisan kecil),
+  di tablet ikon + tulisan Pa5X.
+- File berubah: index.html (versi 9.4), v9.css, sw.js (cache v65).
+
+MIDI ROYALE PRO - VERSI 9.3
+===========================
+- Header: tulisan di samping titik status MIDI kini menampilkan USERNAME akun yang login
+  (nama tampilan Firebase bila ada, kalau tidak bagian email sebelum @, huruf besar).
+  Belum login = KING TITU. Berganti otomatis saat ganti akun.
+- Style Play (Klasik & Pa5X) di tablet / layar besar: tombol memenuhi seluruh layar, huruf, ikon,
+  dan tombol START/STOP ikut membesar. Tampilan HP tidak berubah.
+- File berubah: index.html (versi), v9.js, v9.css, sw.js (cache v64).
+
+MIDI ROYALE PRO - VERSI 9.2 (library voice, backup otomatis, pindah HP mandiri, Inggris lengkap)
+=============================================================================================
+
+!! WAJIB SETELAH UPLOAD: pasang firestore.rules yang baru (Firebase Console › Firestore › Rules ›
+   tempel isi firestore.rules › Publish). Tanpa itu, "Pindah ke HP ini" dan laporan error ditolak server.
+
+1. LIBRARY VOICE (📚)
+- Tombol 📚 LIBRARY di baris kategori (Klasik), Pa5X › Keys, Pengaturan › Keyboard, dan Panduan Setup.
+- GM2 · semua keyboard: 128 voice GM + 9 set drum (Bank 120), dikelompokkan 17 keluarga, bisa dicari.
+  Nomor PC menyesuaikan penomoran model (mulai 0 atau 1).
+- Daftar per model: tempel daftar sound dari PDF manual / layar keyboard, satu per baris:
+  "Nama, MSB, LSB, PC"  atau  "121.000.014 Nama". Disimpan per model dan ikut Export / Cloud.
+- ▶ mencoba voice langsung di keyboard. Centang lalu TAMBAH SEBAGAI TILE (voice yang sudah ada
+  dilewati dan ditandai SUDAH ADA). Kategori & ikon tile ditebak dari nama.
+- Daftar voice pabrikan per model TIDAK diisi otomatis (tidak dikarang). Kirim PDF daftar voice
+  resmi bila ingin dimasukkan sebagai bawaan.
+
+2. BACKUP CLOUD OTOMATIS
+- Sekali sehari, bila ada perubahan dan HP online, preset disimpan diam-diam ke akun.
+  ON/OFF di Pengaturan › Data & Info. Pengingat backup tetap ada.
+
+3. PINDAH PERANGKAT MANDIRI (1x tiap 30 hari)
+- Login di HP lain → muncul pilihan BATAL / PINDAHKAN KE HP INI. HP lama otomatis tidak bisa dipakai.
+- Bila belum 30 hari, muncul tanggal kapan boleh pindah lagi. Reset lebih cepat tetap lewat
+  Firebase Console (hapus / ubah dokumen licensed_devices).
+- Aturan 30 hari dijaga juga oleh firestore.rules (tidak bisa diakali dari aplikasi).
+
+4. LAPORAN ERROR OTOMATIS
+- Error aplikasi dikirim ke Firestore › koleksi error_logs (maks 5 per sesi): pesan, versi, model
+  keyboard, tampilan, port MIDI, bahasa, browser, uid. Tanpa email, tanpa data MIDI.
+- Pengguna hanya bisa MENULIS laporan, tidak bisa membaca. Baca di Firebase Console.
+- ON/OFF di Pengaturan › Data & Info.
+
+5. KLASIK: KOTAK CARI VOICE di baris kategori (melebar saat diketik, ✕ untuk hapus).
+
+6. FONT Pa5X: Chakra Petch kini benar-benar dimuat (sebelumnya jatuh ke font cadangan).
+
+7. PANDUAN SETUP OTOMATIS untuk pengguna baru: setelah memilih keyboard dan tampilan, Panduan Setup
+   (langkah Kabel) terbuka sekali. Tur cepat Buku Panduan menunggu sampai semua layar awal selesai.
+
+8. UKURAN SENTUH & KONTRAS
+- HP landscape: tombol strip atas, PANIC, MENU, tab utama, tab kategori, LIBRARY, kotak cari = 42 px.
+- Pa5X: tombol Keys 40 px, baris voice 46 px, tab kategori 42 px. Teks kecil abu-abu lebih terang.
+
+9. BAHASA INGGRIS LENGKAP
+- Layar login (dengan tombol ID / EN), jendela PRO (Setlist, Split, Mixer, Rekam, Cloud, Tampilan),
+  kotak Maqam, Pa5X (MAIN, Keys, Tools, status MIDI), pemilih tampilan, baris Warna LCD / Dimmer,
+  jendela tile, layar "putar ke landscape", semua toast & pesan yang tersisa, tab FAVORIT.
+
+10. KEBIJAKAN PRIVASI (untuk Google Play)
+- privacy.html (Indonesia + Inggris, berlaku 3 November 2026). Tautan di layar login dan
+  Pengaturan › Data & Info. Langkah Play Console + isian Data Safety ada di PANDUAN_APK.txt.
+
+LAINNYA
+- Versi 9.2, service worker cache v63 (ikut menyimpan voicelib.js dan privacy.html).
+- Buku Panduan: bab VOICE (Cari + Library), BACKUP, PANDUAN SETUP, PENGATURAN, MASALAH (ganti HP),
+  Mode Pa5X diperbarui. Tetap 33 subjudul.
+
+FILE BARU / BERUBAH
+- Baru: voicelib.js, privacy.html
+- Berubah: index.html, v9.js, v9.css, pro.js, pa5x.js, theme-pick.js, sw.js, firestore.rules,
+  PANDUAN_APK.txt
+
+CATATAN PENGUJIAN 9.2
+- Diuji di Chromium dengan keyboard MIDI & Firebase tiruan (852x393, 740x360, 1024x768, 1366x1024):
+  library (cari, coba, tambah, duplikat, drum, impor), cari voice, wizard otomatis, pindah lisensi
+  (boleh / belum 30 hari / ditolak server), backup otomatis, laporan error, ganti bahasa ID/EN.
+- Aturan firestore.rules belum dijalankan di server sungguhan: uji sekali "Pindah ke HP ini"
+  setelah Publish.
+
+MIDI ROYALE PRO - VERSI 9.1 (penyempurnaan tampilan & siap APK)
+===============================================================
+
+TAMPILAN KLASIK (HP tidak lagi sesak)
+- Strip atas satu baris: TRANS, OCT, DUAL, KEYS, chip model, MEM 1-6, PANIC, ☰ MENU.
+  (REG 7-8 tetap tersimpan; bisa dipanggil dari pedal dan di Pa5X › Tools.)
+- Panel bawah (PANIC, SUS, SPLIT, REC, SETLIST, PRO, ⚙) sekarang hanya di tab CONTROLLERS.
+  Di tab lain dibuka lewat ☰ MENU (jendela kecil; termasuk 🔒 kunci layar).
+- CHORD + TR/OCT pindah dari header ke atas tampilan voice, sehingga nama KING TITU terlihat di HP kecil.
+  CHORD juga tampil di tab STYLE.
+- Tab Voice dan Style memakai ruang yang dulu dipakai panel bawah. Tombol ⋯ di header dihapus
+  (Export / Import / Logout ada di Pengaturan › Data & Info).
+
+TAMPILAN Pa5X
+- MAIN: baris START/STOP + VAR 1-4 dan REG 1-8 dihapus; kartu UPPER 1 · SOUND lebih besar.
+  START/STOP & VAR tetap di tab Style, REG 1-8 pindah ke tab Tools.
+- Keys: tombol ✎ EDIT dan + VOICE. Saat EDIT ON, ketuk voice untuk mengubah nama, kategori, ikon,
+  Bank MSB, LSB, dan Program PC. Tahan baris 0,6 detik = langsung edit.
+- Layar lebar: MAIN satu kolom (tidak ada ruang kosong).
+
+PEMILIH MEREK KEYBOARD (didesain ulang, gaya sama dengan pemilih Klasik / Pa5X)
+- Langkah 1: empat kartu merek bercahaya (KORG, YAMAHA, ROLAND, MIDI UMUM) dengan daftar seri.
+- Langkah 2: tab merek, seri, kartu model dengan ikon tipe, dan panel profil (Upper 1/2/3, Control,
+  nomor PC, quartertone, Style Play) + tombol PAKAI MODEL INI.
+
+PENGATURAN (Klasik & Pa5X)
+- Disusun per bagian dengan menu kiri: KEYBOARD & MIDI, TAMPILAN, PANGGUNG, KONEKSI, DATA & INFO.
+- Teks dan tombol lebih besar; di HP landscape layar penuh.
+- Memilih Mode Tampilan (Klasik / Pa5X) langsung menutup Pengaturan dan membuka layar utama tampilan itu
+  (juga dari tombol "Pilih…").
+- Menu CEK UPDATE, pengecekan otomatis, dan notifikasi "Versi baru tersedia" DIHAPUS
+  (update nanti khusus pelanggan). Versi aplikasi tetap tampil di Data & Info.
+
+UKURAN PANEL TERKUNCI DI TABLET / FULLSCREEN
+- Piano quartertone 1 oktaf memakai rasio tetap dan berada di tengah (tidak melebar / tertarik).
+- Tombol Style Play dan slider Controllers dibatasi tingginya; layar besar hanya memberi ruang lebih.
+
+SIAP APK (PWABuilder)
+- manifest.json lengkap (id, scope, bahasa, kategori, landscape, fullscreen, ikon maskable 192/512,
+  ikon 384, 4 screenshot 1280x720). Ikon maskable baru di folder icons/, screenshot di screenshots/.
+- Panduan langkah demi langkah: PANDUAN_APK.txt (Android APK/AAB, Windows, catatan iPhone/iPad).
+- Buku Panduan: bab "Versi & Update" diganti "Pasang Aplikasi"; bab lain disesuaikan tata letak baru.
+- Service worker cache v62, versi 9.1.
+
+MIDI ROYALE PRO - PERUBAHAN VERSI 9 (9.0)
+=========================================
+
+1. PILIH MEREK & MODEL KEYBOARD
+- Menu Merek → Seri → Model untuk KORG, YAMAHA, ROLAND, dan "MIDI UMUM" (58 model):
+  KORG Pa5X, Pa4X, Pa3X, Pa2X, Pa1000, Pa900, Pa800, Pa700, Pa600, Pa500, Pa300, i3, EK-50,
+  Kronos, Nautilus, Krome EX, Kross 2.
+  YAMAHA Genos/Genos2, Tyros4/5, PSR-SX920/900/720/700/600, PSR-S975/970/775/670,
+  PSR-E473/EW425/E383, CVP-909/809, MONTAGE M, MONTAGE, MODX+.
+  ROLAND E-A7, E-X20/30/50, BK-3/5/7m/9, FANTOM, JUNO-X, JUNO-DS, RD-2000, RD-88, FP-30X/60X/90X.
+  MIDI UMUM: keyboard GM, modul GM/GS, modul XG, controller USB.
+- Memilih model langsung mengatur channel Upper 1/2/3 + Control, penomoran Program Change
+  (Korg mulai 0, Yamaha/Roland mulai 1), SysEx quartertone, dan cara tombol Style Play:
+    Korg          : Program Change di channel Control (seperti sebelumnya)
+    Yamaha        : SysEx Section Control (F0 43 7E 00 ss 7F F7) + Style Start/Stop
+    Roland E-A7/E-X : Start/Stop saja (MIDI Start/Stop)
+    Roland BK     : kode Bank 42H/42H + Program di channel Control (FILL/BREAK belum didukung)
+    Synth / piano : Style Play mati
+  Cara Style Play bisa diganti manual di Pengaturan › Style Play.
+- Layar pemilih keyboard penuh muncul setelah login (lalu pemilih tema). Bisa dibuka lagi dari
+  chip model di strip atas (Klasik), chip di bar LCD (Pa5X), Pengaturan › Keyboard, atau Panduan Setup.
+- "Atur channel otomatis": bawaan menyala untuk pengguna baru, mati untuk pengguna lama
+  (channel yang sudah kamu atur tidak tertimpa).
+- Teks yang dulu menyebut "Pa600" sekarang umum ("keyboard") di seluruh aplikasi, termasuk
+  tombol "REKAM DARI KEYBOARD".
+
+2. TUTS & AKOR DARI KEYBOARD
+- Nada dari MIDI IN menyalakan keyboard virtual (hijau) pada oktaf yang benar. Gambar keyboard
+  di Pa5X juga memakai oktaf yang benar (dulu selalu dipetakan ke 2 oktaf yang sama).
+- Nama akor tampil di panel voice, sebagai pil CHORD di bar atas (semua tab), dan di kotak CHORD
+  pada LCD Pa5X. Akor terakhir tetap tampil (redup) saat tuts dilepas.
+- Mengenali 34 jenis akor (mayor, minor, 7, maj7, m7, dim, dim7, aug, sus2, sus4, 6, m6, 9, maj9,
+  m9, add9, 11, 13, m7b5, 7b9, 7#9, dst.) + slash chord. Channel 10 (drum) diabaikan.
+- Hanya tampilan, tidak ada nada yang dikirim balik. ON/OFF di Pengaturan atau ketuk pil CHORD.
+
+3. FITUR PANGGUNG
+- Kontrol dari keyboard (MIDI Learn): pedal / tombol keyboard menjalankan Keyboard Set ◀▶,
+  lagu Setlist ◀▶, Voice ◀▶, PANIC, dan REG 1-8. Peringatan bila yang dipakai tuts atau
+  pedal sustain (CC64). Pengaturan › Kontrol dari keyboard › ATUR…
+- Kunci layar panggung: tombol 🔒 di strip PRO (Klasik) dan LOCK di bar LCD (Pa5X).
+  Buka dengan menahan tombol 2 detik. PANIC dan kontrol dari keyboard tetap jalan saat terkunci.
+- Pengingat backup: Mati / tiap hari / 3 hari / minggu / 2 minggu / bulan, dengan tombol
+  "SIMPAN KE CLOUD" atau "EXPORT FILE". Hanya muncul bila ada perubahan sejak backup terakhir.
+
+4. PENGATURAN GRAFIS (menggantikan "Frame Rate")
+- Otomatis, Low (30 fps), Medium (60 fps), High (120 fps), Ultra (tanpa batas fps).
+- Otomatis menurunkan grafis sendiri bila HP terasa berat.
+- Indikator beban (perkiraan CPU + FPS + mode) bisa dinyalakan.
+- Di mode Low, layar Pa5X dan chip status/pemilih tema diperbarui lebih jarang (hemat baterai).
+- Setelan lama 30 Hz / 60 Hz otomatis menjadi Low / Medium.
+
+5. VERSI, UPDATE, PANDUAN SETUP
+- (Menu CEK UPDATE dihapus di 9.1, lihat di atas.)
+- Panduan Setup 5 langkah: pilih keyboard, sambungkan kabel (USB / 5-pin / Bluetooth), atur
+  channel di keyboard sesuai merek, tes kirim C4 + tes IN + Cek Keyboard, selesai.
+- Ganti bahasa sekarang juga memperbarui bagian baru dan tab KBD SET. Panel Diagnosa dan
+  Monitor sekarang punya teks Inggris.
+
+6. KONEKSI MIDI LEBIH TANGGUH
+- Cek Keyboard (Universal Device Inquiry): mengenali KORG, YAMAHA, ROLAND, CASIO, KAWAI, AKAI, KETRON.
+- Bunyi + getar saat MIDI tersambung / terputus. Volume OFF, KECIL, SEDANG, KERAS (tombol "Bunyi").
+- Pembatas kecepatan: pitch bend dan CC slider digabung, dikirim paling cepat tiap 8 ms (USB)
+  atau 16 ms (interface 5-pin / Bluetooth). Nilai terakhir selalu terkirim, urutan pesan tetap.
+- Pulih otomatis setelah layar HP terkunci / aplikasi di latar belakang; bila ditinggal > 45 detik,
+  setelan dikirim ulang (resync).
+- Port "zombie": setelah 3 kali gagal kirim berturut-turut, port dipindai ulang.
+- Bila browser menolak SysEx, aplikasi berhenti mencoba dan menampilkan peringatan di Diagnosa.
+- Saat tersambung ulang, All Notes Off dikirim otomatis ke 16 channel. PANIC dikirim bertahap
+  (channel Upper lebih dulu) supaya interface murah tidak membuang pesan.
+- Bluetooth MIDI (WIDI, BLE-MIDI) sekarang dianggap port asli, bukan port virtual.
+
+LAINNYA
+- Buku Panduan: 14 → 33 subjudul. Bab baru: Pilih Keyboard, Panduan Setup, panduan per merek
+  (KORG, YAMAHA, ROLAND, MIDI UMUM), Split, Tuts & Akor, Setlist, Rekam .MID, Kontrol dari
+  Keyboard, Kunci Layar, Pengingat Backup, Mode Pa5X, Grafis, Koneksi & Diagnosa, Cek Keyboard,
+  Bluetooth MIDI, Versi & Update. Bab Setup Keyboard lama (yang masih menyebut CC 114-118)
+  diperbaiki.
+- Pa5X: kartu "KEYS & ACCORDION" menjadi "UPPER 1 · SOUND" dan menampilkan nama Keyboard Set aktif.
+- Nama pembuat: "Titu Ardiansyah" → "KING TITU". Nomor versi di backup Cloud dan Export diambil
+  otomatis dari MR_VERSION. (Sidik jari lisensi perangkat lama TIDAK diubah, supaya perangkat
+  yang sudah terikat tetap lolos.)
+- Export/Import/Cloud ikut menyimpan: model keyboard + cara Style Play, setelan grafis,
+  kontrol dari keyboard, bunyi koneksi, dan tuts/akor.
+
+CATATAN PENGUJIAN
+- Diuji di Chromium dengan keyboard MIDI tiruan (layar 1280x720, 1024x768, 844x390, 740x360).
+- Belum diuji dengan hardware asli: kode Style Yamaha (Section Control) dan Roland BK
+  (diambil dari laporan pengguna BK-7m), serta channel bawaan per model. Bila tidak cocok,
+  ubah channel / Style Play di Pengaturan.
+
+FILE BARU / BERUBAH
+- Baru: v9.js, v9.css, PERUBAHAN_V9.txt
+- Berubah: index.html, pro.js, kset.js, pa5x.js, theme-pick.js, sw.js (cache v61), midi-test.html

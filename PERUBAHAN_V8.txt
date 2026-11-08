@@ -1,0 +1,48 @@
+MIDI ROYALE PRO - PERUBAHAN VERSI 8
+===================================
+
+FITUR BARU: TAB "KBD SET" (Keyboard Set / Performance)
+- Tab baru terpisah dari Sound (tab VOICE). Mode Pa5X juga punya tab "Kbd Set".
+- REKAM DARI Pa600: tekan tombol Keyboard Set / Performance / STS di panel Pa600,
+  aplikasi merekam semua pesan Upper 1-3 (Bank, Program, Volume, Pan, efek, dll.)
+  lalu memutarnya ulang persis saat tile diketuk. Cara kerjanya sama dengan merekam di Cubase.
+- NOMOR: panggil Performance/STS lewat channel Control (Bank MSB/LSB + Program).
+  Ada tombol STS 1-4 (PC 64-67) dan mode "Kirim langsung" untuk mencari nomor sambil melihat layar Pa600.
+- PREV / NEXT, warna tile, ganti nama, urutan, duplikat, rekam ulang, hapus (EDIT: ON).
+- REG (MEM 1-8) dan lagu Setlist yang disimpan setelah memanggil Keyboard Set ikut memanggilnya lagi.
+- Ikut Export/Import dan backup Cloud.
+- Tile voice lama yang berisi data Keyboard Set dipindah otomatis ke tab KBD SET.
+
+KENAPA LEARN LAMA TIDAK JALAN
+- Learn lama hanya menunggu pesan di channel Control. Pa600 tidak pernah mengirim pesan di
+  channel Control (MIDI Out Channels Pa600 tidak punya pilihan Control), jadi Learn selalu gagal.
+  Rekaman baru mendengarkan semua channel.
+
+KONEKSI MIDI LEBIH TANGGUH
+- MIDI IN lewat satu pintu: listener dipasang lewat dua jalur (onmidimessage dan
+  addEventListener) karena browser MIDI iOS berbeda-beda; pesan ganda dibuang.
+  Listener tidak hilang lagi setelah port dipindai ulang.
+- Cabut-colok kabel: aplikasi memilih port Pa600 lagi secara otomatis (sebelumnya bisa
+  tertahan di "Network Session"), lalu mengirim ulang bend range, transpose, dan quartertone (Auto-sync).
+- Kiriman beruntun (Keyboard Set, SYNC) diberi jeda secepat kabel MIDI 5-pin supaya
+  interface USB-MIDI murah tidak membuang pesan.
+- Pengaturan > "Koneksi & Diagnosa Pa600": status port IN/OUT, SysEx, jumlah pesan
+  terkirim/diterima, tombol Pindai Ulang, SYNC, Auto-sync, Tes IN.
+- Pemilihan port otomatis mengenali interface MIDI 5-pin (iRig, UM-ONE, CME, "USB MIDI", dll.).
+- midi-test.html sekarang juga menampilkan pesan yang masuk dari keyboard.
+
+PERBAIKAN BUG
+- Saat aplikasi dibuka / kabel dicolok, Triple Controller mengirim Modulation (CC1) = 127
+  ke Upper 1-3 (vibrato penuh). Sekarang CC baru dikirim setelah slider disentuh.
+- Menggulir daftar voice tidak lagi mengganti voice; voice dipilih saat jari diangkat tanpa bergeser.
+- Loop animasi pitch bend / slider berhenti saat diam (HP tidak cepat panas, baterai lebih awet).
+  Setelan Frame Rate 30/60 Hz sekarang benar-benar membatasi frame.
+- Nada quartertone bernilai 0 cent bisa dimatikan lagi.
+- Data tersimpan dibersihkan saat dimuat (nilai rusak tidak lagi merusak tampilan).
+- Interval pemindaian MIDI tidak lagi bisa berjalan ganda.
+- Panduan Style Play diperbaiki: tombol mengirim Program Change 80-94 di Style Control Channel
+  (bukan CC 114-118 seperti tertulis sebelumnya).
+
+FILE BARU / BERUBAH
+- Baru: kset.js, kset.css, PERUBAHAN_V8.txt
+- Berubah: index.html, pro.js, pa5x.js, sw.js (cache v60), midi-test.html

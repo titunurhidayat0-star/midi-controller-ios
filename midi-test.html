@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tes Web MIDI</title>
+<style>body{font:15px system-ui;background:#0b0f17;color:#e5e7eb;padding:14px}
+button{font:inherit;padding:8px 12px;margin:4px 4px 4px 0;border-radius:8px;border:1px solid #556;background:#1c2433;color:#fcd34d}
+pre{white-space:pre-wrap;background:#111826;padding:10px;border-radius:8px}</style></head>
+<body>
+<h3>Tes Web MIDI</h3>
+<button id="go">Mulai tes (minta izin MIDI)</button>
+<pre id="log">Tekan tombol di atas.</pre>
+<div id="outs"></div>
+<script>
+const log = m => { document.getElementById('log').textContent += '\n' + m; };
+document.getElementById('go').onclick = async () => {
+  document.getElementById('log').textContent = '';
+  log('https/secure: ' + window.isSecureContext);
+  log('requestMIDIAccess ada: ' + !!navigator.requestMIDIAccess);
+  log('UA: ' + navigator.userAgent);
+  if (!navigator.requestMIDIAccess) { log('=> Browser ini TIDAK mendukung Web MIDI.'); return; }
+  let acc = null;
+  for (const sysex of [true, false]) {
+    try { acc = await navigator.requestMIDIAccess({ sysex }); log('Akses OK (sysex=' + sysex + ')'); break; }
+    catch (e) { log('Gagal (sysex=' + sysex + '): ' + e.name + ' ' + e.message); }
+  }
+  if (!acc) return;
+  const show = () => {
+    const L = x => { const a = []; if (x && x.forEach) x.forEach(p => a.push(p)); return a; }; const outs = L(acc.outputs), ins = L(acc.inputs);
+    log('[' + new Date().toLocaleTimeString() + '] outputs=' + outs.length + ' inputs=' + ins.length);
+    log('  OUT: ' + (outs.map(o => o.name + ' (' + o.state + ')').join(', ') || '-'));
+    log('  IN : ' + (ins.map(o => o.name + ' (' + o.state + ')').join(', ') || '-'));
+    // MIDI IN: pasang dua jalur supaya terlihat jalur mana yang dijalankan browser ini
+    ins.forEach(p => {
+      if (p.__t) return; p.__t = 1;
+      const hx = d => Array.from(d).slice(0, 16).map(x => x.toString(16).padStart(2, '0')).join(' ').toUpperCase();
+      try { p.onmidimessage = e => { if (e.data[0] < 0xF8) log('IN [onmidimessage] ' + p.name + ': ' + hx(e.data)); }; } catch (e) { log('onmidimessage gagal: ' + e.message); }
+      try { p.addEventListener('midimessage', e => { if (e.data[0] < 0xF8) log('IN [addEventListener] ' + p.name + ': ' + hx(e.data)); }); } catch (e) { log('addEventListener gagal: ' + e.message); }
+    });
+    if (ins.length) log('  => Tekan tuts / tombol Keyboard Set di keyboard: pesan masuk akan tampil di sini.');
+    const box = document.getElementById('outs'); box.innerHTML = '';
+    outs.forEach(o => {
+      const b = document.createElement('button');
+      b.textContent = 'Tes nada C4 -> ' + o.name;
+      b.onclick = () => { o.send([0x90, 60, 100]); setTimeout(() => o.send([0x80, 60, 0]), 400); log('Terkirim ke ' + o.name); };
+      box.appendChild(b);
+    });
+  };
+  acc.onstatechange = e => { log('statechange: ' + e.port.name + ' ' + e.port.state); show(); };
+  show();
+  setTimeout(show, 2000);
+};
+</script></body></html>

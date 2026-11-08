@@ -1,0 +1,588 @@
+/* =====================================================================
+   MIDI ROYALE PRO 9.5 — tampilan
+   ===================================================================== */
+
+/* ---------- Quartertone: preset buatan pengguna ---------- */
+.qt-user { display: inline-flex; align-items: center; gap: .3rem; flex-shrink: 0; }
+.qt-up, .qt-save { flex-shrink: 0; min-height: 30px; padding: 0 .6rem; border-radius: .55rem; font: 800 10.5px 'Plus Jakarta Sans', sans-serif; white-space: nowrap; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; touch-action: manipulation; }
+.qt-up { background: #0f1424; border: 1px solid rgba(56, 189, 248, .45); color: #7dd3fc; }
+.qt-up.on { background: rgba(56, 189, 248, .22); border-color: #38bdf8; color: #e0f2fe; box-shadow: 0 0 10px rgba(56, 189, 248, .45); }
+.qt-save { background: rgba(16, 185, 129, .12); border: 1px dashed rgba(52, 211, 153, .7); color: #6ee7b7; }
+#panelQt button[onclick^="applyScalePreset"], #panelQt button[onclick^="resetAllQuartertones"] { min-height: 30px; flex-shrink: 0; }
+.qtm-card { max-width: 30rem; }
+.qtm-acts { display: grid; grid-template-columns: 1fr 1fr; gap: .45rem; }
+.qtm-acts .v9-btn { min-height: 44px; }
+.qtm-acts .v9-btn:first-child, .qtm-acts .v9-btn:nth-child(3) { grid-column: 1 / -1; }
+
+/* ---------- Triple Controller: reset saat ganti voice ---------- */
+.tr-chip { flex-shrink: 0; min-height: 30px; padding: 0 .55rem; border-radius: .6rem; font: 800 10px 'Orbitron', sans-serif; letter-spacing: .04em; border: 1px solid #334155; color: #94a3b8; background: #0b1120; white-space: nowrap; }
+.tr-chip.tr-now { color: #e2e8f0; border-color: #475569; background: linear-gradient(180deg, #1e293b, #0b1120); }
+.tr-chip.tr-now:active { transform: translateY(1px); }
+.tr-chip.on { border-color: rgb(var(--accent-rgb)); color: rgb(var(--ac-300)); background: rgb(var(--accent-rgb) / .12); box-shadow: 0 0 8px rgb(var(--accent-rgb) / .3); }
+.tr-reset { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; margin-top: .35rem; padding: .35rem .55rem; border-radius: .7rem; border: 1px solid #1e293b; background: rgba(2, 6, 23, .55); }
+.tr-reset .tl { font: 800 10px 'Orbitron', sans-serif; letter-spacing: .06em; color: rgb(var(--ac-300)); }
+.tr-reset small { flex: 1 1 auto; min-width: 0; font: 600 10.5px 'JetBrains Mono', monospace; color: #a8b3c4; }
+.tr-reset .v9-btn { min-height: 34px; min-width: 56px; }
+
+/* ---------- Klasik: pilihan grid ---------- */
+.mr-gseg { display: inline-flex; align-items: center; gap: 2px; padding: 2px; border-radius: .7rem; background: #05070e; border: 1px solid #1e293b; flex-shrink: 0; }
+.mr-gseg .gi { color: #22d3ee; font-size: 13px; padding: 0 .3rem 0 .25rem; }
+.mr-gseg button { min-height: 28px; min-width: 34px; padding: 0 .4rem; border-radius: .5rem; font: 800 10px 'JetBrains Mono', monospace; color: #94a3b8; }
+.mr-gseg button.on { background: rgba(34, 211, 238, .18); color: #a5f3fc; box-shadow: inset 0 0 0 1px rgba(34, 211, 238, .55); }
+@media (max-height: 520px) { .mr-gseg button { min-width: 28px; padding: 0 .3rem; font-size: 9.5px; } .mr-gseg button[data-g="auto"] { min-width: 36px; } }
+#voiceTilesGrid.mr-g { grid-template-columns: repeat(var(--mr-cols), minmax(0, 1fr)) !important; grid-auto-rows: var(--mr-row) !important; }
+#voiceTilesGrid.mr-g .voice-tile { min-height: 0 !important; height: auto; justify-content: center !important; gap: .25rem !important; }
+#voiceTilesGrid.mr-gmid .voice-tile svg, #voiceTilesGrid.mr-gmid .voice-tile img { width: clamp(26px, calc(var(--mr-row) * .34), 44px) !important; height: clamp(26px, calc(var(--mr-row) * .34), 44px) !important; }
+#voiceTilesGrid.mr-gmid .voice-tile h4 { font-size: clamp(10px, calc(var(--mr-row) * .12), 14px) !important; }
+#voiceTilesGrid.mr-gbig .voice-tile svg, #voiceTilesGrid.mr-gbig .voice-tile img { width: clamp(40px, calc(var(--mr-row) * .3), 84px) !important; height: clamp(40px, calc(var(--mr-row) * .3), 84px) !important; }
+#voiceTilesGrid.mr-gbig .voice-tile h4 { font-size: clamp(13px, calc(var(--mr-row) * .1), 24px) !important; }
+#voiceTilesGrid.mr-gbig .voice-tile .tile-badge { display: inline-block !important; font-size: clamp(9px, calc(var(--mr-row) * .06), 12px); }
+
+/* ---------- Klasik: tile aktif / UP2 / UP3, nama 2 baris ---------- */
+.voice-tile .mr-badge { position: absolute; right: 4px; top: 4px; z-index: 3; padding: 1px 6px; border-radius: 999px; font: 900 8px/1.4 'Orbitron', sans-serif; letter-spacing: .08em; pointer-events: none; }
+.voice-tile.active-tile .mr-badge { background: rgb(var(--accent-rgb)); color: #0a0a0d; box-shadow: 0 0 10px rgb(var(--accent-rgb) / .7); }
+.voice-tile.layer-tile .mr-badge { background: #a855f7; color: #fff; }
+.voice-tile.u3-tile .mr-badge { background: #0ea5e9; color: #fff; }
+.voice-tile.active-tile { box-shadow: 0 0 0 2px rgb(var(--ac-300)), 0 0 22px rgb(var(--accent-rgb) / .65) !important; background: linear-gradient(180deg, rgb(var(--accent-rgb) / .2), rgba(8, 10, 18, .9)) !important; }
+.voice-tile.active-tile h4 { color: #fff7dd !important; text-shadow: 0 0 10px rgb(var(--accent-rgb) / .8); }
+.voice-tile.layer-tile { box-shadow: 0 0 0 2px #a855f7, 0 0 14px rgba(168, 85, 247, .45) !important; }
+.voice-tile.u3-tile { box-shadow: 0 0 0 2px #0ea5e9, 0 0 14px rgba(14, 165, 233, .45) !important; }
+
+#voiceTilesGrid .voice-tile h4.mr-fit2 { white-space: normal !important; text-overflow: clip !important; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.08; word-break: break-word; overflow-wrap: anywhere; }
+
+/* ---------- Klasik: tab kategori berwarna + jumlah ---------- */
+.category-tab.mr-cc { border-color: rgb(var(--cc) / .45) !important; color: rgb(var(--cc)) !important; }
+.category-tab.mr-cc.active { background: rgb(var(--cc) / .18) !important; border-color: rgb(var(--cc)) !important; color: #fff !important; box-shadow: 0 0 12px rgb(var(--cc) / .45), inset 0 -2px 0 rgb(var(--cc)) !important; }
+.category-tab .mr-cn { margin-left: .2rem; min-width: 18px; padding: 0 5px; border-radius: 999px; background: rgb(var(--cc, 148 163 184) / .2); color: inherit; font: 800 9px 'JetBrains Mono', monospace; line-height: 16px; text-align: center; }
+
+/* ---------- Klasik: tab STYLE berkedip saat style jalan ---------- */
+#navStyleBtn.mr-run { position: relative; animation: mrRunGlow 1.1s ease-in-out infinite; }
+#navStyleBtn.mr-run::after { content: ""; position: absolute; top: 5px; right: 7px; width: 7px; height: 7px; border-radius: 50%; background: #ff7a33; box-shadow: 0 0 8px #ff7a33; }
+@keyframes mrRunGlow { 0%, 100% { box-shadow: 0 0 0 1px rgba(255, 122, 51, .35); } 50% { box-shadow: 0 0 0 1px rgba(255, 122, 51, .9), 0 0 16px rgba(255, 122, 51, .55); } }
+@media (prefers-reduced-motion: reduce) { #navStyleBtn.mr-run { animation: none; box-shadow: 0 0 0 1px #ff7a33; } }
+
+/* ---------- Klasik: panel kiri dipisah ---------- */
+#mrHero.mr-split { display: flex !important; flex-direction: column; gap: .45rem !important; padding: 0 !important; padding-top: 0 !important; background: none !important; border: 0 !important; box-shadow: none !important; overflow: visible; }
+#mrHero.mr-split > .mr-hstat { position: static; flex: 0 0 auto; display: flex; align-items: center; gap: .45rem; min-height: 46px; padding: .4rem .6rem; border-radius: 1rem; border: 1px solid rgb(var(--accent-rgb) / .38);
+  background: linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(0, 0, 0, .3)), #0a0b10; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05); }
+#mrHero.mr-split > .mr-hstat .chord-pill { padding: .2rem .7rem; min-height: 32px; display: inline-flex; align-items: center; gap: .4rem; }
+#mrHero.mr-split > .mr-hstat .chord-pill small { font-size: 9px; }
+#mrHero.mr-split > .mr-hstat .chord-pill b { font-size: 17px; }
+#mrHero.mr-split > .mr-hstat .k-chips { display: inline-flex; gap: .35rem; margin-left: auto; }
+#mrHero.mr-split > .mr-hstat .k-chips b { font-size: 12px !important; padding: 5px 10px !important; border-radius: .55rem; }
+#mrHero.mr-split > .mr-vbox { position: relative; flex: 1 1 auto; min-height: 0; display: grid; gap: .45rem; padding: .55rem; border-radius: 1.1rem;
+  grid-template-columns: minmax(64px, 1fr) minmax(0, 2.6fr) minmax(64px, 1fr); grid-template-rows: auto auto;
+  border: 1px solid rgb(var(--accent-rgb) / .45); background: linear-gradient(135deg, rgba(255, 255, 255, .05), rgba(0, 0, 0, .35)), linear-gradient(100deg, #0a0a0d, rgb(var(--accent-rgb) / .14) 50%, #0a0a0d);
+  box-shadow: 0 0 28px rgb(var(--accent-rgb) / .14), inset 0 1px 0 rgba(255, 255, 255, .06); }
+@media (orientation: landscape) and (min-width: 560px) {
+  #mrHero.mr-split > .mr-vbox { grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1fr) auto auto; }
+}
+@media (orientation: landscape) and (max-height: 520px) {
+  #mrHero.mr-split { gap: .35rem !important; }
+  #mrHero.mr-split > .mr-hstat { min-height: 40px; padding: .3rem .5rem; }
+  #mrHero.mr-split > .mr-hstat .chord-pill { min-height: 28px; }
+  #mrHero.mr-split > .mr-hstat .chord-pill b { font-size: 15px; }
+  #mrHero.mr-split > .mr-hstat .k-chips b { font-size: 11px !important; padding: 4px 8px !important; }
+  #mrHero.mr-split > .mr-vbox { padding: .4rem; gap: .3rem; }
+}
+@media (min-width: 1000px) and (min-height: 600px) {
+  #mrHero.mr-split > .mr-hstat { min-height: 58px; }
+  #mrHero.mr-split > .mr-hstat .chord-pill b { font-size: 22px; }
+  #mrHero.mr-split > .mr-hstat .k-chips b { font-size: 14px !important; padding: 6px 12px !important; }
+}
+
+/* ---------- Umum: toast di atas, tidak menutupi tombol ---------- */
+#toast { top: calc(var(--sat, 0px) + 6px) !important; bottom: auto !important; transform: translateX(-50%) translateY(-8px) !important; max-width: min(92vw, 640px); box-shadow: 0 8px 26px rgba(0, 0, 0, .55); }
+#toast.show { transform: translateX(-50%) translateY(0) !important; }
+
+/* ---------- Umum: MIDI terputus ---------- */
+body.mr-midi-lost::before { content: ""; position: fixed; left: 0; right: 0; top: 0; height: 3px; z-index: 9998; background: #ef4444; box-shadow: 0 0 12px #ef4444, 0 0 3px #ef4444; animation: mrLost 1.2s ease-in-out infinite; pointer-events: none; }
+@keyframes mrLost { 50% { opacity: .35; } }
+.mr-lost-pill { display: none; position: fixed; top: 8px; left: 50%; transform: translateX(-50%); z-index: 9999; padding: .4rem .9rem; border-radius: 999px; background: #450a0a; border: 1px solid #ef4444; color: #fecaca; font: 800 11px 'Orbitron', sans-serif; letter-spacing: .05em; box-shadow: 0 6px 22px rgba(239, 68, 68, .35); transition: opacity .6s; pointer-events: none; white-space: nowrap; }
+.mr-lost-pill.fade { opacity: 0; }
+
+/* ---------- Umum: efek tekan ---------- */
+.mr-press { animation: mrPress .26s ease-out; }
+@keyframes mrPress { 0% { transform: scale(.95); filter: brightness(1.45); } 100% { transform: scale(1); filter: none; } }
+@media (prefers-reduced-motion: reduce) { .mr-press { animation: none; filter: brightness(1.3); } }
+html.gfx-low .mr-press { animation-duration: .15s; }
+
+/* =====================================================================
+   Pa5X
+   ===================================================================== */
+/* bar atas: panel logam bertekstur + garis aksen oranye */
+#paRoot .pa-top { position: relative; gap: .4rem !important; background: linear-gradient(180deg, #2d3037 0%, #1a1c21 45%, #0d0e11 100%) !important; border-bottom: 1px solid #000 !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .09), 0 1px 0 rgba(255, 85, 0, .35), 0 4px 14px rgba(0, 0, 0, .55) !important; }
+#paRoot .pa-top::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: linear-gradient(90deg, transparent, #ff5500 20%, #ffb37a 50%, #ff5500 80%, transparent); opacity: .75; pointer-events: none; }
+#paRoot .pa-top button, #paRoot .pa-top .pa-kbchip { border-radius: 6px !important; background: linear-gradient(180deg, #34373f 0%, #1c1e23 52%, #15161a 100%) !important; border: 1px solid #0a0b0d !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 1px 2px rgba(0, 0, 0, .6) !important; color: #e5e7eb; transition: filter .15s; }
+#paRoot .pa-top button:active { filter: brightness(1.35); }
+#paRoot .pa-top .pa-home { color: #ff7a33 !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), inset 0 -2px 0 #ff5500, 0 0 10px rgba(255, 85, 0, .25) !important; }
+#paRoot .pa-top button[data-act="panic"] { color: #ff6b4a !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), inset 0 -2px 0 #dc2626 !important; margin-left: .2rem; }
+#paRoot .pa-top button[data-act="classic"] { color: rgb(var(--ac-300)) !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), inset 0 -2px 0 rgb(var(--accent-rgb)) !important; }
+#paRoot .pa-top select { background: #050607 !important; border: 1px solid #00ff6644 !important; border-radius: 6px !important; box-shadow: inset 0 2px 6px rgba(0, 0, 0, .8) !important; }
+/* nama aplikasi + username */
+#paRoot .pa-brand { display: flex; flex-direction: column; justify-content: center; line-height: 1.05; min-width: 0; flex-shrink: 1; padding: 0 .35rem 0 .15rem; border-right: 1px solid rgba(255, 255, 255, .08); margin-right: .1rem; }
+#paRoot .pa-brand b { font: 900 10.5px 'Orbitron', sans-serif; letter-spacing: .1em; white-space: nowrap; background: linear-gradient(90deg, #ffb37a, #fff 45%, rgb(var(--ac-300))); -webkit-background-clip: text; background-clip: text; color: transparent; }
+#paRoot .pa-brand > span { display: flex; align-items: center; gap: .3rem; margin-top: 2px; min-width: 0; }
+#paRoot .pa-brand .pa-dot { flex-shrink: 0; margin: 0 !important; }
+#paRoot .pa-brand .mr-author { font: 800 9px 'Orbitron', sans-serif !important; letter-spacing: .1em; color: #00ff66 !important; text-shadow: 0 0 6px rgba(0, 255, 102, .45) !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 9rem; font-style: normal; }
+@media (max-width: 900px) { #paRoot .pa-brand { flex-shrink: 0; } #paRoot .pa-brand b { font-size: 8.5px; letter-spacing: .02em; } #paRoot #paMidiSlot { min-width: 0; flex-shrink: 1; } #paRoot #paMidiSlot select { min-width: 0; } #paRoot .pa-brand .mr-author { font-size: 8px !important; max-width: 6.5rem; } #paRoot #paMidiSlot select { max-width: 6.8rem; } #paRoot .pa-top { gap: .3rem !important; } }
+@media (max-width: 760px) { #paRoot .pa-brand b { display: none; } #paRoot .pa-brand { border-right: 0; } }
+@media (min-width: 1000px) { #paRoot .pa-brand b { font-size: 12px; } #paRoot .pa-brand .mr-author { font-size: 10px !important; } }
+/* tempo dari keyboard */
+#paRoot .pa-beat { display: none; white-space: nowrap; flex-shrink: 0; align-items: center; gap: .3rem; height: 26px; padding: 0 .5rem; border-radius: 5px; background: #020403; border: 1px solid #00ff6644; box-shadow: inset 0 2px 6px rgba(0, 0, 0, .8); font: 800 12px 'JetBrains Mono', monospace; color: #00ff66; }
+#paRoot .pa-beat.on { display: inline-flex; }
+#paRoot .pa-beat i { width: 8px; height: 8px; border-radius: 50%; background: #0b3d1e; }
+#paRoot .pa-beat i.hit { animation: paBeat .22s ease-out; }
+#paRoot .pa-beat.down i.hit { animation-name: paBeatDown; }
+#paRoot .pa-beat b::before { content: "♩ "; opacity: .7; }
+@keyframes paBeat { 0% { background: #00ff66; box-shadow: 0 0 10px #00ff66; } 100% { background: #0b3d1e; box-shadow: none; } }
+@keyframes paBeatDown { 0% { background: #ff7a33; box-shadow: 0 0 10px #ff7a33; } 100% { background: #0b3d1e; box-shadow: none; } }
+
+/* LCD lebih nyata: bingkai, kilap kaca, vignette */
+#paRoot .pa-keys { box-shadow: 0 0 0 3px #0b0c0e, 0 0 0 4px #2b2e35, inset 0 0 0 1px rgba(0, 255, 102, .12), inset 0 2px 22px rgba(0, 0, 0, .85), 0 6px 18px rgba(0, 0, 0, .6) !important; }
+#paRoot .pa-keys::after { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0; border-radius: inherit;
+  background: linear-gradient(118deg, rgba(255, 255, 255, .075) 0%, rgba(255, 255, 255, .02) 28%, rgba(255, 255, 255, 0) 42%), radial-gradient(120% 90% at 50% 50%, transparent 60%, rgba(0, 0, 0, .45) 100%); }
+#paRoot .pa-card { box-shadow: 0 0 0 1px #000, inset 0 1px 0 rgba(255, 255, 255, .05), 0 4px 12px rgba(0, 0, 0, .45); }
+/* gambar tuts: rata kanan bawah, tidak menabrak nama voice */
+#paRoot .pa-keys .kbd-art { right: 14px !important; left: auto !important; bottom: 18px !important; width: min(30%, 380px) !important; height: 40% !important; }
+#paRoot .pa-keys .pa-ups { align-self: flex-start; margin-top: .4rem; }
+@media (max-height: 520px) { #paRoot .pa-keys .kbd-art { width: 24% !important; height: 34% !important; bottom: 14px !important; opacity: .75; } }
+/* Upper 2 / Upper 3 di MAIN */
+#paRoot .pa-uplist { display: flex; flex-direction: column; gap: 3px; margin-top: .45rem; max-width: 62%; }
+#paRoot .pa-uplist > div { display: flex; align-items: center; gap: .5rem; min-width: 0; opacity: .38; }
+#paRoot .pa-uplist > div.on { opacity: 1; }
+#paRoot .pa-uplist em { flex-shrink: 0; width: 34px; text-align: center; font: 800 9px 'JetBrains Mono', monospace; color: #00ff66; border: 1px solid #00ff6655; border-radius: 3px; padding: 1px 0; font-style: normal; }
+#paRoot .pa-uplist > div.on em { background: #00ff6622; box-shadow: 0 0 6px #00ff6644; }
+#paRoot .pa-uplist b { min-width: 0; flex: 0 1 auto; font: 700 clamp(12px, 1.6vw, 20px) 'Chakra Petch', 'Rajdhani', sans-serif; color: #b6ffd2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#paRoot .pa-uplist small { flex-shrink: 0; font: 700 9px 'JetBrains Mono', monospace; color: #00ff66aa; }
+@media (max-height: 520px) { #paRoot .pa-uplist { margin-top: .2rem; gap: 1px; } #paRoot .pa-uplist b { font-size: 11px; } #paRoot .pa-keys .hint { display: none; } }
+/* status style */
+#paRoot .pa-stat .chip.ok5 { color: #ffb37a; border-color: #ff7a3377; background: rgba(255, 122, 51, .12); }
+/* tab bawah: ukuran TETAP, hanya tab aktif bergaris menyala + transisi */
+#paRoot .pa-tabs button { transition: background .2s, color .2s, box-shadow .2s; }
+#paRoot .pa-tabs button.on { box-shadow: 0 0 10px rgba(255, 85, 0, .55), inset 0 -3px 0 #ffd2b3, inset 0 1px 0 rgba(255, 255, 255, .25) !important; color: #fff !important; }
+#panelCtrl .tr-chip { min-height: 30px !important; height: 30px; }
+
+/* =====================================================================
+   9.6 PEMILIH KEYBOARD — langkah model didesain ulang
+   ===================================================================== */
+.kbp-ov.step-model { background: radial-gradient(70% 60% at 15% 0%, rgb(var(--c) / .16), transparent 70%), radial-gradient(60% 60% at 100% 100%, rgb(var(--c) / .1), transparent 70%), #05060a !important; }
+.kbp-ov.step-model .kbp-panel { position: relative; border: 1px solid rgb(var(--c) / .35) !important; background: linear-gradient(180deg, rgba(255, 255, 255, .035), rgba(0, 0, 0, .25)), #070910 !important; box-shadow: 0 30px 80px -30px #000, 0 0 40px rgb(var(--c) / .12), inset 0 1px 0 rgba(255, 255, 255, .06) !important; }
+.kbp-ov.step-model .kbp-panel::before { content: ""; position: absolute; left: 1.2rem; right: 1.2rem; top: 0; height: 2px; border-radius: 2px; background: linear-gradient(90deg, transparent, rgb(var(--c)), transparent); }
+/* tab merek */
+.kbp-ov.step-model .kbp-tab { font: 900 12px 'Orbitron', sans-serif; letter-spacing: .12em; background: linear-gradient(180deg, #0f1320, #080a12); position: relative; overflow: hidden; }
+.kbp-ov.step-model .kbp-tab.on { background: linear-gradient(180deg, rgb(var(--c) / .3), rgb(var(--c) / .08)); text-shadow: 0 0 10px rgb(var(--c) / .7); }
+.kbp-ov.step-model .kbp-tab.on::after { content: ""; position: absolute; left: 15%; right: 15%; bottom: 0; height: 2px; background: rgb(var(--c)); box-shadow: 0 0 10px rgb(var(--c)); }
+/* nama merek besar + seri */
+.kbp-ov.step-model .kbp-series { align-items: center; gap: .45rem; }
+.kbp-bname { flex: 0 0 auto; display: flex; align-items: baseline; gap: .45rem; margin-right: .3rem; font: 900 clamp(18px, 2.6vw, 28px) 'Orbitron', sans-serif; letter-spacing: .12em; color: rgb(var(--c)); text-shadow: 0 0 18px rgb(var(--c) / .45); }
+.kbp-bname small { font: 800 9px 'JetBrains Mono', monospace; letter-spacing: .1em; color: #94a3b8; text-shadow: none; }
+.kbp-ov.step-model .kbp-ser { font-size: 11px; transition: background .2s, color .2s; }
+/* kartu model */
+.kbp-ov.step-model .kbp-models { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)) !important; grid-auto-rows: minmax(88px, auto); align-content: start; gap: .55rem !important; padding: 4px; }
+.kbp-ov.step-model .kbp-model { overflow: hidden; align-items: flex-start; justify-content: flex-start; text-align: left; gap: .15rem; padding: .6rem .7rem 1.1rem !important; border-radius: .9rem !important;
+  background: linear-gradient(160deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, 0) 45%), linear-gradient(180deg, #121624, #0a0c14) !important; border: 1px solid #222a3c !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 6px 16px -8px #000 !important; transition: transform .18s, border-color .18s, box-shadow .18s; }
+.kbp-ov.step-model .kbp-model .kbp-mico { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: .55rem; background: rgb(var(--c) / .12); border: 1px solid rgb(var(--c) / .3); margin-bottom: .2rem; }
+.kbp-ov.step-model .kbp-model b { font-size: clamp(13px, 1.6vw, 17px) !important; color: #f1f5f9; }
+.kbp-ov.step-model .kbp-model small { font-size: 8.5px !important; }
+.kbp-bed { position: absolute; left: 0; right: 0; bottom: 0; height: 9px; opacity: .55; background: repeating-linear-gradient(90deg, #d9dee8 0 7px, #0a0c14 7px 8px); box-shadow: inset 0 2px 0 rgb(var(--c) / .6); }
+.kbp-bed::before { content: ""; position: absolute; inset: 0 0 4px 0; background: repeating-linear-gradient(90deg, transparent 0 5px, #05060a 5px 9px, transparent 9px 16px); opacity: .9; }
+.kbp-ck { position: absolute; top: .45rem; right: .45rem; width: 20px; height: 20px; border-radius: 50%; display: none; align-items: center; justify-content: center; font: 900 11px sans-serif; font-style: normal; background: rgb(var(--c)); color: #06080c; box-shadow: 0 0 10px rgb(var(--c) / .7); }
+.kbp-ov.step-model .kbp-model.on { transform: translateY(-2px); border-color: rgb(var(--c)) !important; background: linear-gradient(160deg, rgb(var(--c) / .28), rgb(var(--c) / .05) 60%), #0b0e18 !important; box-shadow: 0 0 0 1px rgb(var(--c) / .5), 0 10px 26px -8px rgb(var(--c) / .55), inset 0 1px 0 rgba(255, 255, 255, .1) !important; }
+.kbp-ov.step-model .kbp-model.on .kbp-ck { display: flex; }
+.kbp-ov.step-model .kbp-model.on .kbp-bed { opacity: 1; box-shadow: inset 0 2px 0 rgb(var(--c)), 0 0 10px rgb(var(--c) / .6); }
+.kbp-ov.step-model .kbp-model.cur:not(.on) { border-color: rgba(74, 222, 128, .45) !important; }
+.kbp-ov.step-model .kbp-model:hover { border-color: rgb(var(--c) / .6) !important; }
+.kbp-ov.step-model.anim .kbp-model { animation: kbpIn .38s cubic-bezier(.2, .8, .2, 1) both; animation-delay: calc(var(--i, 0) * 28ms); }
+@keyframes kbpIn { from { opacity: 0; transform: translateY(10px) scale(.96); } to { opacity: 1; transform: none; } }
+/* panel kanan: ilustrasi keyboard + LCD */
+.kbp-ov.step-model .kbp-side { background: linear-gradient(180deg, rgb(var(--c) / .08), rgba(0, 0, 0, .3) 40%), #05070d !important; border: 1px solid rgb(var(--c) / .3) !important; }
+.kbp-kb { flex: 0 0 auto; border-radius: .8rem; padding: .5rem .5rem 0; background: linear-gradient(180deg, #2b2f38, #14161b); border: 1px solid #000; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 8px 18px -8px #000; }
+.kbp-lcd { display: flex; flex-direction: column; align-items: center; padding: .4rem .5rem; margin: 0 auto .45rem; width: 78%; border-radius: .4rem; background: #021108; border: 1px solid #000; box-shadow: inset 0 0 14px rgba(0, 255, 102, .18), 0 0 12px rgb(var(--c) / .25);
+  background-image: repeating-linear-gradient(0deg, rgba(0, 255, 102, .05) 0 1px, transparent 1px 3px); }
+.kbp-lcd small { font: 800 8px 'Orbitron', sans-serif; letter-spacing: .14em; color: #00ff66aa; }
+.kbp-lcd b { font: 800 clamp(15px, 2vw, 22px) 'Chakra Petch', 'Orbitron', sans-serif; color: #00ff66; text-shadow: 0 0 10px rgba(0, 255, 102, .7); letter-spacing: .04em; line-height: 1.15; }
+.kbp-lcd i { font: 700 8px 'JetBrains Mono', monospace; font-style: normal; letter-spacing: .12em; color: #00ff6699; }
+.kbp-keys { display: flex; height: 34px; gap: 1px; padding: 0 2px; position: relative; }
+.kbp-keys u { flex: 1 1 0; background: linear-gradient(180deg, #f8fafc, #cbd5e1); border-radius: 0 0 3px 3px; position: relative; }
+.kbp-keys u:nth-child(7n+1)::after, .kbp-keys u:nth-child(7n+2)::after, .kbp-keys u:nth-child(7n+4)::after, .kbp-keys u:nth-child(7n+5)::after, .kbp-keys u:nth-child(7n+6)::after { content: ""; position: absolute; right: -32%; top: 0; width: 64%; height: 58%; background: #0b0d12; border-radius: 0 0 2px 2px; z-index: 1; }
+.kbp-kb:not(.idle) .kbp-keys u:nth-child(8), .kbp-kb:not(.idle) .kbp-keys u:nth-child(10), .kbp-kb:not(.idle) .kbp-keys u:nth-child(12) { background: linear-gradient(180deg, rgb(var(--c)), rgb(var(--c) / .55)); box-shadow: 0 0 10px rgb(var(--c) / .8); }
+.kbp-kb.idle .kbp-lcd b { color: #00ff6655; text-shadow: none; }
+.kbp-ov.step-model.selanim .kbp-lcd b { animation: lcdIn .45s steps(4, end); }
+.kbp-ov.step-model.selanim .kbp-kb:not(.idle) .kbp-keys u:nth-child(8), .kbp-ov.step-model.selanim .kbp-kb:not(.idle) .kbp-keys u:nth-child(10), .kbp-ov.step-model.selanim .kbp-kb:not(.idle) .kbp-keys u:nth-child(12) { animation: keyHit .5s ease-out both; }
+.kbp-ov.step-model.selanim .kbp-kb:not(.idle) .kbp-keys u:nth-child(10) { animation-delay: .08s; }
+.kbp-ov.step-model.selanim .kbp-kb:not(.idle) .kbp-keys u:nth-child(12) { animation-delay: .16s; }
+@keyframes lcdIn { 0% { opacity: 0; } 50% { opacity: 1; } 75% { opacity: .3; } 100% { opacity: 1; } }
+@keyframes keyHit { 0% { transform: translateY(2px); filter: brightness(1.8); } 100% { transform: none; } }
+.kbp-ov.step-model.selanim .kbp-prof > div { animation: kbpIn .3s ease-out both; }
+.kbp-ov.step-model.selanim .kbp-prof > div:nth-child(2) { animation-delay: .04s; } .kbp-ov.step-model.selanim .kbp-prof > div:nth-child(3) { animation-delay: .08s; }
+.kbp-ov.step-model.selanim .kbp-prof > div:nth-child(4) { animation-delay: .12s; } .kbp-ov.step-model.selanim .kbp-prof > div:nth-child(5) { animation-delay: .16s; }
+.kbp-ov.step-model .kbp-side .kbp-sname { display: none; }
+.kbp-ov.step-model .kbp-prof div { background: linear-gradient(90deg, #0b1020, #080b15) !important; border: 1px solid #141b2c; }
+.kbp-ov.step-model .kbp-prof b { color: rgb(var(--c)) !important; filter: brightness(1.25); }
+.kbp-ov.step-model .kbp-go { position: relative; overflow: hidden; background: linear-gradient(180deg, rgb(var(--c)), rgb(var(--c) / .78)) !important; box-shadow: 0 8px 24px -6px rgb(var(--c) / .7), inset 0 1px 0 rgba(255, 255, 255, .4) !important; }
+.kbp-ov.step-model .kbp-go:not(:disabled)::after { content: ""; position: absolute; top: 0; bottom: 0; width: 40%; left: -60%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .45), transparent); transform: skewX(-20deg); animation: goShine 2.6s ease-in-out infinite; }
+@keyframes goShine { 0%, 55% { left: -60%; } 100% { left: 130%; } }
+.kbp-ov.step-model .kbp-empty { font-size: 12px; color: #94a3b8; }
+@media (min-width: 1000px) and (min-height: 600px) {
+  .kbp-ov.step-model .kbp-main { grid-template-columns: minmax(0, 1fr) minmax(18rem, 22rem) !important; }
+  .kbp-ov.step-model .kbp-models { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important; grid-auto-rows: minmax(118px, auto); gap: .7rem !important; }
+  .kbp-ov.step-model .kbp-model .kbp-mico { width: 38px; height: 38px; } .kbp-ov.step-model .kbp-model .kbp-mico svg { width: 24px; height: 24px; }
+  .kbp-ov.step-model .kbp-model b { font-size: 19px !important; }
+  .kbp-bed { height: 14px; }
+  .kbp-keys { height: 60px; }
+  .kbp-lcd { padding: .7rem; }
+}
+@media (orientation: landscape) and (max-height: 520px) {
+  .kbp-ov.step-model .kbp-models { grid-auto-rows: minmax(64px, auto); grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)) !important; gap: .4rem !important; }
+  .kbp-ov.step-model .kbp-model { padding: .4rem .5rem .8rem !important; }
+  .kbp-ov.step-model .kbp-model .kbp-mico { width: 22px; height: 22px; margin-bottom: 0; } .kbp-ov.step-model .kbp-model .kbp-mico svg { width: 14px; height: 14px; }
+  .kbp-ov.step-model .kbp-model b { font-size: 13px !important; }
+  .kbp-bed { height: 6px; }
+  .kbp-kb { padding: .3rem .3rem 0; } .kbp-lcd { padding: .2rem .4rem; margin-bottom: .3rem; } .kbp-keys { height: 20px; }
+  .kbp-lcd b { font-size: 14px; }
+  .kbp-bname { font-size: 15px; }
+}
+@media (prefers-reduced-motion: reduce) { .kbp-ov.step-model .kbp-model, .kbp-ov.step-model .kbp-go::after, .kbp-lcd b, .kbp-prof > div { animation: none !important; } }
+html.gfx-low .kbp-ov.step-model .kbp-go::after { animation: none; display: none; }
+@media (orientation: landscape) and (max-height: 520px) { .kbp-ov.step-model .kbp-keys { display: none; } .kbp-ov.step-model .kbp-kb { padding: .3rem; } .kbp-ov.step-model .kbp-lcd { margin-bottom: 0; width: 100%; } .kbp-ov.step-model .kbp-prof div { padding: .12rem .4rem !important; } }
+
+/* ---------- 9.6 Klasik: grid tidak terpotong, kartu tegak, custom ---------- */
+#voiceTilesGrid { padding: 8px 8px 10px !important; }
+#voiceTilesGrid.mr-g .voice-tile { justify-content: space-evenly !important; }
+.mr-gseg button[data-g="custom"] { min-width: 44px; }
+.mr-gpop { position: fixed; z-index: 95; width: 15.5rem; padding: .7rem; border-radius: 1rem; background: #0a0d18; border: 1px solid rgb(var(--accent-rgb) / .5); box-shadow: 0 18px 40px -10px #000, 0 0 20px rgb(var(--accent-rgb) / .2); }
+.mr-gpop h5 { margin: 0 0 .5rem; font: 800 11px 'Orbitron', sans-serif; letter-spacing: .08em; color: rgb(var(--ac-300)); }
+.mr-gpop .row { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-bottom: .45rem; font: 700 12px 'Plus Jakarta Sans', sans-serif; color: #cbd5e1; }
+.mr-gpop .st { display: inline-flex; align-items: center; gap: .3rem; }
+.mr-gpop .st button { width: 40px; height: 40px; border-radius: .65rem; background: #111827; border: 1px solid #334155; color: #e2e8f0; font: 900 18px sans-serif; }
+.mr-gpop .st b { min-width: 28px; text-align: center; font: 900 18px 'JetBrains Mono', monospace; color: #fff; }
+.mr-gpop .pv { display: grid; gap: 3px; height: 70px; margin: .3rem 0 .55rem; padding: 4px; border-radius: .5rem; background: #05070e; border: 1px solid #1e293b; }
+.mr-gpop .pv i { border-radius: 3px; background: rgb(var(--accent-rgb) / .35); border: 1px solid rgb(var(--accent-rgb) / .6); }
+.mr-gpop .ok { width: 100%; min-height: 40px; border-radius: .7rem; background: rgb(var(--accent-rgb)); color: #0a0a0d; font: 900 11px 'Orbitron', sans-serif; letter-spacing: .06em; }
+
+/* =====================================================================
+   9.6 Pa5X MAIN: navigasi voice di bawah, ikon voice aktif
+   ===================================================================== */
+#paRoot .pa-keys .vrow .big { text-align: left; }
+#paRoot .pa-vnav { display: flex; gap: .45rem; margin-top: .55rem; max-width: 26rem; }
+#paRoot .pa-vnav .vnav { flex: 1 1 0; width: auto !important; height: 40px !important; gap: .35rem; padding: 0 .8rem !important; border-radius: 8px !important; font: 800 12px 'Chakra Petch', 'Orbitron', sans-serif; letter-spacing: .1em; color: #b6ffd2;
+  background: linear-gradient(180deg, #13261b, #07120c) !important; border: 1px solid #00ff6655 !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), 0 0 10px rgba(0, 255, 102, .12) !important; }
+#paRoot .pa-vnav .vnav svg, #paRoot .pa-vnav .vnav i { width: 18px; height: 18px; }
+@media (max-height: 520px) { #paRoot .pa-vnav { margin-top: .3rem; } #paRoot .pa-vnav .vnav { height: 32px !important; font-size: 11px; } }
+@media (min-width: 1000px) and (min-height: 600px) { #paRoot .pa-vnav { max-width: 30rem; } #paRoot .pa-vnav .vnav { height: 52px !important; font-size: 14px; } }
+/* ikon voice di kotak kiri */
+#paRoot .pa-keys .ico-box { --cc: 0 255 102; color: #00ff66; border-color: rgb(var(--cc) / .6) !important; box-shadow: 0 0 14px rgb(var(--cc) / .3), inset 0 0 14px rgb(var(--cc) / .15) !important; }
+#paRoot .pa-keys .ico-box svg { width: 62%; height: 62%; filter: drop-shadow(0 0 6px rgba(0, 255, 102, .6)); }
+#paRoot .pa-keys .ico-box svg * { stroke: currentColor; }
+#paRoot .pa-keys .ico-box img { width: 70%; height: 70%; object-fit: contain; border-radius: 6px; filter: drop-shadow(0 0 6px rgba(0, 255, 102, .4)); }
+#paRoot .pa-keys .ico-box[data-cat="keys"] { --cc: 34 211 238; } #paRoot .pa-keys .ico-box[data-cat="orchestral"] { --cc: 167 139 250; }
+#paRoot .pa-keys .ico-box[data-cat="ethnic"] { --cc: 251 146 60; } #paRoot .pa-keys .ico-box[data-cat="brass"] { --cc: 245 158 11; }
+#paRoot .pa-keys .ico-box[data-cat="guitar"] { --cc: 163 230 53; } #paRoot .pa-keys .ico-box[data-cat="percussion"] { --cc: 251 113 133; }
+#paRoot .pa-keys .ico-box.chg svg, #paRoot .pa-keys .ico-box.chg img { animation: icoIn .5s ease-out; }
+@keyframes icoIn { 0% { opacity: 0; transform: scale(.6); filter: brightness(2.2); } 40% { opacity: 1; } 100% { opacity: 1; transform: none; } }
+#paRoot .pa-uplist .ui { flex-shrink: 0; width: 18px; height: 18px; color: #00ff66; display: inline-flex; }
+#paRoot .pa-uplist .ui svg, #paRoot .pa-uplist .ui img { width: 18px; height: 18px; }
+#paRoot .pa-uplist .ui:empty { display: none; }
+
+/* =====================================================================
+   9.6 Pa5X: TAB KBD SET / CONTROL / SCALE TUNING / STYLE bergaya Pa5X
+   ===================================================================== */
+#paRoot .pa-slot > section > .glass-card, #paRoot .pa-slot > section > div > .glass-card, #paRoot #panelCtrl > .glass-card, #paRoot #panelCtrl > div {
+  background: repeating-linear-gradient(0deg, rgba(0, 255, 102, .022) 0 1px, transparent 1px 3px), radial-gradient(120% 90% at 50% 0%, #0c1a12 0%, #050807 70%) !important;
+  border: 1px solid #000 !important; border-radius: 10px !important;
+  box-shadow: 0 0 0 2px #0b0c0e, 0 0 0 3px #2b2e35, inset 0 0 0 1px rgba(0, 255, 102, .1), inset 0 2px 18px rgba(0, 0, 0, .8) !important; }
+#paRoot .pa-slot h3 { font-family: 'Chakra Petch', 'Orbitron', sans-serif !important; letter-spacing: .14em !important; color: #b6ffd2 !important; text-shadow: 0 0 8px rgba(0, 255, 102, .45); }
+/* tombol hardware dengan lampu LED */
+#paRoot .pa-slot button:not(.key-white):not(.key-black):not(.qt-up):not(.qt-save) { position: relative; border-radius: 7px !important; color: #e5e7eb; background: linear-gradient(180deg, #34373f 0%, #1d1f24 55%, #15161a 100%) !important; border: 1px solid #08090b !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 2px 3px rgba(0, 0, 0, .6) !important; transition: filter .15s, box-shadow .2s; }
+#paRoot .pa-slot button:not(.key-white):not(.key-black):not(.qt-up):not(.qt-save)::before { content: ""; position: absolute; left: 30%; right: 30%; top: 3px; height: 3px; border-radius: 3px; background: #1d2620; box-shadow: inset 0 1px 1px #000; transition: background .25s, box-shadow .25s; pointer-events: none; }
+#paRoot .pa-slot button.on::before, #paRoot .pa-slot button.active-style::before, #paRoot .pa-slot button.active::before, #paRoot .pa-slot button.pri::before, #paRoot .pa-slot button[aria-pressed="true"]::before { background: var(--led, #00ff66) !important; box-shadow: 0 0 8px var(--led, #00ff66), 0 0 2px var(--led, #00ff66) !important; }
+#paRoot .pa-slot button:active { filter: brightness(1.3); }
+/* KBD SET: slot bernomor seperti Kbd Set Library */
+#paRoot #panelKset .ks-tile { border-radius: 6px !important; border: 1px solid #00ff6633 !important; background: linear-gradient(180deg, #08160e, #030805) !important; box-shadow: inset 0 0 12px rgba(0, 0, 0, .7) !important; }
+#paRoot #panelKset .ks-tile .ks-nm, #paRoot #panelKset .ks-tile b { font-family: 'Chakra Petch', 'Orbitron', sans-serif !important; color: #b6ffd2 !important; letter-spacing: .04em; }
+#paRoot #panelKset .ks-tile .ks-num { color: #00ff66 !important; font-family: 'JetBrains Mono', monospace !important; }
+#paRoot #panelKset .ks-tile.on { border-color: #00ff66 !important; background: linear-gradient(180deg, #0f3a20, #06180d) !important; box-shadow: 0 0 14px rgba(0, 255, 102, .4), inset 0 0 14px rgba(0, 255, 102, .15) !important; }
+#paRoot #panelKset .ks-tile.on .ks-nm, #paRoot #panelKset .ks-tile.on b { color: #fff !important; text-shadow: 0 0 8px #00ff66; }
+#paRoot #panelKset { --led: #c084fc; }
+/* CONTROL: jalur slider seperti meter LCD */
+#paRoot #panelCtrl { --led: #22d3ee; }
+#paRoot #pitchTouchTrack, #paRoot #tripleTouchTrack { background: repeating-linear-gradient(90deg, rgba(0, 255, 102, .08) 0 1px, transparent 1px 10%), linear-gradient(180deg, #031009, #010402) !important; border: 1px solid #00ff6644 !important; border-radius: 6px !important; box-shadow: inset 0 2px 12px #000 !important; }
+#paRoot #tripleSliderFill { background: linear-gradient(90deg, #0a5c2c, #00ff66) !important; box-shadow: 0 0 14px rgba(0, 255, 102, .5) !important; opacity: .85; }
+#paRoot #pitchSliderFill { background: linear-gradient(90deg, rgba(0, 255, 102, .3), #00ff66) !important; box-shadow: 0 0 12px rgba(0, 255, 102, .5) !important; }
+#paRoot #tripleValDisplay, #paRoot #pitchValDisplay { font-family: 'JetBrains Mono', monospace !important; color: #00ff66 !important; background: #020a05 !important; border: 1px solid #00ff6644 !important; text-shadow: 0 0 8px rgba(0, 255, 102, .6); }
+#paRoot #panelCtrl input[type=checkbox] { accent-color: #00ff66; }
+#paRoot #panelCtrl .glass-card > div:first-child { flex-wrap: wrap; row-gap: .3rem; }
+/* SCALE TUNING */
+#paRoot #panelQt { --led: #fbbf24; }
+#paRoot #panelQt button[onclick^="applyScalePreset"], #paRoot #panelQt .qt-up { font-family: 'Chakra Petch', sans-serif !important; color: #b6ffd2 !important; background: linear-gradient(180deg, #08160e, #030805) !important; border: 1px solid #00ff6644 !important; border-radius: 5px !important; }
+#paRoot #panelQt .qt-up.on { background: linear-gradient(180deg, #0f3a20, #06180d) !important; border-color: #00ff66 !important; color: #fff !important; box-shadow: 0 0 10px rgba(0, 255, 102, .45) !important; }
+#paRoot #panelQt div:has(> #whiteKeysContainer) { border: 1px solid #000 !important; background: linear-gradient(180deg, #2b2f38, #121418) !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 0 0 2px #0b0c0e !important; }
+#paRoot #panelQt .qt-cent.on { color: #00ff66 !important; text-shadow: 0 0 6px #00ff66; }
+/* STYLE: tombol fisik Pa5X berlampu */
+#paRoot #panelStyle { --led: #ff7a33; }
+#paRoot #panelStyle .style-btn { font-family: 'Chakra Petch', 'Orbitron', sans-serif !important; font-weight: 700 !important; letter-spacing: .06em; color: #d1d5db !important; }
+#paRoot #panelStyle .style-btn.active-style { color: #fff !important; background: linear-gradient(180deg, #4a2a18 0%, #2a160c 60%, #1a0d06 100%) !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 0 16px rgba(255, 122, 51, .45) !important; animation: paBreath var(--beat, 1.2s) ease-in-out infinite; }
+@keyframes paBreath { 0%, 100% { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 0 8px rgba(255, 122, 51, .3); } 50% { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 0 20px rgba(255, 122, 51, .7); } }
+#paRoot #panelStyle #btnStyleStartStop { --led: #22c55e; color: #bbf7d0 !important; }
+#paRoot #panelStyle h3 + * , #paRoot #panelStyle span[class*="text-"] { font-family: 'Chakra Petch', sans-serif; }
+#paRoot #activeStyleDisplay { font-family: 'JetBrains Mono', monospace !important; color: #00ff66 !important; background: #020a05 !important; border-color: #00ff6655 !important; }
+
+/* =====================================================================
+   9.6 Pa5X ANIMASI (ikut setelan Grafis; Low = mati / ringan)
+   ===================================================================== */
+/* 1. ganti tab */
+#paRoot .pa-scr.on { animation: paScrIn .17s ease-out; }
+@keyframes paScrIn { from { opacity: 0; transform: translateX(8px); } to { opacity: 1; transform: none; } }
+/* 2. penanda tab meluncur (ukuran tab tetap) */
+#paRoot .pa-tabs { position: relative; }
+#paRoot .pa-tind { position: absolute; bottom: 2px; height: 3px; border-radius: 3px; background: #ffd2b3; box-shadow: 0 0 10px #ff7a33, 0 0 3px #fff; transition: left .28s cubic-bezier(.3, .9, .3, 1), width .28s; pointer-events: none; z-index: 2; }
+/* 3. layar menyala saat masuk Pa5X */
+#paRoot.pa-boot .pa-body::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 22%; z-index: 30; pointer-events: none; background: linear-gradient(180deg, transparent, rgba(0, 255, 102, .18) 60%, rgba(180, 255, 210, .5) 96%, transparent); animation: paBoot .8s ease-in forwards; }
+#paRoot .pa-body { position: relative; }
+@keyframes paBoot { from { transform: translateY(-100%); opacity: 1; } to { transform: translateY(480%); opacity: 0; } }
+/* 4. LED pada tombol aktif di MAIN & bar atas */
+#paRoot .pa-btns button, #paRoot .pa-top button[data-act="lock"], #paRoot .pa-regs button { position: relative; }
+#paRoot .pa-btns button::before, #paRoot .pa-regs button::before { content: ""; position: absolute; left: 32%; right: 32%; top: 3px; height: 3px; border-radius: 3px; background: #1d2620; transition: background .25s, box-shadow .25s; pointer-events: none; }
+#paRoot .pa-btns button.on::before, #paRoot .pa-regs button.on::before { background: #00ff66; box-shadow: 0 0 8px #00ff66; }
+#paRoot .pa-regs button.has:not(.on)::before { background: #0e4d26; }
+/* 6. nama voice berganti dengan efek LCD */
+#paRoot .pa-keys .big.chg { animation: paLcd .42s steps(5, end) !important; }
+@keyframes paLcd { 0% { opacity: 0; letter-spacing: .3em; } 30% { opacity: 1; } 50% { opacity: .25; } 70% { opacity: 1; } 100% { opacity: 1; letter-spacing: normal; } }
+/* 7. angka berganti dengan efek gulir */
+.mr-roll { display: inline-block; animation: mrRoll .22s ease-out; }
+@keyframes mrRoll { from { transform: translateY(-45%); opacity: 0; } to { transform: none; opacity: 1; } }
+/* 8. nama akor muncul */
+#paRoot #paChord b.pop, #chordPill b.pop { display: inline-block; animation: chordPop .28s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes chordPop { from { transform: scale(1.45); filter: brightness(1.8); } to { transform: none; filter: none; } }
+/* 9. tuts menyala lalu meredup pelan */
+#paRoot .pa-keys .kbd-art rect { transition: fill .45s ease-out, stroke .45s ease-out, filter .45s; }
+#paRoot .pa-keys .kbd-art rect.lit { transition: none; filter: drop-shadow(0 0 4px #00ff66); }
+/* 10. toast bergaya kotak pesan LCD Korg */
+body.pa-mode #toast { background: repeating-linear-gradient(0deg, rgba(0, 255, 102, .05) 0 1px, transparent 1px 3px), #021108 !important; border: 1px solid #00ff66 !important; color: #b6ffd2 !important; font-family: 'Chakra Petch', 'JetBrains Mono', monospace !important; border-radius: 6px !important; box-shadow: 0 0 0 2px #0b0c0e, 0 0 18px rgba(0, 255, 102, .35), 0 8px 24px rgba(0, 0, 0, .6) !important; text-shadow: 0 0 6px rgba(0, 255, 102, .5); }
+/* 11. garis LCD bergerak pelan */
+#paRoot .pa-keys .info { position: relative; }
+#paRoot .pa-keys::after { animation: none; }
+#paRoot .pa-keys > .deco ~ .mr-sweep, #paRoot .mr-sweep { position: absolute; left: 0; right: 0; height: 40%; top: -40%; pointer-events: none; z-index: 0; background: linear-gradient(180deg, transparent, rgba(0, 255, 102, .045), transparent); animation: paSweep 7s linear infinite; }
+@keyframes paSweep { to { top: 100%; } }
+/* grafis Low / gerak dikurangi */
+html.gfx-low #paRoot .pa-scr.on, html.gfx-low #paRoot.pa-boot .pa-body::after, html.gfx-low #paRoot .mr-sweep, html.gfx-low #paRoot #panelStyle .style-btn.active-style, html.gfx-low #paRoot .pa-keys .big.chg, html.gfx-low #paRoot .ico-box.chg svg { animation: none !important; }
+html.gfx-low #paRoot .mr-sweep, html.gfx-low #paRoot.pa-boot .pa-body::after { display: none; }
+html.gfx-low #paRoot .pa-tind { transition: none; }
+@media (prefers-reduced-motion: reduce) { #paRoot *, #paRoot *::before, #paRoot *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; } }
+#paRoot .pa-keys .ico-box svg { color: #00ff66 !important; }
+#paRoot .pa-keys .ico-box svg [stroke]:not([stroke="none"]) { stroke: currentColor !important; }
+#paRoot .pa-btns button.val::before { display: none; }
+#paRoot .pa-slot button:not(.key-white):not(.key-black):not(.qt-up):not(.qt-save)::before { top: 2px; height: 2px; }
+
+/* =====================================================================
+   9.6 Pa5X MAIN lebih lega: baris status dihapus, kotak TR/OCT/DUAL/MEM ramping
+   ===================================================================== */
+#paRoot #paStat { display: none !important; }
+#paRoot .pa-ctl { flex: 0 0 auto !important; padding: 4px !important; gap: 0 !important; }
+#paRoot .pa-ctl .pa-cap { display: none !important; }
+#paRoot .pa-ctl .pa-btns { gap: 4px !important; }
+#paRoot .pa-ctl .pa-btns button { height: 40px !important; min-height: 0 !important; padding: 0 4px !important; font-size: 11px !important; }
+#paRoot .pa-ctl .pa-btns button i, #paRoot .pa-ctl .pa-btns button svg { width: 14px !important; height: 14px !important; }
+#paRoot .pa-ctl .pa-btns button.val { flex-direction: row !important; gap: 5px !important; }
+#paRoot .pa-ctl .pa-btns button.val small { font-size: 8px !important; }
+#paRoot .pa-ctl .pa-btns button.val b { font-size: 16px !important; line-height: 1 !important; }
+@media (orientation: landscape) and (max-height: 520px) {
+  #paRoot .pa-ctl { padding: 3px !important; }
+  #paRoot .pa-ctl .pa-btns button { height: 34px !important; font-size: 10px !important; }
+  #paRoot .pa-ctl .pa-btns button.val small { display: none; }
+  #paRoot .pa-ctl .pa-btns button.val b { font-size: 15px !important; }
+}
+@media (min-width: 1000px) and (min-height: 600px) { #paRoot .pa-ctl .pa-btns button { height: 48px !important; font-size: 13px !important; } #paRoot .pa-ctl .pa-btns button.val b { font-size: 20px !important; } }
+/* 9.6: PREV/NEXT cukup ikon panah kecil (bersih) */
+#paRoot .pa-vnav { gap: .4rem; max-width: none; }
+#paRoot .pa-vnav .vnav { flex: 0 0 auto !important; width: 42px !important; height: 34px !important; padding: 0 !important; border-radius: 8px !important; }
+#paRoot .pa-vnav .vnav span { display: none; }
+#paRoot .pa-vnav .vnav svg, #paRoot .pa-vnav .vnav i { width: 20px !important; height: 20px !important; }
+@media (max-height: 520px) { #paRoot .pa-vnav .vnav { width: 38px !important; height: 30px !important; } }
+@media (min-width: 1000px) and (min-height: 600px) { #paRoot .pa-vnav .vnav { width: 52px !important; height: 42px !important; } #paRoot .pa-vnav .vnav svg, #paRoot .pa-vnav .vnav i { width: 24px !important; height: 24px !important; } }
+/* 9.6: panah PREV/NEXT tanpa kotak, hanya ikon yang menyala (ikut warna LCD: hijau / amber / es) */
+#paRoot .pa-vnav .vnav { background: none !important; border: 0 !important; box-shadow: none !important; color: #00ff66 !important; width: 40px !important; }
+#paRoot .pa-vnav .vnav svg { width: 26px !important; height: 26px !important; filter: drop-shadow(0 0 4px rgba(0, 255, 102, .9)) drop-shadow(0 0 10px rgba(0, 255, 102, .45)); transition: transform .12s, filter .12s; }
+#paRoot .pa-vnav .vnav:active svg { transform: scale(.85); filter: drop-shadow(0 0 8px #00ff66) drop-shadow(0 0 16px #00ff66) brightness(1.4); }
+#paRoot .pa-vnav .vnav::before { display: none !important; }
+@media (min-width: 1000px) and (min-height: 600px) { #paRoot .pa-vnav .vnav svg { width: 32px !important; height: 32px !important; } }
+
+/* =====================================================================
+   9.6 Pa5X: bar TRANSPOSE / OCTAVE / DUAL / MEM yang simpel
+   [ − TRANSPOSE 0 + ]  [ ⌄ OCTAVE 0 ⌃ ]          [◇ DUAL] [▣ MEM]
+   ===================================================================== */
+#paRoot .pa-ctl2 { display: flex !important; flex-direction: row !important; align-items: center; gap: .55rem !important; padding: 5px 8px !important; background: linear-gradient(180deg, #17191e, #0c0d10) !important; border: 1px solid #000 !important; border-radius: 10px !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06) !important; }
+#paRoot .pa-ctl2 .pa-csp { flex: 1 1 auto; }
+#paRoot .pa-step { display: inline-flex; align-items: stretch; height: 40px; border-radius: 9px; overflow: hidden; border: 1px solid #000; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), 0 2px 4px rgba(0, 0, 0, .5); }
+#paRoot .pa-step button { display: inline-flex; align-items: center; justify-content: center; border: 0 !important; border-radius: 0 !important; min-height: 0 !important; padding: 0 !important; }
+#paRoot .pa-step button:not(.val) { width: 42px; color: #d1d5db; background: linear-gradient(180deg, #34373f, #1b1d22) !important; }
+#paRoot .pa-step button:not(.val):active { background: linear-gradient(180deg, #ff5a12, #c92700) !important; color: #fff; }
+#paRoot .pa-step button svg { width: 18px; height: 18px; }
+#paRoot .pa-step button.val { min-width: 96px; flex-direction: row; gap: .45rem; padding: 0 .6rem !important; background: repeating-linear-gradient(0deg, rgba(0, 255, 102, .05) 0 1px, transparent 1px 3px), #020a05 !important; border-left: 1px solid #000 !important; border-right: 1px solid #000 !important; }
+#paRoot .pa-step button.val small { font: 700 8px 'Chakra Petch', 'JetBrains Mono', monospace; letter-spacing: .12em; color: #00ff6699; }
+#paRoot .pa-step button.val b { font: 800 18px 'JetBrains Mono', monospace; color: #00ff66; text-shadow: 0 0 8px rgba(0, 255, 102, .6); min-width: 1.6em; text-align: center; }
+#paRoot .pa-pill { position: relative; display: inline-flex; align-items: center; gap: .35rem; height: 40px; min-height: 0 !important; padding: 0 .9rem !important; border-radius: 999px !important; font: 800 11px 'Chakra Petch', 'Orbitron', sans-serif; letter-spacing: .1em; color: #c4b5fd;
+  background: linear-gradient(180deg, #2a2d34, #15161a) !important; border: 1px solid #000 !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 2px 4px rgba(0, 0, 0, .5) !important; }
+#paRoot .pa-pill.mem { color: #fca5a5; }
+#paRoot .pa-pill svg { width: 16px; height: 16px; }
+#paRoot .pa-pill.on { color: #fff; background: linear-gradient(180deg, #5b3aa0, #2e1a5c) !important; box-shadow: 0 0 14px rgba(168, 85, 247, .55), inset 0 1px 0 rgba(255, 255, 255, .2) !important; }
+#paRoot .pa-pill.mem.on { background: linear-gradient(180deg, #9b2c2c, #4a1010) !important; box-shadow: 0 0 14px rgba(239, 68, 68, .55), inset 0 1px 0 rgba(255, 255, 255, .2) !important; }
+#paRoot .pa-pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #2a2f3a; box-shadow: inset 0 1px 1px #000; order: -1; }
+#paRoot .pa-pill.on::before { background: currentColor; box-shadow: 0 0 6px currentColor; }
+@media (orientation: landscape) and (max-height: 520px) {
+  #paRoot .pa-ctl2 { padding: 4px 6px !important; gap: .4rem !important; }
+  #paRoot .pa-step, #paRoot .pa-pill { height: 34px; }
+  #paRoot .pa-step button:not(.val) { width: 38px; }
+  #paRoot .pa-step button.val { min-width: 76px; }
+  #paRoot .pa-step button.val small { font-size: 7px; }
+  #paRoot .pa-step button.val b { font-size: 16px; }
+  #paRoot .pa-pill { padding: 0 .7rem !important; font-size: 10px; }
+}
+@media (min-width: 1000px) and (min-height: 600px) {
+  #paRoot .pa-step, #paRoot .pa-pill { height: 50px; }
+  #paRoot .pa-step button:not(.val) { width: 54px; } #paRoot .pa-step button svg { width: 22px; height: 22px; }
+  #paRoot .pa-step button.val { min-width: 130px; } #paRoot .pa-step button.val b { font-size: 22px; } #paRoot .pa-step button.val small { font-size: 9px; }
+  #paRoot .pa-pill { padding: 0 1.3rem !important; font-size: 13px; } #paRoot .pa-pill svg { width: 20px; height: 20px; }
+}
+
+/* =====================================================================
+   9.6 Pa5X: tab bawah & bar TR/OCT transparan (kaca), ukuran tetap
+   ===================================================================== */
+#paRoot .pa-tabs { background: linear-gradient(180deg, rgba(10, 12, 16, .35), rgba(4, 5, 7, .75)) !important; border-top: 1px solid rgba(255, 255, 255, .06) !important; -webkit-backdrop-filter: blur(10px) saturate(140%); backdrop-filter: blur(10px) saturate(140%); }
+#paRoot .pa-tabs button { background: transparent !important; border: 1px solid transparent !important; color: #8b93a1 !important; box-shadow: none !important; }
+#paRoot .pa-tabs button:not(.on):hover { color: #d1d5db !important; background: rgba(255, 255, 255, .04) !important; }
+#paRoot .pa-tabs button.on { color: #fff !important; background: linear-gradient(180deg, rgba(255, 106, 0, .28), rgba(255, 85, 0, .08)) !important; border-color: rgba(255, 122, 51, .55) !important; box-shadow: 0 0 14px rgba(255, 85, 0, .3), inset 0 1px 0 rgba(255, 255, 255, .12) !important; text-shadow: 0 0 8px rgba(255, 140, 70, .8); }
+#paRoot .pa-tabs button + button { position: relative; }
+#paRoot .pa-tabs button + button::after { content: ""; position: absolute; left: -2px; top: 25%; bottom: 25%; width: 1px; background: rgba(255, 255, 255, .06); }
+#paRoot .pa-ctl2 { background: linear-gradient(180deg, rgba(255, 255, 255, .045), rgba(255, 255, 255, .015)) !important; border: 1px solid rgba(255, 255, 255, .07) !important; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 6px 18px -10px #000 !important; }
+#paRoot .pa-step { border-color: rgba(255, 255, 255, .08) !important; background: rgba(0, 0, 0, .25); }
+#paRoot .pa-step button:not(.val) { background: linear-gradient(180deg, rgba(255, 255, 255, .1), rgba(255, 255, 255, .02)) !important; }
+#paRoot .pa-step button.val { background: repeating-linear-gradient(0deg, rgba(0, 255, 102, .05) 0 1px, transparent 1px 3px), rgba(2, 10, 5, .85) !important; }
+#paRoot .pa-pill { background: linear-gradient(180deg, rgba(255, 255, 255, .09), rgba(255, 255, 255, .02)) !important; border-color: rgba(255, 255, 255, .08) !important; }
+html.gfx-low #paRoot .pa-tabs, html.gfx-low #paRoot .pa-ctl2 { -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+/* 9.6b: tanpa animasi nama voice & ikon, tanpa warna aksen kategori pada ikon (semua hijau LCD) */
+#paRoot .pa-keys .big.chg, #paRoot .pa-keys .big { animation: none !important; }
+#paRoot .pa-keys .ico-box.chg svg, #paRoot .pa-keys .ico-box.chg img { animation: none !important; }
+#paRoot .pa-keys .ico-box, #paRoot .pa-keys .ico-box[data-cat] { --cc: 0 255 102 !important; border-color: rgba(0, 255, 102, .45) !important; box-shadow: 0 0 12px rgba(0, 255, 102, .2), inset 0 0 12px rgba(0, 255, 102, .1) !important; }
+/* 9.6c: angka Pitch Bend & Triple Controller tanpa animasi (langsung berubah, tidak berkedip) */
+#pitchValDisplay, #tripleValDisplay, #paRead { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
+#pitchValDisplay.mr-roll, #tripleValDisplay.mr-roll, #paRead.mr-roll { animation: none !important; }
+
+/* =====================================================================
+   9.6d Pa5X SCALE TUNING: piano 1 oktaf bergaya layar Scale Pa5X
+   tuts abu-abu matte di dalam bezel LCD, nada quartertone menyala hijau
+   ===================================================================== */
+#paRoot #panelQt div:has(> #whiteKeysContainer) { border-radius: 10px !important; border: 1px solid #000 !important;
+  background: repeating-linear-gradient(0deg, rgba(0, 255, 102, .03) 0 1px, transparent 1px 3px), radial-gradient(120% 100% at 50% 0%, #0d1a12, #040705 75%) !important;
+  box-shadow: 0 0 0 2px #0b0c0e, 0 0 0 3px #2b2e35, inset 0 0 0 1px rgba(0, 255, 102, .12), inset 0 2px 18px rgba(0, 0, 0, .85) !important; }
+#paRoot #panelQt .key-white { background: linear-gradient(180deg, #e4e8ee 0%, #c9cfd8 70%, #aeb5c1 100%) !important; border: 1px solid #0a0c0f !important; border-radius: 0 0 5px 5px !important;
+  box-shadow: inset 0 -5px 6px rgba(0, 0, 0, .25), inset 0 1px 0 rgba(255, 255, 255, .7) !important; }
+#paRoot #panelQt .key-white > span:first-child { color: #2b3240 !important; font-family: 'Chakra Petch', 'JetBrains Mono', monospace !important; font-weight: 700 !important; }
+#paRoot #panelQt .key-black { background: linear-gradient(180deg, #2a2d33 0%, #0b0c0e 60%, #000 100%) !important; border: 1px solid #000 !important; border-radius: 0 0 4px 4px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 4px 6px rgba(0, 0, 0, .7) !important; }
+#paRoot #panelQt .key-black > span:first-child { color: #9aa3b2 !important; font-family: 'Chakra Petch', 'JetBrains Mono', monospace !important; }
+#paRoot #panelQt .key-white.qt-active { background: linear-gradient(180deg, #b9ffd6 0%, #39ff8b 55%, #00c853 100%) !important; box-shadow: 0 0 18px rgba(0, 255, 102, .7), inset 0 1px 0 rgba(255, 255, 255, .7) !important; transform: none !important; }
+#paRoot #panelQt .key-black.qt-active { background: linear-gradient(180deg, #1f7a46 0%, #0d4d2a 60%, #062b17 100%) !important; box-shadow: 0 0 16px rgba(0, 255, 102, .75), inset 0 1px 0 rgba(160, 255, 200, .35) !important; border-color: #00ff66 !important; transform: none !important; }
+#paRoot #panelQt .key-white.qt-active > span:first-child { color: #032b14 !important; }
+#paRoot #panelQt .key-black.qt-active > span:first-child { color: #b6ffd2 !important; }
+#paRoot #panelQt .qt-cent { font-family: 'JetBrains Mono', monospace !important; color: #2f5a40 !important; }
+#paRoot #panelQt .qt-cent.on, #paRoot #panelQt .key-white.qt-active span.qt-cent, #paRoot #panelQt .key-black.qt-active span.qt-cent { color: #00ff66 !important; text-shadow: 0 0 6px rgba(0, 255, 102, .8) !important; font-weight: 800; }
+#paRoot #panelQt #activeTuningsBadge span, #paRoot #panelQt #activeTuningsBadge > * { background: #020a05 !important; border: 1px solid #00ff6655 !important; color: #00ff66 !important; font-family: 'JetBrains Mono', monospace !important; border-radius: 4px !important; }
+#paRoot #panelQt input[type=number], #paRoot #panelQt input[type=text], #paRoot #panelQt select { background: #020a05 !important; color: #00ff66 !important; border: 1px solid #00ff6655 !important; font-family: 'JetBrains Mono', monospace !important; }
+html.lcd-amber #paRoot #panelQt div:has(> #whiteKeysContainer), html.lcd-amber #paRoot #panelQt .qt-active { filter: hue-rotate(-100deg); }
+html.lcd-ice #paRoot #panelQt div:has(> #whiteKeysContainer), html.lcd-ice #paRoot #panelQt .qt-active { filter: hue-rotate(60deg); }
+
+/* =====================================================================
+   9.6e Pa5X: keyboard virtual (Tools › KEYS · KEYBOARD) bergaya Pa5X
+   panel logam + layar LCD kecil, tuts perak matte, tekan = hijau LCD
+   ===================================================================== */
+#paRoot #vkDock { border-radius: 10px !important; padding: .35rem .45rem .45rem !important; border: 1px solid #000 !important;
+  background: linear-gradient(180deg, #2d3037 0%, #1a1c21 40%, #0d0e11 100%) !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .09), 0 -1px 0 rgba(255, 85, 0, .3), 0 -6px 18px rgba(0, 0, 0, .5) !important; }
+#paRoot #vkDock .vk-toolbar { gap: .4rem; }
+#paRoot #vkDock .vk-title { font: 800 10px 'Chakra Petch', 'Orbitron', sans-serif; letter-spacing: .16em; color: #ff8a3d; }
+#paRoot #vkDock .vk-range, #paRoot #vkDock .vk-info { padding: 3px 8px; border-radius: 4px; background: repeating-linear-gradient(0deg, rgba(0, 255, 102, .05) 0 1px, transparent 1px 3px), #020a05; border: 1px solid #00ff6655; color: #00ff66 !important; text-shadow: 0 0 6px rgba(0, 255, 102, .5); font-family: 'JetBrains Mono', monospace; }
+#paRoot #vkDock .vk-info:empty { display: none; }
+#paRoot #vkDock .pstep, #paRoot #vkDock .ptoggle { border-radius: 6px !important; color: #e5e7eb !important; background: linear-gradient(180deg, #34373f, #1b1d22) !important; border: 1px solid #000 !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .12), 0 1px 2px rgba(0, 0, 0, .6) !important; }
+#paRoot #vkDock .vk-wrap { border-radius: 6px !important; border: 1px solid #000 !important; background: #050607 !important; padding: 3px 3px 0; box-shadow: inset 0 3px 8px rgba(0, 0, 0, .9), 0 0 0 1px #2b2e35 !important; position: relative; }
+#paRoot #vkDock .vk-wrap::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; z-index: 3; background: linear-gradient(90deg, transparent, #ff5500 20%, #ffb37a 50%, #ff5500 80%, transparent); opacity: .7; pointer-events: none; }
+#paRoot #vkDock .vk-white { background: linear-gradient(180deg, #e4e8ee 0%, #cdd3dc 72%, #aeb5c1 100%) !important; border-right: 1px solid #0a0c0f !important; border-radius: 0 0 4px 4px; box-shadow: inset 0 -4px 5px rgba(0, 0, 0, .22), inset 0 1px 0 rgba(255, 255, 255, .7) !important; color: #2b3240 !important; font-family: 'Chakra Petch', 'JetBrains Mono', monospace !important; }
+#paRoot #vkDock .vk-black { background: linear-gradient(180deg, #2a2d33 0%, #0b0c0e 62%, #000 100%) !important; border: 1px solid #000 !important; border-radius: 0 0 3px 3px !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 3px 5px rgba(0, 0, 0, .7) !important; }
+#paRoot #vkDock .vk-white.down, #paRoot #vkDock .vk-white.vk-in { background: linear-gradient(180deg, #b9ffd6 0%, #39ff8b 55%, #00c853 100%) !important; color: #032b14 !important; box-shadow: 0 0 14px rgba(0, 255, 102, .7), inset 0 1px 0 rgba(255, 255, 255, .7) !important; }
+#paRoot #vkDock .vk-black.down, #paRoot #vkDock .vk-black.vk-in { background: linear-gradient(180deg, #1f7a46 0%, #0d4d2a 60%, #062b17 100%) !important; border-color: #00ff66 !important; box-shadow: 0 0 12px rgba(0, 255, 102, .8) !important; }
+#paRoot #vkDock .vk-qt::before { background: #00ff66 !important; box-shadow: 0 0 6px #00ff66 !important; }
+html.lcd-amber #paRoot #vkDock :is(.vk-range, .vk-info, .down, .vk-in, .vk-qt) { filter: hue-rotate(-100deg); }
+html.lcd-ice #paRoot #vkDock :is(.vk-range, .vk-info, .down, .vk-in, .vk-qt) { filter: hue-rotate(60deg); }
+
+/* =====================================================================
+   9.6.2 ANIMASI LEBIH LANCAR (hanya transform & opacity → dikerjakan GPU, tanpa gambar ulang)
+   ===================================================================== */
+/* tombol style aktif "bernapas": cahaya di lapisan terpisah, yang dianimasikan hanya opacity */
+#paRoot #panelStyle .style-btn.active-style { animation: none !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 0 10px rgba(255, 122, 51, .35) !important; }
+#paRoot #panelStyle .style-btn::after { content: ""; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none; opacity: 0; box-shadow: 0 0 22px rgba(255, 122, 51, .75), inset 0 0 0 1px rgba(255, 150, 90, .6); will-change: opacity; }
+#paRoot #panelStyle .style-btn.active-style::after { animation: paBreath2 var(--beat, 1.2s) ease-in-out infinite; }
+@keyframes paBreath2 { 0%, 100% { opacity: .15; } 50% { opacity: 1; } }
+/* efek tekan: hanya transform (tanpa filter) + kilat di lapisan terpisah */
+@keyframes mrPress { 0% { transform: scale(.95); } 100% { transform: scale(1); } }
+.mr-press { animation: mrPress .2s ease-out !important; will-change: transform; }
+#paRoot #panelStyle .style-btn, #paRoot .pa-step button, #paRoot .pa-pill { transition: none !important; }
+#paRoot #panelStyle .style-btn.mr-press::before { opacity: 1; }
+/* garis LCD bergerak: transform, bukan top */
+#paRoot .mr-sweep { top: 0 !important; height: 40%; transform: translateY(-100%); animation: paSweep2 7s linear infinite !important; will-change: transform; }
+@keyframes paSweep2 { to { transform: translateY(260%); } }
+/* tidak menggambar ulang efek kaca di belakang tombol style */
+#paRoot .pa-scr.on { will-change: auto; }
+html.gfx-low #paRoot #panelStyle .style-btn.active-style::after { animation: none; opacity: .8; }
+/* 9.6.2b: penyebab lag = cahaya blur besar (box-shadow 22px) yang digambar ulang. Diganti lapisan gradien ringan. */
+#paRoot #panelStyle .style-btn::after { box-shadow: none !important; background: radial-gradient(90% 70% at 50% 100%, rgba(255, 122, 51, .38), rgba(255, 122, 51, 0) 70%); border: 1px solid rgba(255, 150, 90, .55); inset: 0; }
+#paRoot #panelStyle .style-btn.active-style { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 0 0 1px rgba(255, 122, 51, .6) !important; }
+/* 9.6.2c: tombol style aktif TANPA animasi berulang (sumber lag). Cahaya statis + kilat sekali saat ditekan. */
+#paRoot #panelStyle .style-btn.active-style::after { animation: none !important; opacity: 1 !important; }
+#paRoot #panelStyle .style-btn::after { will-change: auto !important; }
+#paRoot #panelStyle .style-btn.mr-press::after { opacity: 1; }
+/* 9.6.2d: garis LCD bergerak hanya di Grafis Ultra (di mode lain bikin berat) */
+#paRoot .mr-sweep { display: none !important; }
+html.gfx-ultra #paRoot .mr-sweep { display: block !important; }
+
+/* =====================================================================
+   9.6.2 WARNA LAYAR Pa5X: preset, ikut Klasik, custom (dasar hijau, digeser hue)
+   ===================================================================== */
+.tp-lcd { flex-wrap: wrap; justify-content: flex-end; gap: .45rem !important; max-width: 18rem; }
+.tp-lcd-btn { width: 2.1rem !important; height: 2.1rem !important; }
+.tp-lcd-acc { width: auto !important; padding: 0 .65rem; border-radius: 999px !important; background: linear-gradient(135deg, rgb(var(--ac-300)), rgb(var(--ac-600))) !important; color: #0a0a0d; font: 900 9px 'Orbitron', sans-serif; letter-spacing: .06em; box-shadow: 0 0 8px rgb(var(--accent-rgb) / .6) !important; }
+.tp-lcd-cus { position: relative; display: inline-flex; align-items: center; justify-content: center; overflow: hidden; background: conic-gradient(#ef4444, #f59e0b, #22c55e, #22d3ee, #6366f1, #d946ef, #ef4444) !important; color: #fff; font-size: 13px; text-shadow: 0 0 3px #000; }
+.tp-lcd-cus input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.tp-lcd-btn.on { border-color: #fff !important; }
+html.lcd-x #paRoot :is(.pa-keys, #paRead, #paDot, .pa-tname, .pa-btns .val b, .pa-step .val, .pa-chord, .pa-brand .mr-author, .pa-beat, .pa-regs button.on,
+  #panelKset .ks-tile, #pitchTouchTrack, #tripleTouchTrack, #tripleValDisplay, #pitchValDisplay, #activeStyleDisplay, #activeTuningsBadge,
+  #panelQt .qt-up, #panelQt button[onclick^="applyScalePreset"], #panelQt div:has(> #whiteKeysContainer), #panelQt .qt-active, #panelQt select, #panelQt input,
+  #vkDock .vk-range, #vkDock .vk-info, #vkDock .down, #vkDock .vk-in, #vkDock .vk-qt, .pa-slot h3, .pa-uplist) { filter: hue-rotate(var(--lcd-rot, 0deg)) saturate(var(--lcd-sat, 1)); }
+html.lcd-x body.pa-mode #toast { filter: hue-rotate(var(--lcd-rot, 0deg)) saturate(var(--lcd-sat, 1)); }
+/* hindari filter ganda (anak dari elemen yang sudah difilter) */
+html.lcd-x #paRoot .pa-keys :is(.pa-uplist, #paDot) { filter: none; }
+html.lcd-x #paRoot #panelQt div:has(> #whiteKeysContainer) .qt-active { filter: none; }
+html.lcd-x #paRoot :is(#paMidiSlot select, .pa-readout) { filter: hue-rotate(var(--lcd-rot, 0deg)) saturate(var(--lcd-sat, 1)); }
+
+/* 9.6.2e Klasik Style Play: tombol aktif TANPA denyut berulang (penyebab patah-patah). Cahaya statis. */
+.style-btn.active-style { animation: none !important; filter: none !important; box-shadow: 0 0 0 2px currentColor, 0 0 14px rgb(var(--accent-rgb) / .45), inset 0 0 18px rgb(var(--accent-rgb) / .14) !important; }
+#panelStyle .style-btn { transition: background-color .12s, border-color .12s !important; }
+
+/* 9.6.2f Pa5X bar atas: akor tanpa label & tanpa kotak, hanya nama akor besar */
+#paRoot .pa-chord { background: none !important; border: 0 !important; box-shadow: none !important; padding: 0 .3rem !important; min-width: 3.6rem !important; }
+#paRoot .pa-chord small { display: none !important; }
+#paRoot .pa-chord b { font: 800 22px/1 'Chakra Petch', 'Orbitron', sans-serif !important; letter-spacing: .02em; color: #00ff66; text-shadow: 0 0 10px rgba(0, 255, 102, .7) !important; white-space: nowrap; }
+#paRoot .pa-chord.idle b { opacity: .45; text-shadow: none !important; }
+@media (max-height: 520px) { #paRoot .pa-chord b { font-size: 19px !important; } }
+@media (min-width: 1000px) and (min-height: 600px) { #paRoot .pa-chord b { font-size: 26px !important; } }
+html.lcd-x #paRoot .pa-chord { filter: hue-rotate(var(--lcd-rot, 0deg)) saturate(var(--lcd-sat, 1)); }
+
+/* 9.6.3 STYLE PLAY RESPONSIF: tanpa transisi/animasi, umpan balik instan */
+#panelStyle button[onclick*="triggerStyleCommand"] { touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; transition: none !important; animation: none !important; }
+#panelStyle button.mr-hit { filter: brightness(1.55) !important; box-shadow: 0 0 0 2px currentColor !important; }
+#paRoot #panelStyle .style-btn.mr-hit::after { opacity: 1 !important; }
+#panelStyle { overscroll-behavior: contain; }
+/* 9.9.4: RESET + AUTO di Pa5X tetap satu baris */
+#paRoot #panelCtrl :is(#trNowBtn, #trResetBtn) { font-size: 12px !important; min-height: 32px !important; height: 32px !important; padding: 0 .55rem !important; letter-spacing: .02em; }

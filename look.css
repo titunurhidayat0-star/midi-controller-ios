@@ -1,0 +1,95 @@
+/* =====================================================================
+   MIDI ROYALE PRO 9.9.3 - pilihan tampilan Performance (look.js)
+   ===================================================================== */
+
+/* ---------- 1. Warna kategori di tampilan KLASIK (tab Performance) ---------- */
+html:not(.ks-green) body:not(.pa-mode) #panelKset { --kc: var(--accent-rgb); }
+html:not(.ks-green) #panelKset .ks-cat[data-kcat="0"] { --cc: 251 191 36; }
+html:not(.ks-green) #panelKset .ks-cat[data-kcat="1"] { --cc: 251 146 60; }
+html:not(.ks-green) #panelKset .ks-cat[data-kcat="2"] { --cc: 244 114 182; }
+html:not(.ks-green) #panelKset .ks-cat[data-kcat="3"] { --cc: 248 113 113; }
+html:not(.ks-green) #panelKset .ks-cat[data-kcat="4"] { --cc: 250 204 21; }
+html:not(.ks-green) #panelKset .ks-cat[data-kcat="5"] { --cc: 56 189 248; }
+html:not(.ks-green) #panelKset .ks-cat[data-kcat="6"] { --cc: 45 212 191; }
+html:not(.ks-green) #panelKset .ks-cat[data-kcat="7"] { --cc: 192 132 252; }
+html:not(.ks-green) #panelKset .ks-cat[data-kcat="8"] { --cc: 163 230 53; }
+html:not(.ks-green) body:not(.pa-mode) #panelKset:has(.ks-cat.on[data-kcat="0"]) { --kc: 251 191 36; }
+html:not(.ks-green) body:not(.pa-mode) #panelKset:has(.ks-cat.on[data-kcat="1"]) { --kc: 251 146 60; }
+html:not(.ks-green) body:not(.pa-mode) #panelKset:has(.ks-cat.on[data-kcat="2"]) { --kc: 244 114 182; }
+html:not(.ks-green) body:not(.pa-mode) #panelKset:has(.ks-cat.on[data-kcat="3"]) { --kc: 248 113 113; }
+html:not(.ks-green) body:not(.pa-mode) #panelKset:has(.ks-cat.on[data-kcat="4"]) { --kc: 250 204 21; }
+html:not(.ks-green) body:not(.pa-mode) #panelKset:has(.ks-cat.on[data-kcat="5"]) { --kc: 56 189 248; }
+html:not(.ks-green) body:not(.pa-mode) #panelKset:has(.ks-cat.on[data-kcat="6"]) { --kc: 45 212 191; }
+html:not(.ks-green) body:not(.pa-mode) #panelKset:has(.ks-cat.on[data-kcat="7"]) { --kc: 192 132 252; }
+html:not(.ks-green) body:not(.pa-mode) #panelKset:has(.ks-cat.on[data-kcat="8"]) { --kc: 163 230 53; }
+/* kategori: lampu kecil berwarna */
+html:not(.ks-green) body:not(.pa-mode) #panelKset .ks-cat { padding-left: .85rem; background: linear-gradient(90deg, rgb(var(--cc) / .12), transparent 60%), linear-gradient(180deg, #2b303b, #1b1f28); }
+html:not(.ks-green) body:not(.pa-mode) #panelKset .ks-cat::after { content: ""; position: absolute; left: 4px; top: 24%; bottom: 24%; width: 3px; border-radius: 3px; background: rgb(var(--cc) / .45); }
+html:not(.ks-green) body:not(.pa-mode) #panelKset .ks-cat.on { color: #fff; border-color: rgb(var(--cc)); background: linear-gradient(90deg, rgb(var(--cc) / .42), rgb(var(--cc) / .1) 75%), #0b0d12; box-shadow: 0 0 10px rgb(var(--cc) / .3); }
+html:not(.ks-green) body:not(.pa-mode) #panelKset .ks-cat.on::after { background: rgb(var(--cc)); box-shadow: 0 0 6px rgb(var(--cc)); }
+html:not(.ks-green) body:not(.pa-mode) #panelKset .ks-cat i { color: rgb(var(--cc)); }
+/* tombol Keyboard Set: garis kiri + nomor warna kategori */
+html:not(.ks-green) body:not(.pa-mode) #panelKset .ks-slots .ks-tile:not(.on) { border-left: 4px solid rgb(var(--kc)); background: linear-gradient(90deg, rgb(var(--kc) / .2), transparent 50%), linear-gradient(180deg, rgb(var(--accent-rgb) / .14), rgb(var(--accent-rgb) / .05)), #120e0c; }
+html:not(.ks-green) body:not(.pa-mode) #panelKset .ks-slots .ks-tile.on { border: 2px solid rgb(var(--kc)); border-left-width: 6px; background: linear-gradient(180deg, rgb(var(--kc) / .55), rgb(var(--kc) / .22)), #120e0c; box-shadow: 0 0 14px rgb(var(--kc) / .35); }
+html:not(.ks-green) body:not(.pa-mode) #panelKset .ks-slots .ks-tile.on .ks-nm { color: #fff; }
+html.mr-stage body:not(.pa-mode) #panelKset .ks-slots .ks-tile.on { box-shadow: none; }
+html:not(.ks-green) body:not(.pa-mode) #panelKset .ks-sn { background: rgb(var(--kc)); color: #0b0b0b; border-color: rgb(var(--kc)); }
+html:not(.ks-green) body:not(.pa-mode) #panelKset .ks-slot .ks-sn { background: transparent; color: rgb(var(--kc) / .7); border-color: rgb(var(--kc) / .3); }
+html:not(.ks-green) body:not(.pa-mode) #panelKset .ks-slot { border-color: rgb(var(--kc) / .3); }
+html:not(.ks-green) body:not(.pa-mode) #panelKset .ks-slot b { color: rgb(var(--kc) / .65); }
+html:not(.ks-green) body:not(.pa-mode) #panelKset .ks-page.has::after { background: rgb(var(--kc)); }
+
+/* ---------- 2. "HIJAU" di Pa5X: semua kembali hijau polos ---------- */
+html.ks-green #paRoot #panelKset { --kc: 0 255 102 !important; --kg: 0 255 102 !important; }
+html.ks-green #paRoot #panelKset .ks-cat { --cc: 0 255 102 !important; }
+html.ks-green #paRoot #panelKset .ks-bank { --bc: 0 255 102 !important; }
+
+/* ---------- 3. MAIN Pa5X: label & garis ikut warna kategori ---------- */
+html:not(.ks-green)[data-mrkc] #paRoot #paScr-main.perf .pa-keys { border-top: 2px solid rgb(var(--kcat)) !important;
+  background-image: radial-gradient(60% 50% at 0% 0%, rgb(var(--kcat) / .14), transparent 70%) !important; }
+html:not(.ks-green)[data-mrkc] #paRoot #paScr-main.perf #paKLbl,
+html:not(.ks-green)[data-mrkc] #paRoot #paScr-main.perf #paKLbl span,
+html:not(.ks-green)[data-mrkc] #paRoot #paScr-main.perf #paKLbl svg { color: rgb(var(--kcat)) !important; }
+html:not(.ks-green)[data-mrkc] #paRoot #paScr-main.perf #paKLbl span { text-shadow: 0 0 10px rgb(var(--kcat) / .45) !important; }
+html:not(.ks-green)[data-mrkc] #paRoot #paScr-main.perf #paVIco { border-color: rgb(var(--kcat) / .75) !important; color: rgb(var(--kcat)) !important; box-shadow: inset 0 0 18px rgb(var(--kcat) / .18) !important; }
+html:not(.ks-green)[data-mrkc] #paRoot #paScr-main.perf #paVoiceSub { color: rgb(var(--kcat) / .9) !important; }
+
+/* ---------- 4. Ukuran tombol Performance (Pa5X & Klasik) ---------- */
+html.ks-sz-l #panelKset#panelKset .ks-slots .ks-tile .ks-nm { font-size: clamp(17px, 2.5vw, 30px) !important; }
+html.ks-sz-l #panelKset#panelKset .ks-slots .ks-tile .ks-ups { font-size: clamp(10px, 1.2vw, 14px) !important; }
+html.ks-sz-l #panelKset#panelKset .ks-cat { font-size: clamp(12px, 1.35vw, 16px) !important; }
+html.ks-sz-l #panelKset#panelKset .ks-page { font-size: 14px !important; }
+html.ks-sz-l #panelKset#panelKset .ks-sn { min-width: 20px; height: 20px; font-size: 12px !important; }
+html.ks-sz-s #panelKset#panelKset .ks-slots .ks-tile .ks-nm { font-size: clamp(12px, 1.4vw, 17px) !important; }
+html.ks-sz-s #panelKset#panelKset .ks-slots .ks-tile .ks-ups { font-size: clamp(9px, .9vw, 11px) !important; display: flex !important; }
+html.ks-sz-s #panelKset#panelKset .ks-cat { font-size: clamp(10px, 1vw, 12px) !important; }
+html.ks-sz-s #panelKset#panelKset .ks-slots .ks-tile { padding-top: .2rem !important; padding-bottom: .2rem !important; }
+html.ks-sz-s #panelKset#panelKset .ks-slots .ks-tile .ks-bd { font-size: 9px !important; }
+
+/* ---------- 5. Usap pindah halaman: geser ringan ---------- */
+#ksGrid.ks-slots { touch-action: pan-y; }
+@keyframes ksInR { from { opacity: .25; transform: translateX(34px); } to { opacity: 1; transform: none; } }
+@keyframes ksInL { from { opacity: .25; transform: translateX(-34px); } to { opacity: 1; transform: none; } }
+@keyframes ksBumpL { 0%, 100% { transform: none; } 40% { transform: translateX(-10px); } }
+@keyframes ksBumpR { 0%, 100% { transform: none; } 40% { transform: translateX(10px); } }
+#ksGrid.ks-in-r { animation: ksInR .22s cubic-bezier(.2, .8, .2, 1) both; }
+#ksGrid.ks-in-l { animation: ksInL .22s cubic-bezier(.2, .8, .2, 1) both; }
+#ksGrid.ks-bump-l { animation: ksBumpL .25s ease-out; }
+#ksGrid.ks-bump-r { animation: ksBumpR .25s ease-out; }
+html.gfx-low #ksGrid:is(.ks-in-r, .ks-in-l, .ks-bump-l, .ks-bump-r) { animation-duration: .12s; }
+
+/* ---------- 6. Tombol REDUP CEPAT (bulan) ---------- */
+.mr-stage-btn { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+#paRoot .pa-top #paStageBtn { min-width: 42px; padding: 0 .5rem !important; }
+#paRoot .pa-top #paStageBtn.on, #mrStageTop.on { color: #1a1204 !important; background: linear-gradient(180deg, #fde68a, #fbbf24 60%, #d97706) !important; border-color: #fde68a !important; }
+body:not(.pa-mode) #mrStageTop { min-width: 40px; min-height: 40px; height: 40px; padding: 0 .55rem; border-radius: .8rem; border: 1px solid #334155; background: #111827; color: #fcd34d; }
+@media (max-height: 520px) { body:not(.pa-mode) #mrStageTop { min-width: 34px; min-height: 34px; height: 34px; padding: 0 .4rem; } }
+body.pa-mode #mrStageTop { display: none; }
+/* Pa5X: tombol bulan di header hanya di layar lebar; di HP pakai tombol REDUP di bilah MAIN */
+#paRoot #paDimPill { display: none; }
+@media (max-width: 819px) { #paRoot .pa-top #paStageBtn { display: none !important; } #paRoot #paDimPill { display: inline-flex; } }
+#paRoot #paDimPill svg { width: 15px; height: 15px; }
+#paRoot #paDimPill.on { color: #1a1204 !important; background: linear-gradient(180deg, #fde68a, #fbbf24 60%, #d97706) !important; border-color: #fde68a !important; }
+/* tanpa cahaya pendar di tombol aktif saat mode panggung */
+html.mr-stage #panelKset :is(.ks-cat.on, .ks-bank.on, .ks-page.on, .ks-slots .ks-tile.on, .ks-acts .ks-btn.pri) { box-shadow: none !important; }
+html.mr-stage #paRoot #paScr-main .pa-keys { box-shadow: none !important; }

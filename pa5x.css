@@ -1,0 +1,1110 @@
+/* Mode Tampilan Korg Pa5X (100dvh Strict Landscape & Safe Area Responsive) */
+
+#paRoot {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  background: #08090a;
+  color: #e1e4e8;
+  flex-direction: column;
+  font-family: 'Chakra Petch', 'Rajdhani', system-ui, sans-serif;
+  width: 100vw;
+  height: 100dvh;
+  overflow: hidden;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body.pa-mode #paRoot {
+  display: flex;
+}
+
+#paRoot button {
+  font: inherit;
+  color: inherit;
+  background: linear-gradient(180deg, #22252a 0%, #141517 100%);
+  border: 1px solid #31353d;
+  border-radius: 3px;
+  touch-action: manipulation;
+  cursor: pointer;
+}
+
+/* TOP HEADER BAR */
+
+#paRoot .pa-top {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid #25282e;
+  flex: 0 0 auto;
+}
+
+#paRoot .pa-home {
+  border: 1px solid #ff5500;
+  color: #ff5500;
+  padding: 0.15rem 0.6rem;
+  font-weight: 800;
+  font-size: 10px;
+  border-radius: 3px;
+}
+
+#paRoot .pa-top .sp {
+  flex: 1;
+}
+
+#paRoot .pa-top select {
+  background: #000;
+  color: #00ff66;
+  border: 1px solid #333;
+  border-radius: 3px;
+  font-size: 11px;
+  padding: 0.15rem 0.3rem;
+  max-width: 30vw;
+}
+
+#paRoot .pa-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  flex: 0 0 auto;
+}
+
+#paRoot .pa-dot.ok {
+  background: #00ff66;
+  box-shadow: 0 0 6px #00ff66;
+}
+
+#paRoot .pa-top button {
+  padding: 0.15rem 0.5rem;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+#paRoot .pa-readout {
+  font: 700 12px 'Rajdhani', monospace;
+  color: #00ff66;
+  white-space: nowrap;
+}
+
+/* BODY WORKSPACE */
+
+#paRoot .pa-body {
+  flex: 1 1 0;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+  background: #08090a;
+}
+
+#paRoot .pa-scr {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  display: none;
+}
+
+#paRoot .pa-scr.on {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+/* MAIN VIEW LAYOUT (PAS & PADAT TANPA AREA KOSONG) */
+
+#paRoot .pa-card {
+  padding: 0.4rem 0.6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+#paRoot .pa-keys {
+  border: 1px solid #00ff66;
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.15), inset 0 0 10px rgba(0, 255, 102, 0.05);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  flex: 1.2;
+  min-height: 0;
+}
+
+#paRoot .pa-keys .info {
+  flex: 1;
+  min-width: 0;
+}
+
+#paRoot .pa-keys .k {
+  font-weight: 800;
+  color: #00ff66;
+}
+
+#paRoot .pa-keys .sub {
+  color: #8b949e;
+}
+
+#paRoot .pa-keys .big {
+  font-weight: 800;
+  color: #00ff66;
+  text-shadow: 0 0 8px rgba(0, 255, 102, 0.5);
+  line-height: 1.1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#paRoot .pa-ups {
+  display: flex;
+  flex-direction: column;
+}
+
+#paRoot .pa-up {
+  display: flex;
+  align-items: center;
+  font: 800 9px monospace;
+  color: #00ff66;
+  opacity: 0.3;
+}
+
+#paRoot .pa-up i {
+  flex: 1;
+  background: #00ff66;
+}
+
+#paRoot .pa-up.on {
+  opacity: 1;
+}
+
+#paRoot .pa-btns {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0.25rem;
+  flex: 1;
+  min-height: 0;
+}
+
+#paRoot .pa-btns button {
+  padding: 0;
+  font-weight: 700;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#paRoot .pa-btns button.on {
+  background: linear-gradient(180deg, #2b1a14 0%, #18110e 100%);
+  box-shadow: 0 0 6px rgba(255, 85, 0, 0.4);
+}
+
+#paRoot .pa-regs {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 0.25rem;
+  flex: 1;
+  min-height: 0;
+}
+
+#paRoot .pa-regs button {
+  font-weight: 800;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-color: #282b30;
+}
+
+#paRoot .pa-regs button.has {
+  border-color: #00ff66;
+  color: #00ff66;
+}
+
+#paRoot .pa-regs button.on {
+  border-color: #00ff66;
+  color: #00ff66;
+  box-shadow: inset 0 0 6px rgba(0, 255, 102, 0.3);
+}
+
+#paRoot .pa-style {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+#paRoot .pa-style .st {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ff5500;
+}
+
+/* KEYS BROWSER SCREEN (PRESISI 1:1 KORG PA5X) */
+
+#paScr-keys {
+  padding: 0.2rem;
+}
+
+#paRoot .pa-kb {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.2rem;
+  align-items: center;
+}
+
+#paRoot .pa-kb .badge {
+  background: #dc2626;
+  color: #fff;
+  border: 0;
+  font-weight: 800;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  font-size: 10px;
+}
+
+#paRoot .pa-kb input {
+  flex: 1;
+  background: #000;
+  color: #00ff66;
+  border: 1px solid #333;
+  border-radius: 3px;
+  padding: 0.2rem 0.4rem;
+  min-width: 0;
+  font-size: 11px;
+}
+
+#paRoot .pa-split {
+  display: flex;
+  gap: 0.3rem;
+  flex: 1;
+  min-height: 0;
+}
+
+#paRoot .pa-cats {
+  flex: 0 0 110px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+#paRoot .pa-cats button {
+  font-weight: 700;
+  text-align: left;
+  padding: 0.2rem 0.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: #151719;
+  border-color: #25282d;
+  color: #aaa;
+}
+
+#paRoot .pa-cats button.on {
+  background: #fffbbf;
+  color: #000;
+  border-color: #ffd700;
+}
+
+#paRoot .pa-list {
+  flex: 1;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 3px;
+}
+
+#paRoot .pa-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-align: left;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid #24272c;
+}
+
+#paRoot .pa-row.on {
+  border-color: #ff3300;
+  box-shadow: inset 0 0 0 1px #ff3300;
+}
+
+#paRoot .pa-row .ico {
+  color: #000;
+  font-size: 8px;
+  font-weight: bold;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+#paRoot .pa-row .nm {
+  font-weight: 700;
+  font-size: 11px;
+  color: #eee;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* BOTTOM NAVIGATION TABS (DIJAMIN MUNCUL UTUH) */
+
+#paRoot .pa-tabs {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  border-top: 1px solid #202226;
+  flex: 0 0 auto;
+  z-index: 10;
+}
+
+#paRoot .pa-tabs button {
+  border: 1px solid #2a2d33;
+  background: linear-gradient(180deg, #22252a 0%, #131416 100%);
+  font-weight: bold;
+  color: #8b949e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#paRoot .pa-tabs button.on {
+  color: #fff;
+  border-color: #ff5500;
+  box-shadow: 0 0 6px rgba(255, 85, 0, 0.6);
+}
+
+/* PANEL APLIKASI UTAMA YANG DIPINDAH KE TAB (Control / Scale Tuning / Style): harus bisa di-scroll */
+
+#paRoot .pa-scr.pa-slot.on {
+  display: block;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#paRoot .pa-slot > section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#paRoot .pa-slot .glass-card {
+  background: #101113 !important;
+  border-color: #282b30 !important;
+  border-radius: 4px !important;
+}
+
+/* KEYS: favorit & edit di baris voice */
+
+#paRoot .pa-row .nm {
+  flex: 1;
+  min-width: 0;
+}
+
+#paRoot .pa-row .fav,
+#paRoot .pa-row .ed {
+  flex: 0 0 auto;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0 4px;
+  color: #6b7280;
+}
+
+#paRoot .pa-row .fav.on {
+  color: #ffd700;
+}
+
+#paRoot .pa-row .ed {
+  color: #ff5500;
+}
+
+/* TAB TOOLS (fitur Klasik yang tidak ada di layout Pa5X) */
+
+#paRoot .pa-scr.pa-tools.on {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: min-content;
+  align-content: start;
+  gap: 0.3rem;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#paRoot .pa-tcard {
+  gap: 0.3rem;
+}
+
+#paRoot .pa-tcard.pa-wide {
+  grid-column: 1 / -1;
+}
+
+#paRoot .pa-ttl {
+  font-size: 10px;
+  font-weight: 800;
+  border-bottom: 1px solid #22252a;
+  padding-bottom: 2px;
+}
+
+#paRoot .pa-trow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+#paRoot .pa-trow > button,
+#paRoot .pa-trow > .pa-fbtn {
+  flex: 1 1 0;
+  min-height: 32px;
+  padding: 0 0.4rem;
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+#paRoot .pa-trow > .pa-tname {
+  flex: 2.2 1 0;
+  color: #00ff66;
+  border-color: #00ff66;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#paRoot .pa-trow > button.on {
+  background: linear-gradient(180deg, #2b1a14 0%, #18110e 100%);
+  border-color: #ff5500;
+  color: #ff5500;
+  box-shadow: 0 0 6px rgba(255, 85, 0, 0.4);
+}
+
+#paRoot .pa-trow > button.warn {
+  color: #ff3300;
+  border-color: #ff3300;
+}
+
+#paRoot .pa-fbtn {
+  background: linear-gradient(180deg, #22252a 0%, #141517 100%);
+  border: 1px solid #31353d;
+  border-radius: 3px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+#paRoot .pa-fbtn input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+#paRoot .pa-tinfo {
+  font-size: 9px;
+  color: #8b949e;
+  min-height: 11px;
+}
+
+/* strip PRO milik aplikasi utama (PANIC, SUS, SPLIT, REC, SETLIST, PRO) yang dipindah ke tab Tools */
+
+#paRoot #paProSlot > #proStrip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.25rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  grid-area: auto;
+}
+
+/* dock keyboard virtual: tampil di atas tab bawah saat tombol KEYS aktif */
+
+#paRoot #paVk {
+  flex: 0 0 auto;
+}
+
+#paRoot #paVk > #vkDock {
+  margin: 0;
+  border-radius: 0;
+  grid-area: auto;
+}
+
+/* samakan gaya tombol strip PRO dengan tombol Pa5X lain */
+
+#paRoot #proStrip .ptoggle,
+#paRoot #proStrip .pstep,
+#paRoot #proStrip .pro-songname {
+  min-height: 32px;
+  height: 32px;
+  padding: 0 0.5rem;
+  font-size: 10px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #e1e4e8;
+  background: linear-gradient(180deg, #22252a 0%, #141517 100%);
+  border: 1px solid #31353d;
+  border-radius: 3px;
+  box-shadow: none;
+}
+
+#paRoot #proStrip .ptoggle.on,
+#paRoot #proStrip .ptoggle.rec {
+  background: linear-gradient(180deg, #2b1a14 0%, #18110e 100%);
+  border-color: #ff5500;
+  color: #ff5500;
+  box-shadow: 0 0 6px rgba(255, 85, 0, 0.4);
+}
+
+#paRoot #proStrip .ptoggle.red {
+  color: #ff3300;
+  border-color: #ff3300;
+}
+
+#paRoot #proStrip .pro-song {
+  display: flex;
+  gap: 0.25rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+#paRoot #proStrip .pro-songname {
+  flex: 1;
+  min-width: 70px;
+}
+
+/* ======================= v3: PERCANTIK TAMPILAN (visual saja) ======================= */
+
+#paRoot i[data-lucide], #paRoot svg.lucide {
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  stroke-width: 2.2;
+}
+
+#paRoot .pa-top {
+  height: 38px;
+  min-height: 38px;
+  background: linear-gradient(180deg, #23262c 0%, #0e1012 100%);
+  box-shadow: 0 1px 0 #ff550033;
+}
+
+#paRoot .pa-top button, #paRoot .pa-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+#paRoot .pa-home {
+  background: rgba(255, 85, 0, 0.12);
+  box-shadow: 0 0 8px rgba(255, 85, 0, 0.25);
+}
+
+#paRoot .pa-top button[data-act="panic"] {
+  color: #ff6b4a;
+  border-color: #5a2a22;
+}
+
+#paRoot .pa-readout {
+  background: #000;
+  border: 1px solid #1d3b2a;
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+
+/* MAIN */
+
+#paRoot .pa-scr {
+  padding: 0.4rem;
+  gap: 0.4rem;
+}
+
+#paRoot .pa-card {
+  border: 1px solid #2a2e35;
+  border-radius: 8px;
+  background: linear-gradient(160deg, #15171b 0%, #0c0d0f 100%);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  gap: 0.3rem;
+}
+
+#paRoot .pa-cap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #ff7a33;
+  border-bottom: 1px solid #22252a;
+  padding-bottom: 3px;
+}
+
+#paRoot .pa-keys {
+  gap: 0.8rem;
+  padding: 0.5rem 0.9rem;
+  border-radius: 10px;
+  background: radial-gradient(120% 140% at 0% 50%, rgba(0, 255, 102, 0.16) 0%, rgba(0, 0, 0, 0.55) 60%), #050807;
+}
+
+#paRoot .pa-keys .ico-box {
+  flex: 0 0 auto;
+  width: clamp(48px, 9vw, 80px);
+  aspect-ratio: 1;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(26px, 5vw, 44px);
+  color: #00ff66;
+  background: linear-gradient(145deg, rgba(0, 255, 102, 0.22), rgba(0, 255, 102, 0.03));
+  border: 1px solid rgba(0, 255, 102, 0.55);
+  box-shadow: 0 0 14px rgba(0, 255, 102, 0.3), inset 0 0 12px rgba(0, 255, 102, 0.12);
+}
+
+#paRoot .pa-keys .k {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+}
+
+#paRoot .pa-keys .sub {
+  font-size: 11px;
+  margin: 1px 0;
+}
+
+#paRoot .pa-keys .big {
+  font-size: clamp(22px, 5.5vw, 38px);
+}
+
+#paRoot .pa-keys .hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  margin-top: 3px;
+  font-size: 9px;
+  color: #00ff66aa;
+  letter-spacing: 0.06em;
+}
+
+#paRoot .pa-ups {
+  min-width: clamp(80px, 14vw, 130px);
+  gap: 5px;
+}
+
+#paRoot .pa-up {
+  font-size: 10px;
+  gap: 0.5rem;
+}
+
+#paRoot .pa-up i {
+  height: 4px;
+  border-radius: 3px;
+  box-shadow: 0 0 6px #00ff66;
+}
+
+#paRoot .pa-btns button, #paRoot .pa-regs button {
+  flex-direction: row;
+  gap: 4px;
+  border-radius: 6px;
+  font-size: clamp(10px, 1.8vw, 13px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+#paRoot .pa-btns button:active, #paRoot .pa-regs button:active, #paRoot .pa-tabs button:active {
+  transform: scale(0.96);
+}
+
+#paRoot .pa-btns button i {
+  font-size: 1.25em;
+}
+
+#paRoot .pa-btns button.val {
+  flex-direction: column;
+  gap: 0;
+  background: #050607;
+}
+
+#paRoot .pa-btns button.val small {
+  font-size: 7px;
+  letter-spacing: 0.1em;
+  color: #6b7280;
+}
+
+#paRoot .pa-btns button.val b {
+  font: 800 clamp(16px, 3vw, 22px) 'Rajdhani', monospace;
+  color: #00ff66;
+  line-height: 1;
+}
+
+/* warna per kelompok: transpose (kuning), oktaf (cyan), dual (ungu), mem (merah) */
+
+#paRoot .pa-btns button:nth-child(-n+3) {
+  color: #fbbf24;
+  border-color: #fbbf2455;
+}
+
+#paRoot .pa-btns button:nth-child(n+4):nth-child(-n+6) {
+  color: #22d3ee;
+  border-color: #22d3ee55;
+}
+
+#paRoot .pa-btns button:nth-child(7) {
+  color: #c084fc;
+  border-color: #c084fc55;
+}
+
+#paRoot .pa-btns button:nth-child(8) {
+  color: #f87171;
+  border-color: #f8717155;
+}
+
+#paRoot .pa-btns button.val {
+  color: #00ff66;
+  border-color: #3a3f48;
+}
+
+#paRoot .pa-btns button.on {
+  color: #ff5500;
+  border-color: #ff5500;
+}
+
+#paRoot .pa-regs button {
+  color: #9aa3ad;
+}
+
+#paRoot .pa-regs button i {
+  font-size: 1.3em;
+  opacity: 0.75;
+}
+
+#paRoot .pa-regs button.has i {
+  opacity: 1;
+}
+
+#paRoot .pa-regs button.on {
+  background: linear-gradient(180deg, rgba(0, 255, 102, 0.28), rgba(0, 255, 102, 0.06));
+}
+
+/* TAB BAWAH */
+
+#paRoot .pa-tabs {
+  height: 46px;
+  min-height: 46px;
+  padding: 3px 4px;
+  gap: 3px;
+  background: #050607;
+}
+
+#paRoot .pa-tabs button {
+  flex-direction: column;
+  gap: 1px;
+  font-size: clamp(8px, 1.6vw, 11px);
+  border-radius: 6px;
+}
+
+#paRoot .pa-tabs button i {
+  font-size: 15px;
+}
+
+#paRoot .pa-tabs button.on {
+  background: linear-gradient(180deg, #ff5a12 0%, #c92700 100%);
+}
+
+/* TAB SLOT (Control / Scale Tuning / Style): isi penuh layar, tidak ada ruang kosong/terpotong */
+
+#paRoot .pa-slot > section {
+  height: 100%;
+  min-height: 0;
+  gap: 0.4rem;
+}
+
+#paRoot .pa-slot > section > .glass-card {
+  flex: 1 1 auto;
+  min-height: 0;
+  border-radius: 8px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+#paRoot #panelStyle > .glass-card > .grid {
+  min-height: 0;
+  flex: 1 1 0;
+}
+
+#paRoot #panelStyle > .glass-card > .grid > div > div > .grid {
+  grid-template-rows: minmax(44px, 1fr);
+}
+
+#paRoot #panelQt > .glass-card {
+  height: 100%;
+}
+
+#paRoot #panelCtrl > .glass-card {
+  justify-content: space-between;
+}
+
+#paRoot .style-btn {
+  border-radius: 8px;
+  background: linear-gradient(180deg, #14171c, #090a0c);
+}
+
+#paRoot #panelStyle h3, #paRoot #panelCtrl h3, #paRoot #panelQt h3 {
+  letter-spacing: 0.12em;
+}
+
+/* KEYS & TOOLS */
+
+#paRoot .pa-kb {
+  border-radius: 6px;
+  padding: 4px 6px;
+  background: linear-gradient(180deg, #1b1e22, #101214);
+}
+
+#paRoot .pa-cats button {
+  border-radius: 5px;
+  min-height: 32px;
+  font-size: 10px;
+}
+
+#paRoot .pa-row {
+  border-radius: 6px;
+  background: linear-gradient(180deg, #16181b, #0e0f11);
+}
+
+#paRoot .pa-row .ico {
+  border-radius: 3px;
+  padding: 2px 4px;
+}
+
+#paRoot .pa-tcard {
+  padding: 0.5rem 0.7rem;
+}
+
+#paRoot .pa-ttl {
+  color: #ff7a33;
+  letter-spacing: 0.12em;
+}
+
+/* ===== v4: status bar, efek tekan, piano dekor, warna kategori, power-on ===== */
+
+body.pa-mode #paRoot {
+  animation: paOn .55s ease-out both;
+}
+
+@keyframes paOn { from { opacity: 0; filter: brightness(2.4) saturate(0.4); } to { opacity: 1; filter: none; }}
+
+#paRoot .pa-stat {
+  display: flex;
+  gap: 5px;
+  flex: 0 0 auto;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+#paRoot .pa-stat .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 3px 9px;
+  border-radius: 99px;
+  color: #8b949e;
+  background: #0c0d10;
+  border: 1px solid #262a31;
+}
+
+#paRoot .pa-stat .chip .dd {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ef4444;
+}
+
+#paRoot .pa-stat .chip.ok {
+  color: #00ff66;
+  border-color: #00ff6655;
+}
+
+#paRoot .pa-stat .chip.ok .dd {
+  background: #00ff66;
+  box-shadow: 0 0 6px #00ff66;
+}
+
+#paRoot .pa-stat .chip.off {
+  color: #ef4444;
+  border-color: #ef444455;
+}
+
+#paRoot .pa-stat .chip.ok2 {
+  color: #fbbf24;
+  border-color: #fbbf2455;
+}
+
+#paRoot .pa-stat .chip.ok3 {
+  color: #c084fc;
+  border-color: #c084fc55;
+}
+
+#paRoot .pa-stat .chip.ok4 {
+  color: #22d3ee;
+  border-color: #22d3ee55;
+}
+
+#paRoot .pa-keys {
+  position: relative;
+  overflow: hidden;
+}
+
+#paRoot .pa-keys .deco {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 9px;
+  display: flex;
+  gap: 2px;
+  padding: 0 6px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+#paRoot .pa-keys .deco i {
+  flex: 1;
+  border-radius: 0 0 2px 2px;
+  background: linear-gradient(180deg, #00ff6633, #00ff66);
+  animation: paKey 3.4s ease-in-out infinite;
+}
+
+#paRoot .pa-keys .deco i:nth-child(3n) {
+  animation-delay: -1.1s;
+}
+
+#paRoot .pa-keys .deco i:nth-child(3n+1) {
+  animation-delay: -2.2s;
+}
+
+@keyframes paKey { 0%, 100% { opacity: 0.25; } 50% { opacity: 1; }}
+
+#paRoot button:active {
+  filter: brightness(1.45);
+}
+
+#paRoot .pa-btns button.on, #paRoot .pa-regs button.on {
+  animation: paPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes paPulse { 50% { box-shadow: 0 0 12px rgba(255, 85, 0, 0.7); }}
+
+#paRoot .pa-regs button.on {
+  --pc: 0, 255, 102;
+}
+
+#paRoot .pa-cats button {
+  border-left: 3px solid hsl(var(--h, 0) 70% 50%);
+}
+
+#paRoot .pa-cats button.on {
+  border-left-color: #ffd700;
+}
+
+#paRoot .pa-row {
+  border-left: 3px solid hsl(var(--h, 0) 70% 50%);
+}
+
+#paRoot .pa-row .ico {
+  background: hsl(var(--h, 140) 80% 55%);
+}
+
+#paRoot .pa-tcard .pa-ttl {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+#paRoot .pa-tcard:nth-child(1) {
+  border-top: 2px solid #00ff66;
+}
+
+#paRoot .pa-tcard:nth-child(2) {
+  border-top: 2px solid #22d3ee;
+}
+
+#paRoot .pa-tcard:nth-child(3) {
+  border-top: 2px solid #ff7a33;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #paRoot *, body.pa-mode #paRoot {
+    animation: none !important;
+  }
+}
+
+/* ===== v6: layar LCD di MAIN, isi penuh Tools & Scale Tuning, kategori tidak terpotong ===== */
+#paRoot .pa-keys::before { content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0 1px, transparent 1px 3px); }
+#paRoot .pa-keys > .info, #paRoot .pa-keys > .ico-box, #paRoot .pa-keys > .pa-ups { position: relative; z-index: 1; }
+#paRoot .pa-keys .kbd-art { position: absolute; right: 17%; bottom: 14px; width: 36%; height: 52%; opacity: 0.2; pointer-events: none; }
+#paRoot .pa-keys .kbd-art .w rect { fill: none; stroke: #00ff66; stroke-width: 1.2; }
+#paRoot .pa-keys .kbd-art .b rect { fill: #00ff66; }
+#paRoot .pa-keys .big { text-shadow: 0 0 18px rgba(0, 255, 102, 0.55); }
+#paRoot .pa-scr.pa-tools.on { grid-template-rows: minmax(min-content, 1fr) minmax(min-content, 1fr); align-content: stretch; }
+#paRoot .pa-tcard { justify-content: flex-start; }
+#paRoot .pa-tcard button { min-height: clamp(46px, 9vh, 68px); font-size: clamp(11px, 1.9vw, 15px); }
+#paRoot #panelQt > .glass-card { grid-auto-rows: minmax(min-content, 1fr); align-items: stretch; }
+#paRoot .pa-cats button { font-size: 9.5px; letter-spacing: 0; line-height: 1.15; white-space: normal; text-overflow: clip; overflow: visible; }
+
+/* ===== v7: PREV/NEXT di MAIN, titik status tab, tuts menyala, animasi voice, Control lebih besar ===== */
+#paRoot .pa-keys > .info { min-width: 0; flex: 1; }
+#paRoot .pa-keys .vrow { display: flex; align-items: center; gap: 0.6rem; }
+#paRoot .pa-keys .big { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; }
+#paRoot .pa-keys .big.chg { animation: vChg 0.32s ease-out; }
+@keyframes vChg { from { opacity: 0; transform: translateX(-14px); filter: blur(4px); } to { opacity: 1; transform: none; filter: none; } }
+#paRoot .vnav { flex: 0 0 auto; width: clamp(36px, 6vw, 52px); height: clamp(36px, 6vw, 52px); min-height: 0; padding: 0; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center;
+  color: #00ff66; font-size: 22px; background: rgba(0, 255, 102, 0.08); border: 1px solid rgba(0, 255, 102, 0.45); }
+#paRoot .vnav:active { background: rgba(0, 255, 102, 0.32); }
+#paRoot .pa-tabs button { position: relative; }
+#paRoot .pa-tabs .tdot { display: none; position: absolute; top: 5px; right: 12px; width: 8px; height: 8px; border-radius: 50%; background: #c084fc; box-shadow: 0 0 8px #c084fc; }
+#paRoot .pa-tabs [data-go="style"] .tdot { background: #ff7a33; box-shadow: 0 0 8px #ff7a33; }
+#paRoot .pa-tabs button.dotOn .tdot { display: block; }
+#paRoot .pa-keys .kbd-art { opacity: 1; }
+#paRoot .pa-keys .kbd-art .w rect { stroke: rgba(0, 255, 102, 0.24); }
+#paRoot .pa-keys .kbd-art .b rect { fill: rgba(0, 255, 102, 0.2); }
+#paRoot .pa-keys .kbd-art .w rect.lit { fill: rgba(0, 255, 102, 0.85); stroke: #00ff66; }
+#paRoot .pa-keys .kbd-art .b rect.lit { fill: #c8ffdc; }
+#paRoot #pitchValDisplay { font-size: 1.5rem !important; padding: 0.2rem 0.9rem !important; }
+#paRoot #tripleValDisplay { font-size: 1.4rem !important; padding: 0.15rem 0.8rem !important; }
+#paRoot #pitchTouchTrack::before { content: ""; position: absolute; left: 50%; top: -1px; transform: translateX(-50%); border: 6px solid transparent; border-top-color: rgb(var(--ac-300)); pointer-events: none; z-index: 2; }
+#paRoot .pa-row.on { background: linear-gradient(90deg, rgba(255, 51, 0, 0.25), transparent 70%); }
+#paRoot .pa-trow button, #paRoot .pa-trow label { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+
+/* ===== v8: pintasan Style, voice terakhir, tampilan daftar Keys, warna LCD, judul seragam ===== */
+#paRoot .pa-quick { display: flex; gap: 5px; flex: 0 0 auto; }
+#paRoot .pa-quick button { flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px; min-height: 34px; border-radius: 8px; border: 1px solid #2a2e35; background: linear-gradient(180deg, #1b1e22, #101214); color: #c9d1d9; font-weight: 800; font-size: 11px; }
+#paRoot .pa-quick button.ss { flex: 1.7; color: #00ff66; border-color: rgba(0, 255, 102, 0.35); }
+#paRoot .pa-quick button.on { color: #ff5500; border-color: #ff5500; background: #2b1a14; box-shadow: 0 0 10px rgba(255, 85, 0, 0.45); }
+#paRoot .recent { display: flex; gap: 5px; margin-top: 5px; flex-wrap: wrap; }
+#paRoot .recent:empty { display: none; }
+#paRoot .recent button { max-width: 32%; padding: 2px 9px; min-height: 0; border-radius: 99px; font-size: 10px; font-weight: 700; color: #7dffb1; background: rgba(0, 255, 102, 0.08); border: 1px solid rgba(0, 255, 102, 0.35); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#paRoot .pa-list { grid-template-columns: repeat(var(--kc, 2), minmax(0, 1fr)) !important; }
+#paRoot .pa-list.kf-s .nm { font-size: 11px !important; } #paRoot .pa-list.kf-m .nm { font-size: 15px !important; } #paRoot .pa-list.kf-l .nm { font-size: 20px !important; }
+#paRoot .pa-kb #paKcols, #paRoot .pa-kb #paKfont { padding: 0 10px; font-weight: 800; font-size: 11px; }
+#paRoot #panelCtrl > .glass-card:nth-child(1) { border-top: 2px solid #ff7a33 !important; }
+#paRoot #panelCtrl > .glass-card:nth-child(2) { border-top: 2px solid #22d3ee !important; }
+#paRoot #panelQt > .glass-card { border-top: 2px solid #fbbf24 !important; }
+#paRoot #panelStyle > .glass-card { border-top: 2px solid #c084fc !important; }
+html.lcd-amber #paRoot :is(.pa-keys, #paRead, #paDot, .pa-tname, .pa-btns .val b, .pa-stat .chip.ok, .pa-regs button.on, .pa-quick .ss) { filter: hue-rotate(-100deg); }
+html.lcd-ice #paRoot :is(.pa-keys, #paRead, #paDot, .pa-tname, .pa-btns .val b, .pa-stat .chip.ok, .pa-regs button.on, .pa-quick .ss) { filter: hue-rotate(60deg); }

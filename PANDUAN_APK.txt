@@ -1,0 +1,83 @@
+MIDI ROYALE PRO - PANDUAN MEMBUAT APK DENGAN PWABUILDER
+=====================================================
+
+Aplikasi ini sudah disiapkan untuk PWABuilder:
+- manifest.json lengkap: id, scope, start_url, nama, deskripsi, bahasa, kategori, orientasi landscape,
+  display fullscreen/standalone, warna tema, ikon 192/384/512 + ikon MASKABLE 192/512, 4 screenshot.
+- Service worker (sw.js) dengan cache offline.
+- Halaman https wajib (Web MIDI dan PWABuilder hanya jalan di https).
+
+LANGKAH 1 - UNGGAH KE HOSTING HTTPS
+1. Unggah SEMUA isi folder ini (index.html, privacy.html, *.js, *.css, manifest.json, sw.js, folder icons/ dan
+   screenshots/) ke hosting https kamu (mis. Firebase Hosting, Netlify, Vercel, GitHub Pages).
+   Contoh Firebase Hosting:  firebase init hosting  →  salin file ke folder public  →  firebase deploy
+2. Buka alamatnya di Chrome HP, pastikan bisa login dan MIDI jalan.
+3. Bila memakai domain sendiri (bukan *.firebaseapp.com / *.web.app), tambahkan domain itu di
+   Firebase Console › Authentication › Settings › Authorized domains, supaya login berhasil.
+
+LANGKAH 2 - BUAT PAKET ANDROID DI PWABUILDER
+1. Buka https://www.pwabuilder.com lalu masukkan alamat https aplikasi (mis. https://domainmu/index.html).
+2. Tunggu skor PWA keluar (Manifest, Service Worker, Security harus hijau). Klik "Package For Stores".
+3. Pilih ANDROID → "Generate Package". Isi opsi:
+   - Package ID      : com.kingtitu.midiroyalepro   (jangan diganti lagi setelah terbit)
+   - App name        : MIDI ROYALE PRO
+   - Launcher name   : MIDI ROYALE
+   - App version     : 9.1.0     Version code: 91   (naikkan tiap rilis baru)
+   - Display mode    : Fullscreen
+   - Orientation     : Landscape (bila opsinya ada; manifest juga sudah mengunci landscape)
+   - Status bar / Nav bar color: #07070a
+   - Splash background: #07070a
+   - Signing key     : "Create new" (SIMPAN baik-baik file .keystore dan password-nya;
+                        tanpa itu kamu tidak bisa membuat update APK yang sama)
+4. Unduh ZIP. Isinya:  *.apk (untuk dipasang langsung / dibagikan), *.aab (untuk Google Play),
+   assetlinks.json, dan file signing key.
+
+LANGKAH 3 - PASANG assetlinks.json (WAJIB supaya tidak muncul bilah alamat browser)
+1. Unggah assetlinks.json dari ZIP ke hosting di alamat:
+      https://domainmu/.well-known/assetlinks.json
+   (buat folder .well-known di root hosting).
+2. Cek di browser: alamat itu harus menampilkan isi JSON.
+3. Bila memakai Google Play App Signing, tambahkan juga SHA-256 dari Play Console
+   (Setup › App signing) ke assetlinks.json.
+
+LANGKAH 4 - PASANG & UJI
+1. Kirim file .apk ke HP Android, izinkan "Instal dari sumber tidak dikenal", pasang.
+2. Buka aplikasi: harus layar penuh landscape tanpa bilah alamat.
+3. Colok keyboard (USB OTG / interface MIDI / Bluetooth MIDI), izinkan akses MIDI, uji Tes C4.
+
+LANGKAH 5 - GOOGLE PLAY (bila ingin dipasang di Play Store)
+1. Kebijakan Privasi WAJIB. Sudah tersedia: privacy.html (Indonesia + Inggris). Setelah diunggah,
+   alamatnya: https://domainmu/privacy.html  (versi Inggris: https://domainmu/privacy.html#en)
+   Isi alamat itu di Play Console › Policy › App content › Privacy policy.
+   Tautan juga ada di layar login dan di Pengaturan › Data & Info.
+2. Formulir "Data safety" di Play Console, isi sesuai privacy.html:
+   - Dikumpulkan: Email (akun), Device or other IDs (ID perangkat acak untuk lisensi),
+     App activity/Other user-generated content (backup preset), Crash logs & Diagnostics
+     (laporan error, tanpa email).
+   - Semua dikirim terenkripsi (HTTPS). Tidak dibagikan ke pihak ketiga untuk iklan.
+   - Pengguna bisa meminta penghapusan data lewat WhatsApp (tercantum di privacy.html).
+   - Bila Play Console meminta "Delete account URL", isi https://domainmu/privacy.html
+     (bagian 6 menjelaskan cara meminta penghapusan akun & data).
+   - Tidak ada iklan.
+3. Kategori: Music & Audio. Target usia: 13+.
+4. Unggah file .aab (bukan .apk) ke Play Console.
+
+COCOK UNTUK PERANGKAT APA SAJA?
+- Android HP & tablet (APK / Google Play): YA. APK PWABuilder (Trusted Web Activity) memakai
+  Chrome di HP, jadi Web MIDI, USB OTG, dan Bluetooth MIDI jalan. Google Chrome harus terpasang.
+- Windows (paket MSIX / Microsoft Store di PWABuilder): YA, memakai Edge (mendukung Web MIDI).
+- Mac / PC lain: pasang langsung dari Chrome/Edge (ikon Instal di bilah alamat).
+- iPhone / iPad: TIDAK lewat PWABuilder. Paket iOS PWABuilder memakai WebView Apple yang tidak
+  mendukung Web MIDI, jadi aplikasi tidak bisa bicara dengan keyboard. Pengguna iPhone/iPad tetap
+  memakai browser Web MIDI (mis. "Web MIDI Browser" / Bluefy) lalu "Tambahkan ke Layar Utama".
+
+CATATAN PENTING
+- APK/TWA memuat aplikasi dari hosting kamu. Setiap kali file di hosting diganti, SEMUA pengguna
+  ikut mendapat versi baru saat aplikasi dibuka online. Bila nanti update hanya untuk pelanggan
+  (Rp20.000/bulan), pembatasannya harus dilakukan di server/akun (mis. cek status langganan
+  di Firestore saat login), bukan di dalam APK.
+- Login & lisensi perangkat tetap memakai Firebase seperti sekarang. Versi 9.2 butuh
+  firestore.rules TERBARU (pindah perangkat mandiri + laporan error). Pasang di Firebase Console
+  › Firestore › Rules › tempel isi firestore.rules › Publish.
+- Rilis berikutnya: ganti MR_VERSION di index.html, naikkan ?v= di tag script/css dan CACHE_NAME
+  di sw.js, unggah ke hosting. APK tidak perlu dibuat ulang kecuali nama/ikon/izin berubah.

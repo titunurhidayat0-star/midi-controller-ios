@@ -1,0 +1,132 @@
+/* MIDI ROYALE PRO - KLASIK: MAIN / VOICE / TOOLS terpisah (tema Klasik tetap) */
+
+/* ---------- tab: 7 tombol ---------- */
+body.cm:not(.pa-mode) > .sticky > nav.cm-nav { display: grid !important; grid-template-columns: repeat(7, minmax(0, 1fr)) !important; gap: .3rem; }
+body.cm:not(.pa-mode) .cm-nav .tl-short { display: none; }
+@media (max-width: 1400px) { body.cm:not(.pa-mode) .cm-nav .tl-full { display: none; } body.cm:not(.pa-mode) .cm-nav .tl-short { display: inline; } }
+@media (max-width: 900px) { body.cm:not(.pa-mode) .cm-nav .main-tab-btn i, body.cm:not(.pa-mode) .cm-nav .main-tab-btn svg { display: none !important; } body.cm:not(.pa-mode) .cm-nav .main-tab-btn { font-size: .56rem !important; padding: .15rem !important; } }
+.cm-hide { display: none !important; }
+
+/* ---------- tata letak (landscape) ---------- */
+@media (orientation: landscape) and (min-width: 560px) {
+  body.cm:not(.pa-mode) { grid-template-rows: auto auto minmax(0, 1fr) auto auto !important; }
+  body.cm:not(.pa-mode) > .sticky > header > div:first-child { grid-area: 1/1/2/3 !important; }
+  body.cm:not(.pa-mode) > .sticky > nav { grid-area: 1/3/2/10 !important; }
+  body.cm:not(.pa-mode) > .sticky > header > div:last-child { grid-area: 1/10/2/13 !important; justify-content: flex-end !important; }
+  body.cm:not(.pa-mode) #vkDock { grid-area: 5/1/6/13 !important; }
+  body.cm:not(.pa-mode) #perfStrip { grid-area: 4/1/5/13 !important; }
+  /* MAIN */
+  body.cm-main:not(.pa-mode) #mrHero { grid-area: 2/1/4/13 !important; }
+  body.cm-main:not(.pa-mode) #panelVoice > div:nth-child(3), body.cm-main:not(.pa-mode) #panelVoice > .glass-card { display: none !important; }
+  /* VOICE */
+  body.cm-voice:not(.pa-mode) #mrHero { display: none !important; }
+  body.cm-voice:not(.pa-mode) #panelVoice > div:nth-child(3) { grid-area: 2/1/3/13 !important; }
+  body.cm-voice:not(.pa-mode) #panelVoice > .glass-card { grid-area: 3/1/5/13 !important; }
+  /* tab lain */
+  body.cm:not(.pa-mode) #panelQt, body.cm:not(.pa-mode) #panelCtrl, body.cm:not(.pa-mode) #panelStyle, body.cm:not(.pa-mode) #panelKset, body.cm:not(.pa-mode) #panelTools { grid-area: 2/1/5/13 !important; }
+}
+body.cm:not(.pa-mode):not(.cm-main) #perfStrip { display: none !important; }
+body.cm:not(.pa-mode) #mrMenuBtn { display: none !important; }
+
+/* ---------- header kanan: Pa5X · PANIC · pengaturan ---------- */
+body.cm:not(.pa-mode) > .sticky > header > div:last-child .mr-tools { gap: .3rem; }
+body.cm:not(.pa-mode) #mrPanicTop { min-height: 40px !important; height: 40px !important; padding: 0 .65rem; border-radius: .8rem; font-size: .66rem; flex: 0 0 auto; }
+@media (max-height: 520px) { body.cm:not(.pa-mode) #mrPanicTop { min-height: 34px !important; height: 34px !important; padding: 0 .45rem; font-size: .58rem; } }
+
+/* ---------- MAIN: layar utama bergaya layar keyboard (tema Klasik) ---------- */
+body.cm-main:not(.pa-mode) #mrHero.mr-split { gap: .5rem !important; }
+body.cm-main:not(.pa-mode) #mrHero.mr-split > .mr-vbox {
+  position: relative; overflow: hidden;
+  grid-template-columns: minmax(0, 1fr) auto auto !important;
+  grid-template-rows: auto minmax(0, 1fr) auto !important; align-items: center; gap: .7rem 1rem !important; padding: 1rem 1.1rem !important;
+  border: 1px solid rgb(var(--accent-rgb) / .5) !important; border-radius: 1.2rem !important;
+  background:
+    radial-gradient(60% 80% at 18% 45%, rgb(var(--accent-rgb) / .16), transparent 70%),
+    linear-gradient(180deg, #14141b 0%, #0a0a0f 55%, #060609 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), inset 0 -30px 60px rgba(0, 0, 0, .45), 0 8px 24px rgba(0, 0, 0, .45) !important; }
+body.cm-main:not(.pa-mode) #mrHero .mr-vbox > * { position: relative; z-index: 1; }
+/* susunan: akor kanan atas · nama besar kiri · ‹ › bulat kanan · Upper di bawah */
+body.cm-main:not(.pa-mode) #mrHero .mr-vbox > .mr-hstat { position: relative !important; transform: none !important; inset: auto !important; grid-column: 2 / 4 !important; grid-row: 1 !important; justify-self: end; align-self: start; display: flex; margin: 0 !important; padding: 0 !important; border: 0 !important; background: none !important; box-shadow: none !important; min-height: 0 !important; align-items: center; gap: .45rem; }
+body.cm-main:not(.pa-mode) #mrHero .mr-vbox > .mr-hstat .chord-pill { min-height: 34px; padding: .2rem .8rem; display: inline-flex; align-items: center; gap: .45rem; }
+body.cm-main:not(.pa-mode) #mrHero .mr-vbox > .mr-hstat .chord-pill b { font-size: clamp(16px, 2vw, 24px); }
+body.cm-main:not(.pa-mode) #mrHero .mr-vbox > .mr-hstat .k-chips { display: none !important; }
+body.cm-main:not(.pa-mode):has(#vkDock:not(.is-hidden)) #mrHero .mr-vbox > .mr-hstat { display: none !important; }
+body.cm-main:not(.pa-mode) #mrHero .mr-vbox > .mr-name { grid-column: 1 !important; grid-row: 1 / 3 !important; align-self: center; }
+body.cm-main:not(.pa-mode) #mrHero .mr-vbox > .mr-nav:first-child { grid-column: 2 !important; grid-row: 2 !important; }
+body.cm-main:not(.pa-mode) #mrHero .mr-vbox > .mr-name ~ .mr-nav { grid-column: 3 !important; grid-row: 2 !important; }
+body.cm-main:not(.pa-mode) #mrHero .mr-vbox > .mr-hups { grid-column: 1 / -1 !important; grid-row: 3 !important; }
+/* ‹ › bulat */
+body.cm-main:not(.pa-mode) #mrHero .mr-nav { width: clamp(58px, 7vw, 92px); height: clamp(58px, 7vw, 92px); min-height: 0 !important; padding: 0 !important; border-radius: 50% !important; display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgb(var(--accent-rgb) / .55) !important; background: radial-gradient(circle at 50% 35%, #2a2a33, #0c0c11 70%) !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 4px 12px rgba(0, 0, 0, .5) !important; color: rgb(var(--ac-300)); }
+body.cm-main:not(.pa-mode) #mrHero .mr-nav span { display: none !important; }
+body.cm-main:not(.pa-mode) #mrHero .mr-nav .mr-chev { width: 46%; height: 46%; }
+body.cm-main:not(.pa-mode) #mrHero .mr-nav .mr-chev path[opacity] { display: none; }
+body.cm-main:not(.pa-mode) #mrHero .mr-nav:active { transform: scale(.94); background: radial-gradient(circle at 50% 35%, rgb(var(--accent-rgb) / .35), #0c0c11 75%) !important; }
+/* ikon + label kecil + nama besar */
+body.cm-main:not(.pa-mode) #mrHero .mr-name { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto; align-content: center; column-gap: clamp(.8rem, 1.6vw, 1.4rem); row-gap: .35rem; text-align: left; justify-items: start; min-width: 0; padding: 0 !important; }
+body.cm-main:not(.pa-mode) #mrHero .mr-name .cm-ico { grid-column: 1 !important; grid-row: 1 / 3 !important; font-size: 1rem !important; white-space: normal !important; max-width: none !important; overflow: visible !important; display: flex; align-items: center; justify-content: center; width: clamp(60px, min(11vw, 19vh), 170px); aspect-ratio: 1; border-radius: 1.1rem; border: 1px solid rgb(var(--accent-rgb) / .55); background: radial-gradient(circle at 50% 30%, rgb(var(--accent-rgb) / .25), rgba(0, 0, 0, .55) 75%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), 0 6px 18px rgba(0, 0, 0, .5); color: rgb(var(--ac-300)); }
+body.cm-main:not(.pa-mode) #mrHero .mr-name .cm-ico svg, body.cm-main:not(.pa-mode) #mrHero .mr-name .cm-ico img { width: 56% !important; height: 56% !important; filter: none !important; color: rgb(var(--ac-300)); object-fit: contain; }
+body.cm-main:not(.pa-mode) #mrHero .mr-name small { grid-column: 2; grid-row: 1; align-self: end; justify-self: stretch; display: block !important; font: 700 clamp(.6rem, 1.1vw, .85rem) 'JetBrains Mono', monospace !important; letter-spacing: .08em; color: rgb(var(--ac-300)) !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; padding-bottom: .35rem; border-bottom: 1px solid rgb(var(--accent-rgb) / .35); }
+body.cm-main:not(.pa-mode) #mrHero.mr-perf .mr-name small::before { content: "PERFORMANCE  ·  "; color: #f6efd8; }
+body.cm-main:not(.pa-mode) #mrHero:not(.mr-perf) .mr-name small::before { content: "SOUND · UPPER 1  ·  "; color: #f6efd8; }
+body.cm-main:not(.pa-mode) #mrHero .mr-name #mrHeroTitle { grid-column: 2; grid-row: 2; align-self: start; font: 900 clamp(1.5rem, min(6.6vw, 12vh), 6rem)/1.05 'Orbitron', sans-serif !important; white-space: nowrap !important; max-width: 100%; text-align: left; color: #fbf3dc; text-shadow: none !important; }
+/* UPPER 1 / 2 / 3 */
+body.cm-main:not(.pa-mode) #mrHero .mr-hups { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .55rem; }
+body.cm-main:not(.pa-mode) #mrHero .mr-hups .mr-psave { grid-column: 1 / -1; }
+body.cm-main:not(.pa-mode) #mrHero .mr-up { position: relative; display: grid !important; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: auto auto; align-items: center; column-gap: .55rem; row-gap: .15rem; min-height: clamp(54px, 10vh, 92px); padding: .45rem .8rem .45rem .9rem; border-radius: .9rem; text-align: left;
+  border: 1px solid rgba(255, 255, 255, .07) !important; border-left: 3px solid rgb(var(--accent-rgb) / .75) !important; background: linear-gradient(180deg, rgba(255, 255, 255, .04), rgba(0, 0, 0, .35)) !important; }
+body.cm-main:not(.pa-mode) #mrHero .mr-up:not(.on) { border-left-color: rgba(255, 255, 255, .12) !important; }
+body.cm-main:not(.pa-mode) #mrHero .mr-up em { grid-column: 1 / -1; grid-row: 1; justify-self: start; border: 0 !important; padding: 0 !important; background: none !important; font: 800 clamp(8px, .9vw, 11px) 'Orbitron', sans-serif !important; font-style: normal; letter-spacing: .12em; color: rgb(var(--ac-300) / .85) !important; }
+body.cm-main:not(.pa-mode) #mrHero .mr-up .ui { grid-column: 1; grid-row: 2; width: clamp(18px, 2vw, 28px) !important; height: clamp(18px, 2vw, 28px) !important; }
+body.cm-main:not(.pa-mode) #mrHero .mr-up .ui svg, body.cm-main:not(.pa-mode) #mrHero .mr-up .ui img { width: 100% !important; height: 100% !important; }
+body.cm-main:not(.pa-mode) #mrHero .mr-up b { grid-column: 2; grid-row: 2; font-size: clamp(.78rem, min(1.9vw, 3.2vh), 1.6rem); }
+body.cm-main:not(.pa-mode) #mrHero .mr-up .ui:empty + b { grid-column: 1 / -1; }
+body.cm-main:not(.pa-mode) #mrHero .mr-up small { position: absolute; top: .45rem; right: .7rem; }
+
+/* ---------- MAIN: bilah kontrol bergaya panel hardware ---------- */
+body.cm-main:not(.pa-mode) #perfStrip { display: grid !important; grid-template-columns: 1.5fr 1.5fr 1fr 1fr; gap: .5rem; flex-wrap: nowrap; overflow: visible; padding: .45rem; border-radius: 1.1rem; border: 1px solid rgb(var(--accent-rgb) / .25); background: linear-gradient(180deg, #121218, #08080c); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05); }
+body.cm-main:not(.pa-mode) #perfStrip .perf-group { display: flex; min-width: 0; border-radius: .9rem; overflow: hidden; border: 1px solid rgba(255, 255, 255, .08); background: #07080c; }
+body.cm-main:not(.pa-mode) #perfStrip .pstep, body.cm-main:not(.pa-mode) #perfStrip .pval, body.cm-main:not(.pa-mode) #perfStrip .ptoggle { min-height: clamp(52px, 8vh, 70px) !important; height: clamp(52px, 8vh, 70px) !important; }
+body.cm-main:not(.pa-mode) #perfStrip .pstep { width: auto !important; flex: 0 0 24%; border: 0 !important; border-radius: 0 !important; background: linear-gradient(180deg, #1e1f27, #121219) !important; color: rgb(var(--ac-300)) !important; font-size: 1.5rem !important; box-shadow: none !important; }
+body.cm-main:not(.pa-mode) #perfStrip .pstep:active { background: rgb(var(--accent-rgb) / .25) !important; }
+body.cm-main:not(.pa-mode) #perfStrip .pval { flex: 1 1 auto; border: 0 !important; border-left: 1px solid rgba(255, 255, 255, .06) !important; border-right: 1px solid rgba(255, 255, 255, .06) !important; border-radius: 0 !important; background: #020203 !important; box-shadow: inset 0 2px 10px rgba(0, 0, 0, .9) !important; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .1rem; }
+body.cm-main:not(.pa-mode) #perfStrip .pval .pl { font: 800 .55rem 'Orbitron', sans-serif !important; letter-spacing: .14em; color: rgb(var(--ac-300) / .7) !important; }
+body.cm-main:not(.pa-mode) #perfStrip .pval .pv { font: 900 clamp(1.1rem, 2.2vw, 1.7rem) 'Orbitron', sans-serif !important; color: rgb(var(--ac-300)) !important; }
+body.cm-main:not(.pa-mode) #perfStrip .ptoggle { position: relative; border-radius: .9rem !important; border: 1px solid rgba(255, 255, 255, .1) !important; background: linear-gradient(180deg, #1e1f27, #111117) !important; color: #cbd5e1 !important; font: 800 clamp(.7rem, 1.2vw, .9rem) 'Orbitron', sans-serif !important; letter-spacing: .1em; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08) !important; display: flex; align-items: center; justify-content: center; gap: .55rem; }
+body.cm-main:not(.pa-mode) #perfStrip .ptoggle::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: #2a2b33; box-shadow: inset 0 1px 1px #000; flex: 0 0 auto; }
+body.cm-main:not(.pa-mode) #perfStrip .ptoggle.on { color: rgb(var(--ac-300)) !important; border-color: rgb(var(--accent-rgb) / .6) !important; }
+body.cm-main:not(.pa-mode) #perfStrip .ptoggle.on::before { background: rgb(var(--ac-300)); box-shadow: 0 0 8px rgb(var(--accent-rgb)); }
+body.cm-main:not(.pa-mode) #perfStrip #dualBtn.on { color: #d8b4fe !important; border-color: #a855f7 !important; }
+body.cm-main:not(.pa-mode) #perfStrip #dualBtn.on::before { background: #c084fc; box-shadow: 0 0 8px #a855f7; }
+@media (max-height: 520px) {
+  body.cm-main:not(.pa-mode) #perfStrip { gap: .35rem; padding: .3rem; }
+  body.cm-main:not(.pa-mode) #perfStrip .pstep, body.cm-main:not(.pa-mode) #perfStrip .pval, body.cm-main:not(.pa-mode) #perfStrip .ptoggle { min-height: 40px !important; height: 40px !important; }
+  body.cm-main:not(.pa-mode) #mrHero.mr-split > .mr-vbox { padding: .55rem .7rem !important; gap: .45rem .7rem !important; }
+  body.cm-main:not(.pa-mode) #mrHero .mr-up { min-height: 40px; padding: .25rem .6rem .25rem .7rem; row-gap: 0; }
+  body.cm-main:not(.pa-mode) #mrHero .mr-up small { display: none; }
+  body.cm-main:not(.pa-mode) #mrHero .mr-name #mrHeroTitle { font-size: clamp(1.2rem, 3.6vw, 2.1rem) !important; }
+  body.cm-main:not(.pa-mode) #mrHero .mr-name .cm-ico { width: 54px; }
+  body.cm-main:not(.pa-mode) #mrHero .mr-nav { width: 52px; height: 52px; }
+}
+
+/* ---------- TOOLS ---------- */
+#panelTools { display: none; }
+body.cm-tools:not(.pa-mode) #panelTools:not(.hidden) { display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: min-content; gap: .6rem; overflow-y: auto; min-height: 0; align-content: start; padding: .1rem; }
+.cm-card { display: flex; flex-direction: column; gap: .5rem; padding: .7rem; border-radius: 1rem; border: 1px solid rgb(var(--accent-rgb) / .3); background: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(0, 0, 0, .3)), #0a0b10; min-width: 0; }
+#cmReg, #cmPro { grid-column: 1 / -1; }
+.cm-ttl { font: 800 .62rem 'Orbitron', sans-serif; letter-spacing: .08em; color: rgb(var(--ac-300)); }
+.cm-body { display: flex; flex-wrap: wrap; gap: .45rem; align-items: stretch; min-width: 0; }
+#cmReg .reg-group { display: grid !important; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: .45rem; flex: 1 1 100% !important; width: 100%; }
+#cmReg .reg-btn, #cmReg .reg-store { display: flex !important; align-items: center; justify-content: center; min-height: 48px !important; height: 48px !important; font-size: .9rem; }
+#cmReg #mrRegName { flex: 1 1 100%; text-align: left; }
+html body.cm:not(.pa-mode) #panelTools #proStrip.pro-strip { display: grid !important; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: .45rem; position: static !important; width: 100%; margin: 0; padding: 0; background: none; border: 0; box-shadow: none; flex: 1 1 100%; }
+html body.cm:not(.pa-mode) #panelTools #proStrip > * { min-height: 46px !important; height: auto !important; }
+html body.cm:not(.pa-mode) #panelTools #proStrip .pro-song { grid-column: span 2; display: flex; gap: .4rem; }
+#cmConn .cm-port { flex: 1 1 100%; min-height: 46px; }
+#cmConn .cm-port select { font-size: .85rem; }
+#cmConn .kb-chip, .cm-btn { min-height: 46px; padding: 0 .9rem !important; border-radius: .8rem !important; display: inline-flex !important; align-items: center; justify-content: center; gap: .4rem; flex: 1 1 0; }
+.cm-btn { background: #0b0f1a; border: 1px solid #1e293b; color: #e2e8f0; font: 800 .7rem 'Orbitron', sans-serif; letter-spacing: .04em; }
+#cmData .cm-btn span { display: inline !important; }
+@media (max-height: 520px) { #cmReg .reg-btn, #cmReg .reg-store { min-height: 40px !important; height: 40px !important; } .cm-card { padding: .5rem; } }
+
+body.cm:not(.pa-mode) #mrHero .mr-hups[hidden] { display: none !important; }

@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "dev.pages.midiroyale.twa",
+        "sha256_cert_fingerprints": ["89:94:7B:7C:72:7C:38:9F:76:5C:C9:69:96:11:FE:83:37:96:F7:8E:01:64:B6:94:C0:35:42:0B:32:06:85:01"]
+      }
+    }]

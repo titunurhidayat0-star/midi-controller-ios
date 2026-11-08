@@ -1,0 +1,62 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Ikatan perangkat. Pemilik boleh membaca dan membuat.
+    // Pindah perangkat mandiri: pemilik boleh mengganti deviceId 1x tiap 30 hari
+    // (dihitung dari movedAt, atau boundAt bila belum pernah pindah). Reset lebih cepat lewat Firebase Console.
+    match /licensed_devices/{uid} {
+      function lastBind() {
+        return resource.data.get('movedAt', resource.data.get('boundAt', timestamp.value(0)));
+      }
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create: if request.auth != null
+                    && request.auth.uid == uid
+                    && request.resource.data.keys().hasOnly(['email', 'deviceId', 'boundAt'])
+                    && request.resource.data.deviceId is string
+                    && request.resource.data.deviceId.size() < 64
+                    && request.resource.data.boundAt == request.time;
+      allow update: if request.auth != null
+                    && request.auth.uid == uid
+                    && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['deviceId', 'movedAt', 'moves'])
+                    && request.resource.data.deviceId is string
+                    && request.resource.data.deviceId.size() < 64
+                    && request.resource.data.movedAt == request.time
+                    && request.resource.data.moves == resource.data.get('moves', 0) + 1
+                    && request.time > lastBind() + duration.value(30, 'd');
+      allow delete: if false;
+    }
+
+    // Backup preset: hanya pemilik, hanya jika perangkat sudah terdaftar,
+    // dan ukuran dibatasi (dokumen Firestore maks 1 MB).
+    match /user_backups/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null
+                    && request.auth.uid == uid
+                    && exists(/databases/$(database)/documents/licensed_devices/$(uid))
+                    && request.resource.data.keys().hasOnly(['payload', 'updatedAt', 'appVersion'])
+                    && request.resource.data.payload is string
+                    && request.resource.data.payload.size() < 900000
+                    && request.resource.data.appVersion is string;
+      allow delete: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Laporan error otomatis: pengguna login hanya boleh MENULIS laporan miliknya (tidak bisa membaca).
+    // Baca di Firebase Console › Firestore › error_logs.
+    match /error_logs/{id} {
+      allow create: if request.auth != null
+                    && request.resource.data.keys().hasOnly(['uid', 'v', 'msg', 'stack', 'src', 'ua', 'model', 'view', 'port', 'lang', 'at'])
+                    && request.resource.data.uid == request.auth.uid
+                    && request.resource.data.msg is string && request.resource.data.msg.size() <= 500
+                    && request.resource.data.stack is string && request.resource.data.stack.size() <= 1500
+                    && request.resource.data.src is string && request.resource.data.src.size() <= 200
+                    && request.resource.data.ua is string && request.resource.data.ua.size() <= 300
+                    && request.resource.data.at == request.time;
+      allow read, update, delete: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,123 @@
+/* =====================================================================
+   MIDI ROYALE PRO - Pa5X SKIN khusus panel PERFORMANCE (Keyboard Set Library)
+   Hanya berlaku di #panelKset di dalam tampilan Pa5X. Tab lain TIDAK diubah.
+   Warna per kategori, gradasi, kilatan ringan. Animasi hanya transform/opacity,
+   sekali jalan (tidak berulang) dan mati otomatis di Grafis RENDAH.
+   ===================================================================== */
+#paRoot #panelKset { --kc: 0 255 102; --kg: 0 255 102; }
+/* warna tiap kategori */
+#paRoot #panelKset .ks-cat[data-kcat="0"] { --cc: 251 191 36; }  /* Piano & EP */
+#paRoot #panelKset .ks-cat[data-kcat="1"] { --cc: 251 146 60; }  /* Organ */
+#paRoot #panelKset .ks-cat[data-kcat="2"] { --cc: 244 114 182; } /* Guitar */
+#paRoot #panelKset .ks-cat[data-kcat="3"] { --cc: 248 113 113; } /* Strings */
+#paRoot #panelKset .ks-cat[data-kcat="4"] { --cc: 250 204 21; }  /* Brass */
+#paRoot #panelKset .ks-cat[data-kcat="5"] { --cc: 56 189 248; }  /* Trumpet */
+#paRoot #panelKset .ks-cat[data-kcat="6"] { --cc: 45 212 191; }  /* Sax & Wood. */
+#paRoot #panelKset .ks-cat[data-kcat="7"] { --cc: 192 132 252; } /* Synth */
+#paRoot #panelKset .ks-cat[data-kcat="8"] { --cc: 163 230 53; }  /* Ethnic */
+/* warna kategori aktif dibawa ke seluruh layar */
+#paRoot #panelKset:has(.ks-cat.on[data-kcat="0"]) { --kc: 251 191 36; }
+#paRoot #panelKset:has(.ks-cat.on[data-kcat="1"]) { --kc: 251 146 60; }
+#paRoot #panelKset:has(.ks-cat.on[data-kcat="2"]) { --kc: 244 114 182; }
+#paRoot #panelKset:has(.ks-cat.on[data-kcat="3"]) { --kc: 248 113 113; }
+#paRoot #panelKset:has(.ks-cat.on[data-kcat="4"]) { --kc: 250 204 21; }
+#paRoot #panelKset:has(.ks-cat.on[data-kcat="5"]) { --kc: 56 189 248; }
+#paRoot #panelKset:has(.ks-cat.on[data-kcat="6"]) { --kc: 45 212 191; }
+#paRoot #panelKset:has(.ks-cat.on[data-kcat="7"]) { --kc: 192 132 252; }
+#paRoot #panelKset:has(.ks-cat.on[data-kcat="8"]) { --kc: 163 230 53; }
+
+/* ---------- animasi ---------- */
+@keyframes ksxIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes ksxSweep { from { transform: translateX(-130%) skewX(-18deg); opacity: 0; } 25% { opacity: .6; } to { transform: translateX(300%) skewX(-18deg); opacity: 0; } }
+@keyframes ksxPop { from { transform: scale(.96); } to { transform: none; } }
+#paScr-kset.on #panelKset .ks-lib { animation: ksxIn .24s cubic-bezier(.2, .8, .2, 1) both; }
+#paRoot #panelKset .ks-slots .ks-tile.on { overflow: hidden; animation: ksxPop .18s ease-out 1; }
+#paRoot #panelKset .ks-slots .ks-tile.on::after {
+  content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 38%; pointer-events: none; z-index: 2;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .6), transparent);
+  animation: ksxSweep .65s ease-out 1 both; }
+#paRoot #panelKset :is(.ks-tile, .ks-slot, .ks-cat, .ks-bank, .ks-page, .ks-btn) { transition: transform .08s; }
+#paRoot #panelKset :is(.ks-tile, .ks-slot, .ks-cat, .ks-bank, .ks-page, .ks-btn):active { transform: translateY(1px) scale(.985); }
+html.gfx-low #paRoot #panelKset .ks-lib, html.gfx-low #paRoot #panelKset .ks-slots .ks-tile.on, html.gfx-low #paRoot #panelKset .ks-slots .ks-tile.on::after { animation: none !important; }
+html.gfx-low #paRoot #panelKset .ks-slots .ks-tile.on::after { display: none; }
+
+/* ---------- latar layar: kaca gelap + cahaya warna kategori ---------- */
+#paRoot #panelKset > .ks-card, #paRoot #panelKset .ks-lib {
+  background:
+    radial-gradient(70% 55% at 50% 0%, rgb(var(--kc) / .10), transparent 70%),
+    radial-gradient(60% 60% at 100% 100%, rgb(var(--kc) / .07), transparent 70%),
+    repeating-linear-gradient(0deg, rgba(0, 255, 102, .02) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, #07110b 0%, #030705 100%) !important; }
+#paRoot #panelKset > .ks-card { border-top: 2px solid rgb(var(--kc)) !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05), 0 -1px 14px rgb(var(--kc) / .18) !important; }
+
+/* ---------- baris judul ---------- */
+#paRoot #panelKset .ks-head {
+  background: linear-gradient(90deg, rgb(var(--kc) / .22) 0%, #0b2414 38%, #06160c 100%) !important;
+  border: 1px solid rgb(var(--kc) / .4) !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), 0 3px 10px rgba(0, 0, 0, .45) !important; }
+#paRoot #panelKset .ks-t1 { background: linear-gradient(90deg, #eafff2, rgb(var(--kc))); -webkit-background-clip: text; background-clip: text; color: transparent !important; }
+#paRoot #panelKset #ksActive { color: #fff !important; }
+#paRoot #panelKset .ks-acts .ks-btn { background: linear-gradient(180deg, #26302b 0%, #161c19 50%, #0d110f 100%) !important; border: 1px solid #000 !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14), 0 2px 5px rgba(0, 0, 0, .5) !important; color: #d1fae5 !important; }
+#paRoot #panelKset .ks-acts .ks-btn.pri { background: linear-gradient(180deg, #4dff95 0%, #12d965 55%, #06a847 100%) !important; color: #021108 !important; border-color: #b6ffd2 !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .6), 0 0 12px rgb(0 255 102 / .35) !important; }
+#paRoot #panelKset .ks-acts .ks-btn.on { background: linear-gradient(180deg, #fde68a, #fbbf24 55%, #d97706) !important; color: #1a1204 !important; border-color: #fde68a !important; }
+#paRoot #panelKset .ks-search { background: linear-gradient(180deg, #020805, #04120a) !important; border: 1px solid rgb(var(--kc) / .45) !important; box-shadow: inset 0 2px 4px rgba(0, 0, 0, .6) !important; }
+
+/* ---------- tab bank: Factory hijau, User biru, Direct emas ---------- */
+#paRoot #panelKset .ks-bank[data-kbank="factory"] { --bc: 0 255 102; }
+#paRoot #panelKset .ks-bank[data-kbank="user"] { --bc: 34 211 238; }
+#paRoot #panelKset .ks-bank[data-kbank="direct"] { --bc: 251 191 36; }
+#paRoot #panelKset .ks-bank[data-kbank="other"] { --bc: 192 132 252; }
+#paRoot #panelKset .ks-banks { border-bottom-color: rgb(var(--kg)) !important; }
+#paRoot #panelKset:has(.ks-bank.on[data-kbank="user"]) { --kg: 34 211 238; }
+#paRoot #panelKset:has(.ks-bank.on[data-kbank="direct"]) { --kg: 251 191 36; }
+#paRoot #panelKset:has(.ks-bank.on[data-kbank="other"]) { --kg: 192 132 252; }
+#paRoot #panelKset .ks-bank { color: rgb(var(--bc, 0 255 102)) !important; border-color: rgb(var(--bc, 0 255 102) / .3) !important;
+  background: linear-gradient(180deg, rgb(var(--bc, 0 255 102) / .14), #06100a 75%) !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08) !important; }
+#paRoot #panelKset .ks-bank.on { color: #021108 !important; border-color: rgb(var(--bc, 0 255 102)) !important;
+  background: linear-gradient(180deg, #ffffff 0%, rgb(var(--bc, 0 255 102)) 35%, rgb(var(--bc, 0 255 102) / .8) 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 -4px 14px rgb(var(--bc, 0 255 102) / .35) !important; }
+#paRoot #panelKset .ks-banks .ks-nav, #paRoot #panelKset .ks-banks .ks-sts { background: linear-gradient(180deg, #26302b, #0d110f) !important; border: 1px solid #000 !important; box-shadow: inset 0 1px 0 rgba(255, 255, 255, .14) !important; color: #e5e7eb !important; }
+
+/* ---------- tombol kategori: LED warna sendiri ---------- */
+#paRoot #panelKset .ks-cat { color: #e5e7eb !important; border: 1px solid #000 !important;
+  background: linear-gradient(90deg, rgb(var(--cc) / .10), transparent 55%), linear-gradient(180deg, #2a312d 0%, #1a1f1c 48%, #111513 52%, #0b0e0c 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .13), 0 2px 5px rgba(0, 0, 0, .55) !important; }
+#paRoot #panelKset #ksCatsR .ks-cat { background: linear-gradient(270deg, rgb(var(--cc) / .10), transparent 55%), linear-gradient(180deg, #2a312d 0%, #1a1f1c 48%, #111513 52%, #0b0e0c 100%) !important; }
+#paRoot #panelKset .ks-cat::after { background: rgb(var(--cc) / .35) !important; box-shadow: none !important; }
+#paRoot #panelKset .ks-cat i { color: rgb(var(--cc)) !important; }
+#paRoot #panelKset .ks-cat.on { color: #fff !important; border-color: rgb(var(--cc)) !important;
+  background: linear-gradient(90deg, rgb(var(--cc) / .45), rgb(var(--cc) / .12) 70%), linear-gradient(180deg, #1c2420, #0a0f0c) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .22), 0 0 12px rgb(var(--cc) / .35) !important; }
+#paRoot #panelKset #ksCatsR .ks-cat.on { background: linear-gradient(270deg, rgb(var(--cc) / .45), rgb(var(--cc) / .12) 70%), linear-gradient(180deg, #1c2420, #0a0f0c) !important; }
+#paRoot #panelKset .ks-cat.on::after { background: rgb(var(--cc)) !important; box-shadow: 0 0 8px rgb(var(--cc)) !important; }
+
+/* ---------- tombol Keyboard Set ---------- */
+#paRoot #panelKset .ks-slots .ks-tile { border: 1px solid rgb(var(--kc) / .35) !important; border-left: 4px solid rgb(var(--kc)) !important;
+  background: linear-gradient(90deg, rgb(var(--kc) / .18), transparent 45%), linear-gradient(180deg, #143823 0%, #0a2414 55%, #061a0e 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .09), 0 3px 8px rgba(0, 0, 0, .5) !important; }
+#paRoot #panelKset .ks-slots .ks-tile .ks-ups { color: #9be7bb !important; }
+#paRoot #panelKset .ks-slots .ks-tile .ks-ups span:nth-child(2) { color: #8ee8f5 !important; }
+#paRoot #panelKset .ks-slots .ks-tile .ks-ups span:nth-child(3) { color: #d8b4fe !important; }
+#paRoot #panelKset .ks-sn { background: rgb(var(--kc)) !important; color: #050505 !important; border-color: rgb(var(--kc)) !important; font-weight: 800; }
+/* yang aktif: menyala hijau penuh seperti Korg, dengan kilau di atas */
+#paRoot #panelKset .ks-slots .ks-tile.on { border-color: #d1ffe2 !important; border-left-color: #ffffff !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .35) 0%, rgba(255, 255, 255, 0) 45%), linear-gradient(180deg, #4dff95 0%, #12d965 50%, #06a847 100%) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 0 18px rgb(0 255 102 / .45) !important; }
+#paRoot #panelKset .ks-slots .ks-tile.on .ks-ups span { color: #04341a !important; }
+#paRoot #panelKset .ks-slots .ks-tile.on .ks-sn { background: #021108 !important; color: #4dff95 !important; border-color: #021108 !important; }
+/* tombol kosong */
+#paRoot #panelKset .ks-slot { border: 1px dashed rgb(var(--kc) / .3) !important;
+  background: repeating-linear-gradient(135deg, rgb(var(--kc) / .035) 0 6px, transparent 6px 12px), #020805 !important; }
+#paRoot #panelKset .ks-slot b { color: rgb(var(--kc) / .6) !important; }
+#paRoot #panelKset .ks-slot .ks-sn { background: transparent !important; color: rgb(var(--kc) / .6) !important; border-color: rgb(var(--kc) / .25) !important; }
+
+/* ---------- halaman P1-P6 ---------- */
+#paRoot #panelKset .ks-pages { border-top-color: rgb(var(--kc) / .6) !important; }
+#paRoot #panelKset .ks-page { color: #9ca3af !important; background: linear-gradient(0deg, #1a201d 0%, #0d110f 100%) !important; border-color: #000 !important; box-shadow: inset 0 -1px 0 rgba(255, 255, 255, .08) !important; }
+#paRoot #panelKset .ks-page.has { color: #e5e7eb !important; }
+#paRoot #panelKset .ks-page.has::after { background: rgb(var(--kc)) !important; box-shadow: 0 0 6px rgb(var(--kc)) !important; }
+#paRoot #panelKset .ks-page.on { color: #021108 !important; border-color: #b6ffd2 !important;
+  background: linear-gradient(0deg, #ffffff 0%, #4dff95 30%, #12d965 100%) !important; box-shadow: 0 4px 12px rgb(0 255 102 / .35) !important; }
+#paRoot #panelKset .ks-page.on.has::after { background: #021108 !important; box-shadow: none !important; }
+
+/* Grafis RENDAH: tanpa cahaya pendar */
+html.gfx-low #paRoot #panelKset :is(.ks-cat.on, .ks-bank.on, .ks-page.on, .ks-slots .ks-tile.on, .ks-acts .ks-btn.pri) { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .3) !important; }

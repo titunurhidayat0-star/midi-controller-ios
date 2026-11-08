@@ -1,0 +1,526 @@
+/* =====================================================================
+   MIDI ROYALE PRO v9 - tampilan fitur baru (warna mengikuti tema --accent-rgb)
+   ===================================================================== */
+#toast { z-index: 120 !important; }
+
+/* ---------- chip model keyboard (header Klasik) ---------- */
+.kb-chip { display: inline-flex; align-items: center; gap: .3rem; flex: 0 0 auto; min-width: 0; max-width: 8.5rem; height: 34px; padding: 0 .55rem; border-radius: .65rem;
+  background: rgb(var(--accent-rgb) / .1); border: 1px solid rgb(var(--accent-rgb) / .5); color: rgb(var(--ac-300)); font: 800 10px 'Orbitron', sans-serif; letter-spacing: .03em; white-space: nowrap; touch-action: manipulation; }
+.kb-chip span { display: flex; flex-direction: column; align-items: flex-start; line-height: 1; overflow: hidden; text-overflow: ellipsis; min-width: 0; font-size: 11px; }
+.kb-chip span small { font: 800 7px 'Orbitron', sans-serif; letter-spacing: .12em; opacity: .7; margin-bottom: 1px; }
+.kb-chip.unset { border-style: dashed; color: #fbbf24; border-color: rgba(251, 191, 36, .6); background: rgba(251, 191, 36, .08); animation: kbChipPulse 1.8s ease-in-out infinite; }
+@keyframes kbChipPulse { 50% { box-shadow: 0 0 12px rgba(251, 191, 36, .5); } }
+@media (max-width: 900px) { .kb-chip { max-width: 5.6rem; padding: 0 .4rem; } .kb-chip i, .kb-chip svg { display: none; } }
+#perfStrip .kb-chip { min-height: 34px; }
+@media (orientation: landscape) and (max-height: 520px) { #perfStrip .kb-chip { height: 34px !important; min-height: 34px !important; } }
+@media (orientation: landscape) and (max-height: 360px) { #perfStrip .kb-chip { height: 28px !important; min-height: 28px !important; } }
+
+/* ---------- pil CHORD ---------- */
+.chord-pill { display: inline-flex; align-items: baseline; gap: .25rem; flex: 0 0 auto; padding: .05rem .4rem; border-radius: 99px; border: 1px solid rgba(34, 197, 94, .55);
+  background: rgba(5, 46, 22, .55); font: 800 9px 'JetBrains Mono', monospace; color: #86efac; letter-spacing: .04em; cursor: pointer; white-space: nowrap; }
+.chord-pill small { font: 800 7px 'Orbitron', sans-serif; color: #4ade80; opacity: .8; }
+.chord-pill b { font-size: 11px; color: #bbf7d0; min-width: 1.2em; text-align: center; }
+.chord-pill.has:not(.idle) { box-shadow: 0 0 10px rgba(34, 197, 94, .55); border-color: #22c55e; }
+.chord-pill.has:not(.idle) b { color: #fff; text-shadow: 0 0 8px rgba(34, 197, 94, .9); }
+.chord-pill.idle b { opacity: .65; }
+.chord-pill.off { opacity: .35; border-style: dashed; }
+
+/* chord di panel voice (hero) */
+.mr-chord { position: absolute; left: .55rem; bottom: .45rem; z-index: 3; pointer-events: none; padding: .1rem .45rem; border-radius: .5rem; background: rgba(5, 46, 22, .7);
+  border: 1px solid rgba(34, 197, 94, .6); color: #bbf7d0; font: 800 clamp(.6rem, 1.6vw, .85rem) 'JetBrains Mono', monospace; letter-spacing: .04em; box-shadow: 0 0 12px rgba(34, 197, 94, .35); }
+.mr-chord.idle { opacity: .6; box-shadow: none; }
+
+/* ---------- tuts dari keyboard di keyboard virtual (hijau) ---------- */
+.vk-white.vk-in { background: linear-gradient(180deg, #86efac 0%, #16a34a 100%) !important; color: #052e16 !important; box-shadow: 0 0 14px rgba(34, 197, 94, .8) inset !important; }
+.vk-black.vk-in { background: linear-gradient(180deg, #22c55e 0%, #14532d 100%) !important; box-shadow: 0 0 12px rgba(34, 197, 94, .9) !important; }
+.vk-white.vk-in.down, .vk-black.vk-in.down { filter: brightness(1.15); }
+
+/* ---------- Pa5X: chip model, kotak CHORD, nama Keyboard Set ---------- */
+#paRoot .pa-kbchip { display: inline-flex; align-items: center; gap: 4px; max-width: 9rem; overflow: hidden; white-space: nowrap; }
+#paRoot .pa-kbchip span { overflow: hidden; text-overflow: ellipsis; }
+#paRoot .pa-chord { display: inline-flex; flex-direction: column; align-items: center; justify-content: center; min-width: 4.6rem; padding: 1px 8px; border-radius: 6px;
+  border: 1px solid #00ff6655; background: #00160a; color: #00ff66; line-height: 1.05; font-family: 'JetBrains Mono', monospace; }
+#paRoot .pa-chord small { font-size: 7px; font-weight: 800; letter-spacing: .14em; opacity: .7; }
+#paRoot .pa-chord b { font-size: 14px; font-weight: 800; text-shadow: 0 0 8px #00ff66aa; }
+#paRoot .pa-chord.idle b { opacity: .55; text-shadow: none; }
+#paRoot .pa-chord.off { opacity: .35; }
+#paRoot .pa-kset { font-size: 10px; font-weight: 800; letter-spacing: .06em; color: #00ff66aa; min-height: 1em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#paRoot .pa-kset.on { color: #fbbf24; text-shadow: 0 0 6px rgba(251, 191, 36, .6); }
+html.lcd-amber #paRoot .pa-chord { filter: hue-rotate(-100deg); }
+html.lcd-ice #paRoot .pa-chord { filter: hue-rotate(60deg); }
+
+/* ---------- tombol kunci di strip PRO ---------- */
+.lock-btn { font-size: 14px !important; padding: 0 .5rem !important; }
+
+/* ---------- modal umum v9 ---------- */
+.v9-hide { display: none !important; }
+.v9-modal { position: fixed; inset: 0; z-index: 75; display: flex; align-items: center; justify-content: center; padding: max(.6rem, var(--sat, 0px)) max(.6rem, var(--sar, 0px)) max(.6rem, var(--sab, 0px)) max(.6rem, var(--sal, 0px));
+  background: rgba(0, 0, 0, .78); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+.v9-modal.wz { z-index: 84; }
+.v9-card { width: 100%; max-width: 640px; max-height: 94dvh; overflow-y: auto; -webkit-overflow-scrolling: touch; display: flex; flex-direction: column; gap: .55rem; padding: .8rem; border-radius: 1rem;
+  background: linear-gradient(160deg, #10141f, #080b12); border: 1px solid rgb(var(--accent-rgb) / .45); color: #e2e8f0; font-size: 12.5px; box-shadow: 0 20px 60px -20px #000, 0 0 30px rgb(var(--accent-rgb) / .12); }
+.v9-card.sm { max-width: 460px; }
+.v9-card.wide { max-width: 860px; }
+.v9-head { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.v9-head b { font: 800 13px 'Orbitron', sans-serif; letter-spacing: .06em; color: rgb(var(--ac-300)); }
+.v9-x { width: 36px; height: 36px; border-radius: .6rem; background: #0b1120; border: 1px solid #1e293b; color: #cbd5e1; font-size: 15px; flex: 0 0 auto; }
+.v9-p { margin: 0; line-height: 1.5; color: #cbd5e1; }
+.v9-p b { color: #f1f5f9; }
+.v9-p.dim, .dim { color: #94a3b8; font-size: 11px; }
+.v9-row { display: flex; align-items: center; gap: .4rem; }
+.v9-row.wrap { flex-wrap: wrap; }
+.v9-sp { flex: 1; }
+.v9-btn { min-height: 36px; padding: 0 .75rem; border-radius: .6rem; background: #0b1120; border: 1px solid #334155; color: #e2e8f0; font: 800 10px 'Orbitron', sans-serif; letter-spacing: .04em; white-space: nowrap; touch-action: manipulation; }
+.v9-btn.sm { min-height: 30px; padding: 0 .5rem; }
+.v9-btn.pri { color: rgb(var(--ac-300)); border-color: rgb(var(--accent-rgb)); background: rgb(var(--accent-rgb) / .14); }
+.v9-btn.bad { color: #fca5a5; border-color: rgba(248, 113, 113, .5); }
+.v9-btn.on { color: rgb(var(--ac-300)); border-color: rgb(var(--accent-rgb)); }
+.v9-btn:disabled { opacity: .4; }
+.v9-btn:active { transform: scale(.96); }
+
+/* ---------- pemilih keyboard (gaya pemilih tampilan Klasik / Pa5X) ---------- */
+.kbp-ov { position: fixed; inset: 0; z-index: 88; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .9rem; overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding: max(.7rem, var(--sat, 0px)) max(.8rem, var(--sar, 0px)) max(.7rem, var(--sab, 0px)) max(.8rem, var(--sal, 0px));
+  background: radial-gradient(60% 50% at 15% 10%, rgb(var(--accent-rgb, 34 211 238) / .2), transparent 70%), radial-gradient(55% 45% at 90% 95%, rgba(255, 85, 0, .16), transparent 70%), linear-gradient(180deg, #070910, #04060a);
+  color: #e5e7eb; font-family: 'Plus Jakarta Sans', system-ui, sans-serif; animation: kbpIn .35s ease both; }
+@keyframes kbpIn { from { opacity: 0; } to { opacity: 1; } }
+.kbp-hide { display: none !important; }
+.kbp-head2 { text-align: center; }
+.kbp-head2 h2 { margin: 0; font: 900 clamp(17px, 3.2vw, 26px) 'Orbitron', sans-serif; letter-spacing: .14em; background: linear-gradient(90deg, #22d3ee, #fff, #fbbf24); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.kbp-head2 p { margin: .3rem 0 0; font-size: 12px; color: #94a3b8; }
+/* langkah 1: kartu merek */
+.kbp-brow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .8rem; width: 100%; max-width: 64rem; }
+.kbp-bcard { position: relative; overflow: hidden; display: flex; flex-direction: column; gap: .55rem; text-align: left; color: inherit; font: inherit; min-width: 0; padding: .85rem; border-radius: 1.2rem;
+  border: 1px solid #2a3140; background: linear-gradient(160deg, rgba(20, 26, 46, .88), rgba(8, 10, 18, .96)); box-shadow: 0 20px 50px -20px #000; touch-action: manipulation;
+  transition: transform .2s, border-color .2s, box-shadow .2s; animation: kbpCard .55s cubic-bezier(.16, 1, .3, 1) both; animation-delay: calc(var(--i, 0) * .07s); }
+@keyframes kbpCard { from { opacity: 0; transform: translateY(18px) scale(.96); } to { opacity: 1; transform: none; } }
+.kbp-bcard::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: linear-gradient(90deg, transparent, rgb(var(--c)), transparent); opacity: .8; }
+.kbp-bcard:hover, .kbp-bcard:focus-visible, .kbp-bcard.last { border-color: rgb(var(--c) / .8); box-shadow: 0 20px 50px -20px #000, 0 0 28px rgb(var(--c) / .28); outline: 0; }
+.kbp-bcard:active { transform: scale(.97); }
+.kbp-btop { display: flex; align-items: flex-start; gap: .6rem; min-width: 0; }
+.kbp-bico { flex: 0 0 auto; width: 2.8rem; height: 2.8rem; border-radius: .85rem; display: flex; align-items: center; justify-content: center; color: rgb(var(--c));
+  background: linear-gradient(145deg, rgb(var(--c) / .25), rgb(var(--c) / .04)); border: 1px solid rgb(var(--c) / .55); }
+.kbp-bico svg { width: 1.6rem; height: 1.6rem; }
+.kbp-bt { font: 900 clamp(15px, 2.2vw, 21px) 'Orbitron', sans-serif; letter-spacing: .08em; color: rgb(var(--c)); line-height: 1.1; }
+.kbp-bd { font-size: 11px; color: #94a3b8; line-height: 1.35; margin-top: 3px; }
+.kbp-badge { position: absolute; top: .55rem; right: .55rem; font: 800 9px 'Orbitron', sans-serif; letter-spacing: .06em; padding: 2px 7px; border-radius: 99px; background: rgb(var(--c) / .18); border: 1px solid rgb(var(--c) / .5); color: rgb(var(--c)); }
+.kbp-bser { display: flex; flex-wrap: wrap; gap: 4px; flex: 1 1 auto; align-content: flex-start; }
+.kbp-bser i { font-style: normal; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 6px; background: #0b1020; border: 1px solid #222a3b; color: #cbd5e1; white-space: nowrap; }
+.kbp-bgo { display: flex; align-items: center; justify-content: center; padding: .5rem; border-radius: .7rem; font: 800 11px 'Orbitron', sans-serif; letter-spacing: .1em; color: #06080c; background: rgb(var(--c)); }
+.kbp-bfoot { display: flex; gap: .6rem; }
+.kbp-link { min-height: 38px; padding: 0 1rem; border-radius: .7rem; background: rgba(11, 17, 32, .8); border: 1px solid #334155; color: #cbd5e1; font: 800 10px 'Orbitron', sans-serif; letter-spacing: .06em; }
+/* langkah 2: model */
+.kbp-ov.step-model { justify-content: stretch; }
+.kbp-panel { width: 100%; max-width: 72rem; flex: 1 1 auto; min-height: 0; max-height: 46rem; display: flex; flex-direction: column; gap: .5rem; padding: .65rem; border-radius: 1.2rem;
+  border: 1px solid rgb(var(--c) / .45); background: linear-gradient(160deg, rgba(20, 26, 46, .88), rgba(8, 10, 18, .96)); box-shadow: 0 0 40px rgb(var(--c) / .12), 0 20px 50px -20px #000; }
+.kbp-top { display: flex; align-items: center; gap: .5rem; min-width: 0; }
+.kbp-back { flex: 0 0 auto; min-height: 38px; padding: 0 .8rem; border-radius: .7rem; background: #0b1120; border: 1px solid #334155; color: #e2e8f0; font: 800 10px 'Orbitron', sans-serif; letter-spacing: .05em; }
+.kbp-tabs { flex: 1 1 auto; display: flex; gap: .35rem; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.kbp-tabs::-webkit-scrollbar { display: none; }
+.kbp-tab { flex: 1 0 auto; min-height: 38px; padding: 0 .8rem; border-radius: .7rem; background: #0b0f1a; border: 1px solid #1e293b; color: rgb(var(--c) / .75); font: 900 12px 'Orbitron', sans-serif; letter-spacing: .08em; white-space: nowrap; }
+.kbp-tab.on { color: rgb(var(--c)); border-color: rgb(var(--c)); background: rgb(var(--c) / .14); box-shadow: 0 0 14px rgb(var(--c) / .3); }
+.kbp-x { flex: 0 0 auto; width: 38px; height: 38px; border-radius: .7rem; background: #0b1120; border: 1px solid #1e293b; color: #cbd5e1; font-size: 15px; }
+.kbp-series { display: flex; gap: .35rem; overflow-x: auto; scrollbar-width: none; flex: 0 0 auto; }
+.kbp-series::-webkit-scrollbar { display: none; }
+.kbp-ser { flex: 0 0 auto; min-height: 32px; padding: 0 .85rem; border-radius: 99px; background: #0b1120; border: 1px solid #1e293b; color: #94a3b8; font: 800 10px 'Orbitron', sans-serif; letter-spacing: .04em; white-space: nowrap; }
+.kbp-ser.on { color: #06080c; border-color: rgb(var(--c)); background: rgb(var(--c)); }
+.kbp-main { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(13rem, 17rem); gap: .6rem; }
+.kbp-models { min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); grid-auto-rows: min-content; gap: .45rem; align-content: start; padding: .1rem; }
+.kbp-model { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .2rem; min-height: 74px; padding: .4rem .3rem; border-radius: .9rem;
+  background: linear-gradient(180deg, #0d1222, #080b14); border: 1.5px solid #1e293b; color: #f1f5f9; text-align: center; touch-action: manipulation;
+  animation: kbpCard .45s cubic-bezier(.16, 1, .3, 1) both; animation-delay: calc(var(--i, 0) * .025s); transition: border-color .15s, box-shadow .15s, transform .1s; }
+.kbp-model:active { transform: scale(.96); }
+.kbp-mico { color: rgb(var(--c) / .8); line-height: 0; }
+.kbp-mico svg { width: 20px; height: 20px; }
+.kbp-model b { font: 800 clamp(11px, 1.7vw, 14px) 'Orbitron', sans-serif; letter-spacing: .03em; line-height: 1.15; }
+.kbp-model small { font: 700 8px 'JetBrains Mono', monospace; color: #64748b; letter-spacing: .08em; }
+.kbp-model.cur small { color: #4ade80; }
+.kbp-model.on { border-color: rgb(var(--c)); background: linear-gradient(180deg, rgb(var(--c) / .22), rgb(var(--c) / .06)); box-shadow: 0 0 18px rgb(var(--c) / .4); }
+.kbp-model.on b { color: #fff; }
+.kbp-model.on .kbp-mico { color: rgb(var(--c)); }
+.kbp-side { min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: .5rem; padding: .6rem; border-radius: 1rem; background: rgba(4, 6, 12, .7); border: 1px solid #1e293b; }
+.kbp-sname { display: flex; align-items: center; gap: .6rem; }
+.kbp-sico { flex: 0 0 auto; width: 2.6rem; height: 2.6rem; border-radius: .8rem; display: flex; align-items: center; justify-content: center; color: rgb(var(--c));
+  background: linear-gradient(145deg, rgb(var(--c) / .25), rgb(var(--c) / .04)); border: 1px solid rgb(var(--c) / .55); }
+.kbp-sico svg { width: 1.5rem; height: 1.5rem; }
+.kbp-sname small { display: block; font: 800 9px 'Orbitron', sans-serif; letter-spacing: .1em; color: rgb(var(--c)); }
+.kbp-sname b { display: block; font: 900 clamp(16px, 2.4vw, 22px) 'Orbitron', sans-serif; color: #fff; letter-spacing: .04em; line-height: 1.1; }
+.kbp-prof { display: flex; flex-direction: column; gap: 2px; }
+.kbp-prof div { display: flex; justify-content: space-between; gap: .5rem; padding: .28rem .45rem; border-radius: .45rem; background: #0a0e1a; font-size: 11px; }
+.kbp-prof span { color: #94a3b8; }
+.kbp-prof b { color: #f1f5f9; font-family: 'JetBrains Mono', monospace; font-size: 11px; text-align: right; }
+.kbp-chk { display: inline-flex; align-items: center; gap: .45rem; font-size: 12px; color: #cbd5e1; }
+.kbp-chk input { width: 20px; height: 20px; accent-color: rgb(var(--c, var(--accent-rgb))); }
+.kbp-go { min-height: 44px; border-radius: .8rem; border: 0; background: rgb(var(--c)); color: #06080c; font: 900 12px 'Orbitron', sans-serif; letter-spacing: .1em; box-shadow: 0 10px 24px -10px rgb(var(--c) / .8); }
+.kbp-go:disabled { opacity: .35; box-shadow: none; }
+.kbp-empty { flex: 1 1 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .5rem; text-align: center; font-size: 12px; color: #94a3b8; line-height: 1.45; }
+.kbp-empty p { margin: 0; }
+.kbp-sacts { display: flex; gap: .4rem; margin-top: auto; }
+.kbp-sacts .kbp-link { flex: 1 1 0; padding: 0 .4rem; }
+/* HP landscape */
+@media (max-height: 520px) {
+  .kbp-ov { gap: .5rem; padding-top: max(.45rem, var(--sat, 0px)); padding-bottom: max(.45rem, var(--sab, 0px)); }
+  .kbp-head2 p { display: none; }
+  .kbp-brow { gap: .5rem; }
+  .kbp-bcard { padding: .6rem; gap: .4rem; border-radius: 1rem; }
+  .kbp-bico { width: 2.3rem; height: 2.3rem; }
+  .kbp-bd { font-size: 10px; }
+  .kbp-bser i { font-size: 9px; padding: 1px 5px; }
+  .kbp-panel { padding: .45rem; gap: .35rem; max-height: none; }
+  .kbp-back, .kbp-tab, .kbp-x { min-height: 34px; height: 34px; }
+  .kbp-ser { min-height: 28px; }
+  .kbp-main { grid-template-columns: minmax(0, 1fr) minmax(12rem, 14.5rem); gap: .45rem; }
+  .kbp-model { min-height: 58px; gap: .1rem; }
+  .kbp-mico svg { width: 16px; height: 16px; }
+  .kbp-side { padding: .45rem; gap: .35rem; }
+  .kbp-sico { width: 2.1rem; height: 2.1rem; }
+  .kbp-prof div { padding: .15rem .4rem; font-size: 10px; }
+  .kbp-prof b { font-size: 10px; }
+  .kbp-go { min-height: 38px; }
+  .kbp-link { min-height: 32px; }
+}
+@media (max-width: 600px) { .kbp-brow { grid-template-columns: repeat(2, minmax(0, 1fr)); } .kbp-main { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---------- kontrol dari keyboard ---------- */
+.rm-list { display: flex; flex-direction: column; gap: .3rem; }
+.rm-row { display: grid; grid-template-columns: minmax(7rem, 1fr) minmax(0, 1.6fr) auto auto; align-items: center; gap: .4rem; padding: .3rem .4rem; border-radius: .6rem; background: #080c16; border: 1px solid #1e293b; }
+.rm-row.learning { border-color: #fbbf24; background: rgba(251, 191, 36, .08); animation: rmBlink 1s ease-in-out infinite; }
+.rm-row.just { border-color: #22c55e; }
+@keyframes rmBlink { 50% { box-shadow: 0 0 12px rgba(251, 191, 36, .5); } }
+.rm-act { font: 800 11px 'Orbitron', sans-serif; color: #f1f5f9; }
+.rm-map { font: 700 11px 'JetBrains Mono', monospace; color: #64748b; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rm-map.set { color: rgb(var(--ac-300)); }
+.rm-warn { grid-column: 1 / -1; font-size: 11px; line-height: 1.4; color: #fde68a; background: rgba(245, 158, 11, .1); border-left: 3px solid #f59e0b; padding: .25rem .5rem; border-radius: .3rem; }
+.rm-flash { position: fixed; top: calc(var(--sat, 0px) + .6rem); left: 50%; transform: translate(-50%, -8px); z-index: 97; opacity: 0; pointer-events: none; transition: opacity .15s, transform .15s;
+  padding: .35rem .8rem; border-radius: .7rem; background: rgba(8, 12, 22, .95); border: 1px solid rgb(var(--accent-rgb)); color: rgb(var(--ac-300)); font: 800 12px 'Orbitron', sans-serif; letter-spacing: .05em; }
+.rm-flash.show { opacity: 1; transform: translate(-50%, 0); }
+body.mr-locked .rm-flash { top: calc(var(--sat, 0px) + 4.4rem); }
+
+/* ---------- kunci layar ---------- */
+.lk-ov { position: fixed; inset: 0; z-index: 95; display: none; background: rgba(0, 0, 0, .12); touch-action: none; }
+.lk-ov.on { display: block; }
+.lk-bar { position: absolute; left: 50%; top: calc(var(--sat, 0px) + .4rem); transform: translateX(-50%); display: flex; align-items: center; gap: .55rem; max-width: calc(100vw - 1rem);
+  padding: .4rem .5rem .4rem .7rem; border-radius: 1rem; background: rgba(8, 10, 16, .94); border: 1px solid rgb(var(--accent-rgb) / .6); box-shadow: 0 10px 30px -10px #000, 0 0 24px rgb(var(--accent-rgb) / .25); }
+.lk-ico { font-size: 18px; }
+.lk-txt { display: flex; flex-direction: column; min-width: 0; }
+.lk-txt b { font: 800 11px 'Orbitron', sans-serif; letter-spacing: .1em; color: rgb(var(--ac-300)); }
+.lk-txt small { font: 600 10px 'JetBrains Mono', monospace; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 40vw; }
+.lk-panic { min-height: 42px; padding: 0 .8rem; border-radius: .7rem; background: rgba(127, 29, 29, .6); border: 1px solid #ef4444; color: #fecaca; font: 900 11px 'Orbitron', sans-serif; letter-spacing: .06em; touch-action: none; }
+.lk-hold { position: relative; overflow: hidden; min-height: 42px; min-width: 9.5rem; padding: 0 .8rem; border-radius: .7rem; background: #0b1120; border: 1px solid rgb(var(--accent-rgb)); color: rgb(var(--ac-300)); font: 800 10px 'Orbitron', sans-serif; letter-spacing: .04em; touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.lk-hold i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: rgb(var(--accent-rgb) / .45); }
+.lk-hold span { position: relative; }
+body.mr-locked #mrRotate { z-index: 9999; }
+
+/* ---------- pengingat update ---------- */
+.upd-banner { position: fixed; left: 50%; bottom: calc(var(--sab, 0px) + .6rem); transform: translate(-50%, 20px); z-index: 97; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
+  display: flex; align-items: center; gap: .5rem; max-width: calc(100vw - 1rem); padding: .4rem .45rem .4rem .8rem; border-radius: .9rem; background: rgba(8, 12, 22, .97); border: 1px solid #22c55e; color: #dcfce7; font-size: 12px; box-shadow: 0 0 24px rgba(34, 197, 94, .3); }
+.upd-banner.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+.upd-banner button { min-height: 36px; padding: 0 .8rem; border-radius: .6rem; background: #14532d; border: 1px solid #22c55e; color: #fff; font: 800 10px 'Orbitron', sans-serif; letter-spacing: .05em; }
+.upd-banner button.x { background: transparent; border-color: #334155; color: #94a3b8; padding: 0 .55rem; }
+
+/* ---------- indikator beban ---------- */
+.gfx-meter { position: fixed; left: max(.4rem, var(--sal, 0px)); bottom: calc(var(--sab, 0px) + .4rem); z-index: 98; display: flex; gap: .4rem; align-items: baseline; padding: .2rem .5rem; border-radius: .5rem;
+  background: rgba(0, 0, 0, .78); border: 1px solid #334155; font: 700 10px 'JetBrains Mono', monospace; color: #cbd5e1; cursor: pointer; }
+.gfx-meter b { color: #4ade80; } .gfx-meter.mid b { color: #fbbf24; } .gfx-meter.bad b { color: #f87171; }
+.gfx-meter em { font-style: normal; color: rgb(var(--ac-300)); font-size: 9px; }
+
+/* ---------- Pengaturan: baris v9 ---------- */
+.v9-set { display: flex; flex-direction: column; gap: 1rem; }
+.v9-srow { display: flex; align-items: center; justify-content: space-between; gap: .6rem; background: rgba(2, 6, 23, .6); padding: .625rem; border-radius: .75rem; border: 1px solid #1e293b; }
+.v9-srow > div:first-child { min-width: 0; }
+.v9-sctl { display: flex; gap: .35rem; flex-wrap: wrap; justify-content: flex-end; flex: 0 0 auto; max-width: 60%; }
+.v9-sctl .set-select { max-width: 100%; }
+.v9-srow b { color: rgb(var(--ac-300)); }
+
+/* ---------- Panduan Setup ---------- */
+.wz-steps { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .3rem; }
+.wz-st { display: flex; align-items: center; justify-content: center; gap: .35rem; min-height: 36px; border-radius: .6rem; background: #0b1120; border: 1px solid #1e293b; color: #64748b; font: 800 10px 'Orbitron', sans-serif; min-width: 0; }
+.wz-st i { font-style: normal; display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; border: 1px solid currentColor; font-size: 10px; flex: 0 0 auto; }
+.wz-st span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wz-st.done { color: #4ade80; border-color: rgba(34, 197, 94, .4); }
+.wz-st.on { color: rgb(var(--ac-300)); border-color: rgb(var(--accent-rgb)); background: rgb(var(--accent-rgb) / .12); }
+.wz-body { min-height: 9rem; line-height: 1.5; color: #cbd5e1; }
+.wz-body h4 { margin: 0 0 .4rem; font: 800 12px 'Orbitron', sans-serif; color: rgb(var(--ac-300)); letter-spacing: .05em; }
+.wz-body p { margin: .3rem 0; }
+.wz-body ol { margin: .2rem 0 .2rem 1.1rem; padding: 0; list-style: decimal; }
+.wz-body ol li { margin: .2rem 0; }
+.wz-body b { color: #f1f5f9; }
+.wz-model { display: flex; flex-direction: column; align-items: flex-start; gap: .35rem; padding: .6rem; border-radius: .8rem; background: #080c16; border: 1px solid rgb(var(--accent-rgb) / .35); }
+.wz-model b { font: 900 16px 'Orbitron', sans-serif; color: rgb(var(--ac-300)); }
+.wz-model span { font-size: 11px; color: #94a3b8; }
+.wz-status { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .7rem; padding: .4rem .6rem; border-radius: .6rem; border: 1px solid #334155; background: #080c16; font-size: 11px; margin-bottom: .4rem; }
+.wz-status.ok { border-color: rgba(34, 197, 94, .5); } .wz-status.ok > b { color: #4ade80; }
+.wz-status.bad > b { color: #f87171; }
+.wz-status span { font-family: 'JetBrains Mono', monospace; color: #94a3b8; }
+.wz-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .4rem; }
+.wz-c { padding: .5rem; border-radius: .7rem; background: #080c16; border: 1px solid #1e293b; font-size: 11.5px; }
+.wz-c > b { font: 800 11px 'Orbitron', sans-serif; color: rgb(var(--ac-300)); }
+.wz-two { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: .7rem; }
+.wz-tbl { width: 100%; border-collapse: collapse; font-size: 11.5px; }
+.wz-tbl th, .wz-tbl td { text-align: left; padding: .25rem .4rem; border-bottom: 1px solid #1e293b; }
+.wz-tbl th { color: #94a3b8; font-weight: 700; }
+.wz-tbl td:last-child { font: 800 12px 'JetBrains Mono', monospace; color: rgb(var(--ac-300)); }
+.wz-tests { display: flex; flex-direction: column; gap: .4rem; }
+.wz-t { display: flex; align-items: center; gap: .6rem; }
+.wz-t .v9-btn { min-width: 8.5rem; }
+.wz-sum { margin: .2rem 0 .5rem 1.1rem; padding: 0; list-style: disc; }
+@media (max-width: 640px) { .wz-cards, .wz-two { grid-template-columns: minmax(0, 1fr); } .wz-st span { display: none; } }
+
+/* =====================================================================
+   MODE GRAFIS
+   Low    : tanpa animasi & blur, bayangan glow dikurangi (paling ringan)
+   Medium : tanpa blur & animasi hiasan
+   High   : tampilan normal
+   Ultra  : tampilan normal, frame tidak dibatasi
+   ===================================================================== */
+html.gfx-low *, html.gfx-low *::before, html.gfx-low *::after { animation-duration: 0s !important; animation-iteration-count: 1 !important; transition-duration: 0s !important; }
+html.gfx-low *, html.gfx-medium * { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+html.gfx-low .voice-tile, html.gfx-low .glass-card, html.gfx-low .mr-hero, html.gfx-low .reg-btn, html.gfx-low .ptoggle, html.gfx-low .main-tab-btn, html.gfx-low .category-tab, html.gfx-low .style-btn { box-shadow: none !important; }
+html.gfx-low .mr-name span { text-shadow: none !important; }
+html.gfx-low .glass-card { background: #0b0f1a !important; }
+html.gfx-low #paRoot .pa-keys .deco, html.gfx-medium #paRoot .pa-keys .deco { display: none !important; }
+html.gfx-medium #authModal::after, html.gfx-low #authModal::after { animation: none !important; }
+html.gfx-medium .kb-chip.unset { animation: none; }
+
+/* =====================================================================
+   v9.1 TATA LETAK HP: panel bawah hanya di CONTROLLERS, MEM 1-6 + PANIC + MENU
+   ===================================================================== */
+/* Klasik: MEM cukup 1-6 (data REG 7-8 tetap tersimpan, masih bisa dari pedal) */
+#regBtn6, #regBtn7 { display: none !important; }
+.mr-top-panic, .mr-top-menu { flex: 0 0 auto; height: 34px; padding: 0 .6rem !important; font-size: 10px !important; letter-spacing: .04em; }
+.mr-top-panic { color: #fecaca !important; border-color: #b91c1c !important; background: rgba(185, 28, 28, .22) !important; touch-action: none; }
+.mr-top-panic:active { background: #dc2626 !important; color: #fff !important; box-shadow: 0 0 16px rgba(220, 38, 38, .8); }
+.mr-top-menu.on { color: rgb(var(--ac-300)); border-color: rgb(var(--accent-rgb)); background: rgb(var(--accent-rgb) / .14); }
+@media (orientation: landscape) and (max-height: 520px) { .mr-top-panic, .mr-top-menu { height: 34px !important; min-height: 34px !important; } }
+@media (orientation: landscape) and (max-height: 360px) { .mr-top-panic, .mr-top-menu { height: 28px !important; min-height: 28px !important; } }
+
+/* panel bawah (PANIC, SUS, SPLIT, REC, SETLIST, PRO, ⚙) hanya tampil di tab CONTROLLERS */
+body:not(.pa-mode):not(.pro-pop):not(:has(#panelCtrl:not(.hidden))) #proStrip { display: none !important; }
+
+/* ☰ MENU: panel bawah sebagai jendela kecil di semua tab */
+.pro-pop-bg { position: fixed; inset: 0; z-index: 58; background: rgba(0, 0, 0, .35); display: none; }
+body.pro-pop .pro-pop-bg { display: block; }
+body.pro-pop:not(.pa-mode) #proStrip {
+  position: fixed !important; z-index: 59; grid-area: auto !important; margin: 0 !important;
+  display: grid !important; grid-template-columns: repeat(4, minmax(0, 1fr)) !important; gap: .4rem !important;
+  width: min(27rem, calc(100vw - 1.2rem)); max-height: calc(100dvh - 1rem); overflow-y: auto;
+  padding: .6rem !important; border-radius: 1rem; background: rgba(8, 10, 16, .97);
+  border: 1px solid rgb(var(--accent-rgb) / .55); box-shadow: 0 18px 40px -12px #000, 0 0 24px rgb(var(--accent-rgb) / .2);
+}
+body.pro-pop:not(.pa-mode) #proStrip > * { min-height: 44px !important; height: auto !important; }
+body.pro-pop:not(.pa-mode) #proStrip .pro-song { grid-column: 1 / -1 !important; display: flex !important; gap: .4rem; flex: none !important; }
+body.pro-pop:not(.pa-mode) #proStrip .pro-song .pro-songname { flex: 1 1 auto; }
+body.pro-pop:not(.pa-mode) #proStrip #proPanicBtn { display: none !important; }
+body.pro-pop:not(.pa-mode) #proStrip .ptoggle { padding: 0 .3rem !important; }
+
+/* tab Voice: panel voice besar memakai ruang yang dulu dipakai panel bawah */
+@media (orientation: landscape) and (min-width: 560px) {
+  body:not(.pa-mode):not(:has(#panelVoice.hidden)) #mrHero { grid-row: 3 / 7; }
+}
+
+/* ---------- Pa5X: MAIN lebih lega, REG di Tools, edit voice di Keys ---------- */
+#paRoot #paScr-main .pa-keys { flex: 1 1 auto; }
+#paRoot #paScr-main .pa-keys .big { font-size: clamp(26px, 6.6vw, 52px); }
+#paRoot .pa-regcard .pa-regs { grid-template-columns: repeat(8, minmax(0, 1fr)); }
+#paRoot .pa-regcard .pa-regs button { min-height: clamp(40px, 8vh, 60px); }
+#paRoot .pa-regcard .pa-ttl { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#paRoot .pa-kb .pa-kedit, #paRoot .pa-kb .pa-kadd { padding: 0 10px; font-weight: 800; font-size: 11px; white-space: nowrap; flex: 0 0 auto; }
+#paRoot .pa-kb .pa-kedit.on { color: #ff5500; border-color: #ff5500; box-shadow: 0 0 8px rgba(255, 85, 0, .45); }
+#paRoot .pa-kb .pa-kadd { color: #00ff66; border-color: rgba(0, 255, 102, .45); }
+#paRoot .pa-khint { display: none; flex: 0 0 auto; font-size: 10.5px; color: #ffb38a; padding: 2px 6px; border-left: 3px solid #ff5500; background: rgba(255, 85, 0, .08); }
+#paRoot #paScr-keys.editing .pa-khint { display: block; }
+#paRoot #paScr-keys.editing .pa-row { outline: 1px dashed rgba(255, 85, 0, .45); outline-offset: -2px; }
+
+/* strip atas Klasik: satu baris (MEM 1-6 + PANIC + MENU) */
+@media (orientation: landscape) and (min-width: 560px) {
+  #perfStrip { flex-wrap: nowrap !important; overflow: hidden !important; }
+  #perfStrip .reg-group { flex: 1 1 150px !important; min-width: 0; }
+  #perfStrip .reg-btn { min-width: 22px !important; flex: 1 1 22px !important; }
+}
+@media (orientation: landscape) and (max-width: 820px) {
+  #perfStrip { gap: .2rem !important; }
+  #perfStrip .pstep { width: 24px !important; }
+  #perfStrip .pval { min-width: 34px !important; }
+  #perfStrip .ptoggle { padding: 0 .35rem !important; }
+  #perfStrip .reg-store { padding: 0 .35rem !important; }
+  .mr-top-menu .mm-t { display: none; }
+  .mr-top-panic { padding: 0 .4rem !important; }
+}
+
+/* CHORD + TR/OCT di atas tampilan voice (bukan di header) */
+#mrHero { position: relative; padding-top: 1.9rem !important; }
+.mr-hstat { position: absolute; top: .4rem; left: .55rem; right: .55rem; z-index: 3; display: flex; align-items: center; gap: .35rem; pointer-events: none; }
+.mr-hstat > * { pointer-events: auto; }
+.mr-hstat .chord-pill { padding: .1rem .5rem; }
+.mr-hstat .chord-pill b { font-size: 13px; }
+.mr-hstat .k-chips b { font-size: 9px; padding: 2px 6px; }
+.style-chord { margin-left: auto; margin-right: .4rem; }
+.style-chord b { font-size: 12px; }
+
+/* =====================================================================
+   PENGATURAN per bagian (Klasik & Pa5X): navigasi kiri, isi kanan, teks lebih besar
+   ===================================================================== */
+#settingsModal { padding: max(.5rem, var(--sat, 0px)) max(.6rem, var(--sar, 0px)) max(.5rem, var(--sab, 0px)) max(.6rem, var(--sal, 0px)) !important; z-index: 55 !important; }
+#settingsModal > .set-card { max-width: 60rem !important; width: 100%; height: min(calc(100dvh - 1rem), 46rem); max-height: none !important; padding: 0 !important; gap: 0 !important; overflow: hidden !important;
+  display: grid !important; grid-template-columns: 11.5rem minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; border-radius: 1.1rem !important;
+  border: 1px solid rgb(var(--accent-rgb) / .4) !important; background: linear-gradient(160deg, #10141f, #080b12) !important; font-size: 13px !important; }
+#settingsModal > .set-card > div:first-child { grid-column: 1 / -1; padding: .7rem 1rem !important; margin: 0; border-bottom: 1px solid rgb(var(--accent-rgb) / .25) !important; }
+#settingsModal > .set-card > div:first-child h3 { font-size: 15px !important; letter-spacing: .12em; color: rgb(var(--ac-300)) !important; }
+#settingsModal > .set-card > div:first-child button { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: .7rem; background: #0b1120; border: 1px solid #1e293b; }
+#settingsModal > .set-card > div:last-child { grid-column: 1 / -1; padding: .55rem 1rem !important; margin: 0; }
+#settingsModal > .set-card > div:last-child button { min-height: 42px; }
+.set-nav { grid-column: 1; grid-row: 2; display: flex; flex-direction: column; gap: .35rem; padding: .7rem .6rem; overflow-y: auto; border-right: 1px solid rgb(var(--accent-rgb) / .18); background: rgba(2, 4, 10, .45); }
+.set-nav button { display: flex; align-items: center; gap: .55rem; min-height: 46px; padding: 0 .7rem; border-radius: .8rem; border: 1px solid transparent; background: transparent; color: #94a3b8; font: 800 11px 'Orbitron', sans-serif; letter-spacing: .06em; text-align: left; }
+.set-nav button i { font-style: normal; font-size: 17px; width: 1.4rem; text-align: center; }
+.set-nav button.on { color: rgb(var(--ac-300)); border-color: rgb(var(--accent-rgb) / .6); background: rgb(var(--accent-rgb) / .13); box-shadow: 0 0 14px rgb(var(--accent-rgb) / .18); }
+#setBody { grid-column: 2; grid-row: 2; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding: .8rem .9rem 1.2rem !important; gap: .6rem !important; display: flex !important; flex-direction: column; }
+#setBody .sec-hide { display: none !important; }
+#setBody .v9-set { gap: .6rem; }
+#setBody > div:not(#v9Set), #setBody .v9-srow { padding: .75rem .85rem !important; border-radius: .85rem !important; background: rgba(15, 23, 42, .55) !important; border: 1px solid #1f2a3d !important; }
+#setBody .font-bold.text-slate-200 { font-size: 13.5px !important; letter-spacing: .01em; }
+#setBody .text-\[10px\] { font-size: 11.5px !important; line-height: 1.45; color: #9aa6b8 !important; }
+#setBody select, #setBody .set-select { min-height: 40px; font-size: 13px !important; padding: .35rem .6rem !important; border-radius: .6rem !important; }
+#setBody button { min-height: 38px; }
+#setBody .v9-btn { min-height: 40px; font-size: 10.5px; }
+#setBody .midi-diag { font-size: 12px; }
+@media (max-height: 520px) {
+  #settingsModal { padding: 0 !important; }
+  #settingsModal > .set-card { height: 100dvh; border-radius: 0 !important; grid-template-columns: 10rem minmax(0, 1fr); padding-left: var(--sal, 0px) !important; padding-right: var(--sar, 0px) !important; }
+  #settingsModal > .set-card > div:first-child { padding: .4rem .8rem !important; }
+  #settingsModal > .set-card > div:last-child { padding: .35rem .8rem !important; }
+  #settingsModal > .set-card > div:last-child button { min-height: 36px; padding-top: .3rem; padding-bottom: .3rem; }
+  .set-nav { padding: .45rem; gap: .25rem; }
+  .set-nav button { min-height: 40px; font-size: 10px; padding: 0 .5rem; }
+  #setBody { padding: .55rem .7rem 1rem !important; }
+}
+@media (max-width: 600px) { #settingsModal > .set-card { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto auto minmax(0, 1fr) auto; } .set-nav { grid-column: 1; grid-row: 2; flex-direction: row; overflow-x: auto; border-right: 0; } #setBody { grid-column: 1; grid-row: 3; } }
+
+/* Klasik: tombol ⋯ di header tidak perlu lagi (Export / Import / Logout ada di Pengaturan › Data & Info) */
+body:not(.pa-mode) .mr-more { display: none !important; }
+
+/* =====================================================================
+   UKURAN PANEL TERKUNCI di layar besar (tablet / desktop / fullscreen):
+   panel tidak melebar atau memanjang; layar besar hanya memberi ruang lebih, panel tetap proporsional di tengah.
+   ===================================================================== */
+@media (min-width: 1000px) and (min-height: 600px) {
+  /* Quartertone: piano 1 oktaf dengan rasio tetap */
+  #panelQt > .glass-card { width: 100%; max-width: 980px; margin-inline: auto; }
+  #panelQt > .glass-card > div:has(> #whiteKeysContainer) { width: min(100%, 860px) !important; height: auto !important; aspect-ratio: 2.5 / 1; margin-inline: auto !important; align-self: center !important; }
+  /* Style Play (9.3): memenuhi seluruh layar tablet; huruf & ikon ikut membesar */
+  #panelStyle .style-btn { font-size: clamp(.8rem, min(1.6vw, 2.6dvh), 1.7rem) !important; gap: .45rem !important; }
+  #panelStyle .style-btn svg { width: clamp(22px, min(3vw, 4.6dvh), 46px) !important; height: clamp(22px, min(3vw, 4.6dvh), 46px) !important; }
+  #panelStyle > .glass-card > .grid > div > div > span { font-size: clamp(.7rem, 1.1vw, 1rem) !important; }
+  #btnStyleStartStop { min-height: clamp(52px, 7dvh, 76px) !important; min-width: clamp(150px, 16vw, 240px); padding: 0 1.4rem !important; font-size: clamp(.85rem, 1.3vw, 1.25rem) !important; font-weight: 800; }
+  /* Controllers: slider tidak memanjang setinggi layar */
+  #panelCtrl:not(.hidden) { align-content: center; grid-auto-rows: minmax(0, max-content) !important; width: 100%; max-width: 1280px; margin-inline: auto; }
+  #pitchTouchTrack, #tripleTouchTrack { flex: 0 0 auto !important; height: clamp(90px, 18dvh, 190px) !important; }
+  /* Pa5X: kartu Tools & panel tetap rapi */
+  #paRoot .pa-slot > section:not(#panelStyle) { max-width: 1280px; margin-inline: auto; }
+}
+
+/* Pengaturan di HP landscape: tombol tutup di header saja (footer disembunyikan supaya isi lebih lega) */
+@media (max-height: 520px) {
+  #settingsModal > .set-card { grid-template-rows: auto minmax(0, 1fr) !important; }
+  #settingsModal > .set-card > div:last-child { display: none !important; }
+}
+/* Pa5X MAIN: gambar keyboard tidak menimpa nama voice */
+#paRoot .pa-keys .kbd-art { height: min(52%, 74px) !important; }
+/* Pa5X MAIN di layar lebar: satu kolom seperti di HP (kartu UPPER 1 besar, status, transpose) */
+@media (min-width: 900px) and (min-height: 560px) {
+  #paRoot #paScr-main.on { display: flex !important; flex-direction: column; }
+  #paRoot #paScr-main .pa-keys { flex: 1 1 auto; }
+  #paRoot #paScr-main .pa-btns button { min-height: clamp(54px, 9dvh, 84px); }
+}
+
+/* layar login: tawaran pindah lisensi */
+#authErrorMsg .lic-acts { display: flex; gap: .5rem; justify-content: center; margin-top: .6rem; flex-wrap: wrap; }
+#authErrorMsg .lic-btn { min-height: 44px; padding: 0 1rem; border-radius: .7rem; border: 1px solid rgba(248, 113, 113, .5); background: rgba(69, 10, 10, .5); color: #fecaca; font: 800 11px 'Orbitron', sans-serif; letter-spacing: .05em; }
+#authErrorMsg .lic-btn.pri { border-color: rgb(var(--accent-rgb)); background: rgb(var(--accent-rgb) / .2); color: rgb(var(--ac-300)); }
+#authErrorMsg .lic-btn:disabled { opacity: .6; }
+
+/* ---------- Library voice ---------- */
+.vl-open-btn { flex: 0 0 auto; min-height: 36px; padding: 0 .7rem; border-radius: .75rem; border: 1px solid rgba(251, 191, 36, .45); background: rgba(251, 191, 36, .1); color: #fcd34d; font: 800 11px 'Orbitron', sans-serif; letter-spacing: .04em; white-space: nowrap; }
+@media (max-width: 900px) { .vl-open-btn span { display: none; } }
+#paRoot .pa-kb .pa-klib { padding: 0 10px; font-weight: 800; font-size: 11px; white-space: nowrap; flex: 0 0 auto; color: #fbbf24; border-color: rgba(251, 191, 36, .45); }
+.vl-card { height: min(calc(100dvh - 1rem), 44rem); }
+.vl-src { display: flex; gap: .4rem; flex-wrap: wrap; }
+.vl-src button { min-height: 40px; padding: 0 .8rem; border-radius: .7rem; background: #0b1120; border: 1px solid #1e293b; color: #94a3b8; font: 800 10.5px 'Orbitron', sans-serif; letter-spacing: .04em; }
+.vl-src button small { font: 700 10px 'JetBrains Mono', monospace; opacity: .75; margin-left: .2rem; }
+.vl-src button.on { color: rgb(var(--ac-300)); border-color: rgb(var(--accent-rgb)); background: rgb(var(--accent-rgb) / .14); }
+.vl-src button:disabled { opacity: .4; }
+.vl-fams { display: flex; gap: .3rem; overflow-x: auto; scrollbar-width: none; flex: 0 0 auto; padding-bottom: 1px; }
+.vl-fams::-webkit-scrollbar { display: none; }
+.vl-fams button { flex: 0 0 auto; min-height: 36px; padding: 0 .75rem; border-radius: 99px; background: #0b1120; border: 1px solid #1e293b; color: #cbd5e1; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.vl-fams button.on { color: #06080c; background: rgb(var(--ac-300)); border-color: rgb(var(--ac-300)); }
+.vl-bar { display: flex; gap: .4rem; align-items: center; }
+.vl-bar input { flex: 1 1 auto; min-width: 0; min-height: 42px; padding: 0 .8rem; border-radius: .7rem; background: #05070e; border: 1px solid #334155; color: #f1f5f9; font-size: 16px; }
+.vl-bar input:focus { outline: none; border-color: rgb(var(--accent-rgb)); }
+.vl-list { flex: 1 1 auto; min-height: 8rem; overflow-y: auto; -webkit-overflow-scrolling: touch; display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); grid-auto-rows: min-content; gap: .35rem; align-content: start; }
+.vl-row { display: flex; align-items: center; gap: .5rem; min-height: 46px; padding: 0 .3rem 0 .55rem; border-radius: .7rem; background: #080c16; border: 1px solid #1e293b; cursor: pointer; }
+.vl-row.on { border-color: rgb(var(--accent-rgb)); background: rgb(var(--accent-rgb) / .12); }
+.vl-row.have { opacity: .55; }
+.vl-chk { flex: 0 0 auto; width: 22px; height: 22px; border-radius: 6px; border: 1.5px solid #475569; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 900; color: #06080c; }
+.vl-row.on .vl-chk { background: rgb(var(--ac-300)); border-color: rgb(var(--ac-300)); }
+.vl-nm { flex: 1 1 auto; min-width: 0; font-size: 13px; font-weight: 700; color: #f1f5f9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vl-row em { font-style: normal; font: 800 8px 'Orbitron', sans-serif; color: #4ade80; }
+.vl-code { flex: 0 0 auto; font: 700 10.5px 'JetBrains Mono', monospace; color: #94a3b8; }
+.vl-try { flex: 0 0 auto; width: 38px; height: 38px; border-radius: .6rem; background: #0b1120; border: 1px solid #334155; color: #4ade80; font-size: 13px; }
+.vl-empty { grid-column: 1 / -1; padding: 1.5rem .5rem; text-align: center; color: #94a3b8; font-size: 13px; line-height: 1.5; }
+.vl-text { width: 100%; flex: 1 1 auto; min-height: 9rem; padding: .6rem .7rem; border-radius: .7rem; background: #05070e; border: 1px solid #334155; color: #e2e8f0; font: 500 13px 'JetBrains Mono', monospace; resize: none; }
+.vl-card kbd { font: 700 11px 'JetBrains Mono', monospace; background: #0f172a; border: 1px solid #334155; border-radius: .35rem; padding: 0 .35rem; color: #fbbf24; }
+@media (max-height: 520px) { .v9-modal.vl { padding: 0; } .vl-card { height: 100dvh; max-height: 100dvh; border-radius: 0; } .vl-src button { min-height: 36px; } }
+
+/* ---------- Klasik: kotak cari voice di baris kategori ---------- */
+.v9-vsearch { flex: 0 0 auto; display: flex; align-items: center; gap: .25rem; height: 40px; width: 8.5rem; padding: 0 .3rem 0 .55rem; border-radius: .75rem; background: #05070e; border: 1.5px solid #1e293b; transition: width .2s; }
+.v9-vsearch:focus-within { width: 13rem; border-color: rgb(var(--accent-rgb)); }
+.v9-vsearch span { font-size: 13px; opacity: .7; }
+.v9-vsearch input { flex: 1 1 auto; min-width: 0; height: 100%; background: transparent; border: 0; outline: 0; color: #f1f5f9; font-size: 16px; }
+.v9-vsearch input::-webkit-search-cancel-button { display: none; }
+.v9-vsearch button { width: 30px; height: 30px; color: #94a3b8; font-size: 14px; }
+#panelVoice > div:nth-child(3) { gap: .4rem !important; }
+
+/* =====================================================================
+   UKURAN SENTUH & KONTRAS (panggung gelap): tombol utama >= 42-44 px di HP, teks kecil lebih terang
+   ===================================================================== */
+@media (orientation: landscape) and (max-height: 520px) and (min-height: 361px) {
+  #perfStrip .pstep, #perfStrip .ptoggle, #perfStrip .reg-btn, #perfStrip .reg-store, #perfStrip .pval, #perfStrip .kb-chip, .mr-top-panic, .mr-top-menu { height: 42px !important; min-height: 42px !important; }
+  .main-tab-btn { min-height: 42px !important; }
+  #categoryTabs .category-tab { min-height: 42px; }
+  .vl-open-btn, button[onclick="openAddInstrumentModal()"], .v9-vsearch { min-height: 42px; height: 42px; }
+}
+.category-tab { min-height: 38px; }
+.pval .pl { font-size: 8.5px !important; color: #94a3b8 !important; }
+.reg-btn { color: #64748b; }
+#toast { font-size: 12.5px !important; padding: .55rem .9rem !important; }
+#setBody .text-slate-400, #setBody .text-slate-500 { color: #a8b3c4 !important; }
+.tile-badge { color: #a8b3c4; }
+/* Pa5X */
+#paRoot .pa-top button, #paRoot .pa-top select, #paRoot .pa-top .pa-kbchip { min-height: 34px; font-size: 11px; white-space: nowrap; }
+#paRoot .pa-top .pa-kbchip { flex-shrink: 0; }
+#paRoot .pa-kb #paPick2, #paRoot .pa-kb #paPick3 { padding: 0 10px; font-weight: 800; font-size: 11px; white-space: nowrap; flex: 0 0 auto; }
+#paRoot .pa-kb button { min-height: 40px; }
+#paRoot .pa-kb input { min-height: 40px; font-size: 16px; }
+#paRoot .pa-cats button { min-height: 42px !important; font-size: 11px !important; }
+#paRoot .pa-row { min-height: 46px; }
+#paRoot .pa-stat .chip { font-size: 10px; padding: 4px 10px; }
+@media (orientation: landscape) and (max-height: 360px) {
+  #perfStrip .pstep, #perfStrip .ptoggle, #perfStrip .reg-btn, #perfStrip .reg-store, #perfStrip .pval, #perfStrip .kb-chip, .mr-top-panic, .mr-top-menu { height: 36px !important; min-height: 36px !important; }
+}
+
+/* bahasa di layar login */
+.lg-lang { position: absolute; top: .7rem; left: .7rem; display: flex; border: 1px solid #334155; border-radius: .7rem; overflow: hidden; z-index: 2; }
+.lg-lang button { min-width: 44px; min-height: 36px; font: 700 12px 'Plus Jakarta Sans', sans-serif; color: #94a3b8; background: transparent; }
+html[lang="id"] .lg-lang [data-lg="id"], html[lang="en"] .lg-lang [data-lg="en"] { background: rgb(var(--accent-rgb)); color: #0a0a0d; }
+#authModal > .glass-card > div:nth-child(3) a#lgPrivacy { background: none !important; border: 0 !important; color: #94a3b8 !important; font-weight: 600; min-height: 44px; box-shadow: none !important; transform: none !important; }
+#authModal > .glass-card > div:nth-child(3) a#lgPrivacy:hover { color: #e2e8f0 !important; }
+
+/* 9.4: tombol pindah ke tampilan Pa5X di header Klasik (pasangan tombol KLASIK di Pa5X) */
+.mr-to-pa { display: inline-flex; align-items: center; gap: .35rem; height: 34px; padding: 0 .7rem; border-radius: .75rem; flex-shrink: 0;
+  background: linear-gradient(180deg, #1f1206, #0d0804); border: 1px solid rgba(255, 106, 0, .55); color: #ff8a3d;
+  font: 800 11px 'Orbitron', sans-serif; letter-spacing: .08em; box-shadow: 0 0 10px rgba(255, 85, 0, .18), inset 0 1px 0 rgba(255, 255, 255, .06); transition: border-color .2s, box-shadow .2s, transform .1s; }
+.mr-to-pa svg { width: 16px; height: 16px; flex-shrink: 0; }
+.mr-to-pa:hover { border-color: #ff6a00; box-shadow: 0 0 14px rgba(255, 85, 0, .4); }
+.mr-to-pa:active { transform: scale(.96); }
+@media (min-width: 1000px) { .mr-to-pa { height: 40px; padding: 0 .95rem; font-size: 12px; } .mr-to-pa svg { width: 18px; height: 18px; } }
+@media (max-width: 999px) { .mr-to-pa { flex-direction: column; justify-content: center; gap: 1px; padding: 0 .45rem; } .mr-to-pa svg { width: 14px; height: 14px; } .mr-to-pa b { font-size: 7.5px; letter-spacing: .04em; line-height: 1; } }
+body.pa-mode .mr-to-pa { display: none; }
