@@ -20,7 +20,6 @@ jobs:
 
     - name: Inisialisasi Proyek & Capacitor
       run: |
-        # Buat package.json jika belum ada
         if [ ! -f package.json ]; then
           npm init -y
         fi
@@ -32,12 +31,19 @@ jobs:
         mkdir -p www
         cp -R index.html *.js *.css *.json assets/ www/ 2>/dev/null || true
         
-        # Hapus konfigurasi capacitor lama jika ada
+        # Bersihkan folder/config lama
         rm -rf capacitor.config.json capacitor.config.ts ios
         
-        # Init ulang dengan web-dir www
+        # Init ulang proyek Capacitor
         npx cap init "MIDI Controller" "com.midi.controller" --web-dir www
         npx cap add ios
+        
+        # Perbaiki iOS Deployment Target di Podfile agar tidak bentrok CocoaPods
+        if [ -f ios/App/Podfile ]; then
+          sed -i '' "s/platform :ios, '.*'/platform :ios, '13.0'/g" ios/App/Podfile
+        fi
+        
+        # Lakukan sync iOS
         npx cap sync ios
 
     - name: Tambahkan Izin Hardware MIDI & Bluetooth di Info.plist
